@@ -4,20 +4,16 @@
 //
 // ============================================================================== //
 
-using EnhancedEditor;
 using UnityEngine;
 
-namespace GamePratic2020
-{
-	public class RunEndScreen : MonoBehaviour
-    {
+namespace GamePratic2020 {
+    public class RunEndScreen : MonoBehaviour {
         #region Fields / Properties
-		//[HorizontalLine(1, order = 0), Section("RunEndScreen", order = 1)]
-		
+        //[SerializeField] 
         #endregion
-		
-		#region Methods
-		
-		#endregion
+
+        #region Methods
+
+        #endregion
     }
 }

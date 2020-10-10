@@ -11,10 +11,19 @@ namespace GamePratic2020.Tools {
         [SerializeField, Min(0f)] private float randomness = 90f;
         [SerializeField] private bool snapping = false;
         [SerializeField] private bool fadeOut = true;
+        [SerializeField, Min(0)] private int priority = 0;
         #endregion
 
         #region Current
         private Tween currentTween = null;
+        private static int currentTweenPriority = -1;
+        #endregion
+
+        #region Initialize
+        [RuntimeInitializeOnLoadMethod]
+        private void Reset() {
+            currentTweenPriority = -1;
+        }
         #endregion
 
         #region Behaviour
@@ -22,12 +31,15 @@ namespace GamePratic2020.Tools {
         /// Play camera shake effect
         /// </summary>
         public void Play() {
+            if (priority < currentTweenPriority) return;
+
             //Must finish the previous tween to play another to not offset the camera
             if(currentTween != null && currentTween.IsPlaying()) {
                 currentTween.Complete();
             }
 
-            currentTween = Camera.main.transform.DOShakePosition(duration, strength, vibrato, randomness, snapping, fadeOut);
+            currentTweenPriority = priority;
+            currentTween = Camera.main.transform.DOShakePosition(duration, strength, vibrato, randomness, snapping, fadeOut).OnComplete(() => currentTweenPriority = -1);
         }
         #endregion
     }

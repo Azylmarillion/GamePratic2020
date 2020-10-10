@@ -9,9 +9,13 @@ using UnityEngine;
 
 namespace GamePratic2020
 {
-	public class WagonController : MonoBehaviour
+	public class WagonController : MiniGame
     {
         #region Fields / Properties
+        private const float MIN_DISTANCE = .02f;
+
+        // -----------------------
+
         [HorizontalLine(1, order = 0), Section("WAGON CONTROLLER", order = 1)]
 
         [SerializeField, Required] private new Camera camera = null;
@@ -25,9 +29,10 @@ namespace GamePratic2020
 
         [HorizontalLine(1)]
 
-        [SerializeField] private Vector2 controlBounds = new Vector2();
-        [SerializeField] private Vector2 bounds = new Vector2();
-        [SerializeField] private float fallMovement = 5;
+        [SerializeField, MinMax(-3, 3)] private Vector2 controlBounds = new Vector2();
+        [SerializeField, MinMax(-3, 3)] private Vector2 deadZone = new Vector2();
+
+        [SerializeField, MinMax(-3, 3)] private Vector2 bounds = new Vector2();
 
         [HorizontalLine(1)]
 
@@ -42,49 +47,83 @@ namespace GamePratic2020
 
         [HorizontalLine(2, SuperColor.Crimson)]
 
-        [SerializeField] private float radius = 2;
-        [SerializeField] private float maxDistance = 1;
-        [SerializeField] private float speed = 5;
-        [SerializeField] private float speedMovement = 1;
-        [SerializeField] private float speedDecreaseCoef = 1;
+        [SerializeField] private float distanceMagnitude = 2;
+        [SerializeField] private float horizontalDistance = 1.75f;
 
         [HorizontalLine(1)]
 
-        [SerializeField] private float minDistance = .02f;
-        [SerializeField] private float movementSensibility = 1;
-        [SerializeField] private float speedFall = 1;
-        [SerializeField] private float rotationSpeed = .1f;
+        [SerializeField] private float maxSpeed = 5;
 
-        [HorizontalLine(1)]
-
-        [SerializeField, ReadOnly] private float speedVar = 0;
-        [SerializeField, ReadOnly] private Vector3 previousAnchor = new Vector3();
-
-        [HorizontalLine(1)]
-
-        [SerializeField, ReadOnly] private bool isFalling = false;
-        [SerializeField, ReadOnly] private int railIndex = 1;
-        [SerializeField, ReadOnly] private float fallMovementVar = 0;
+        [SerializeField] private float speedMovementIncrease = 1;
+        [SerializeField] private float speedFallIncrease = 1;
+        [SerializeField] private float speedIncrease = 1;
+        [SerializeField] private float speedDecrease = 1;
+        [SerializeField] private float fallSpeed = 5;
 
         [HorizontalLine(1)]
 
         [SerializeField, ReadOnly] private bool isMoving = false;
+        [SerializeField, ReadOnly] private bool isFalling = false;
+        [SerializeField, ReadOnly] private int railIndex = 1;
         [SerializeField, ReadOnly] private int direction = 0;
 
         [HorizontalLine(1)]
 
-        [SerializeField, ReadOnly] private float speedStartFall = 0;
+        [SerializeField, ReadOnly] private float speedVar = 0;
+        [SerializeField, ReadOnly] private float fallSpeedVar = 0;
+        [SerializeField, ReadOnly] private float startFallSpeed = 0;
 
         [HorizontalLine(1)]
 
         [SerializeField, ReadOnly] private bool isTouch = false;
+        [SerializeField, ReadOnly] private Vector3 previousAnchor = new Vector3();
+
+        // -----------------------
+
+        private Vector3 originalPosition = new Vector3();
         #endregion
 
         #region Methods
+
+        #region Mini Game
+        public override void StartMiniGame()
+        {
+            base.StartMiniGame();
+        }
+
+        public override void StopMiniGame()
+        {
+            base.StopMiniGame();
+        }
+
+        // -----------------------
+
+        public override void ResetMiniGame(int _iteration)
+        {
+            base.ResetMiniGame(_iteration);
+
+            anchor.position = previousAnchor = originalPosition;
+            transform.position = new Vector3(originalPosition.x, originalPosition.y - distanceMagnitude, originalPosition.z);
+            transform.rotation = Quaternion.identity;
+
+            railIndex = 1;
+            isTouch = isMoving = isFalling = false;
+            speedVar = fallSpeedVar = startFallSpeed;
+        }
+        #endregion
+
+        #region Monobehaviour
         private void Awake()
         {
             if (!camera)
                 camera = Camera.main;
+
+            originalPosition = anchor.position;
+        }
+
+        private void OnEnable()
+        {
+            ResetMiniGame(0);
         }
 
         private void Update()
@@ -101,11 +140,11 @@ namespace GamePratic2020
                 {
                     Vector3 _controlPos = controlStick.position;
                     _controlPos.x = Mathf.Clamp(_contact.x, controlBounds.x, controlBounds.y);
-
                     controlStick.position = _controlPos;
 
-                    // Move wagon anchor.
-                    _anchorPosition.x += Mathf.Sign(controlStick.localPosition.x) * Time.deltaTime * controlSpeed;
+                    // Move wagon anchor if touch point outside dead zone.
+                    if ((_contact.x < deadZone.x) || (_contact.x > deadZone.y))
+                        _anchorPosition.x += ((_controlPos.x - deadZone.y * Mathf.Sign(_controlPos.x)) / (controlBounds.y - deadZone.y)) * Time.deltaTime * controlSpeed;
                 }
                 else if (controlArea.OverlapPoint(_contact))
                 {
@@ -121,7 +160,7 @@ namespace GamePratic2020
 
             // ----------
 
-            
+            // Falling state and horizontal position clamp.
             _anchorPosition.x = Mathf.Clamp(_anchorPosition.x, bounds.x, bounds.y);
             switch (railIndex)
             {
@@ -129,7 +168,7 @@ namespace GamePratic2020
                     if (_anchorPosition.x > trackOneLimit)
                     {
                         isFalling = true;
-                        speedStartFall = speedVar;
+                        startFallSpeed = speedVar;
                         railIndex++;
                     }
                     break;
@@ -138,7 +177,7 @@ namespace GamePratic2020
                     if (_anchorPosition.x < trackTwoLimit)
                     {
                         isFalling = true;
-                        speedStartFall = speedVar;
+                        startFallSpeed = speedVar;
                         railIndex++;
                     }
                     break;
@@ -148,28 +187,31 @@ namespace GamePratic2020
                     break;
             }
 
+            // Falling height update.
             if (isFalling)
             {
                 float _height = railIndex == 2 ? trackTwoHeight : trackThreeHeight;
-                fallMovementVar += Time.deltaTime * fallMovement;
+                fallSpeedVar += Time.deltaTime * fallSpeed;
 
-                _anchorPosition.y -= fallMovementVar * Time.deltaTime;
+                _anchorPosition.y -= fallSpeedVar * Time.deltaTime;
                 if (_anchorPosition.y < _height)
                 {
-                    _anchorPosition.y = _height;
-                    fallMovementVar = 0;
                     isFalling = false;
+                    fallSpeedVar = 0;
+
+                    _anchorPosition.y = _height;
                 }
             }
 
+            // Get anchor movement and wagon position.
             anchor.transform.position = _anchorPosition;
             Vector3 _movement = _anchorPosition - previousAnchor;
             previousAnchor = _anchorPosition;
 
             Vector3 _position = transform.position;
             float _difference = _anchorPosition.x - _position.x;
-            if (Mathf.Abs(_difference) > maxDistance)
-                _difference = maxDistance * Mathf.Sign(_difference);
+            if (Mathf.Abs(_difference) > horizontalDistance)
+                _difference = horizontalDistance * Mathf.Sign(_difference);
 
             // Get movement inertia.
             if (_movement.x != 0)
@@ -179,47 +221,47 @@ namespace GamePratic2020
                     isMoving = true;
                     direction = _movement.x > 0 ? -1 : 1;
 
-                    speedVar = Mathf.MoveTowards(speedVar, speed, Time.deltaTime * speedMovement * movementSensibility);
+                    speedVar = Mathf.MoveTowards(speedVar, maxSpeed, Time.deltaTime * speedIncrease * speedMovementIncrease);
                 }
                 else if (direction != Mathf.Sign(_movement.x))
                 {
-                    speedVar = Mathf.MoveTowards(speedVar, speed, Time.deltaTime * speedMovement * movementSensibility);
+                    speedVar = Mathf.MoveTowards(speedVar, maxSpeed, Time.deltaTime * speedIncrease * speedMovementIncrease);
                 }
                 else
                 {
-                    speedVar = Mathf.MoveTowards(speedVar, 0, Time.deltaTime * speedMovement * speedDecreaseCoef);
+                    speedVar = Mathf.MoveTowards(speedVar, 0, Time.deltaTime * speedDecrease);
                 }
             }
 
-            // Move around anchor.
+            // Move and rotate wagon around anchor.
             if (isMoving)
             {
                 _position.x = _anchorPosition.x - _difference;
-                _position.x = Mathf.MoveTowards(_position.x, _anchorPosition.x + (maxDistance * direction), Time.deltaTime * speedVar);
+                _position.x = Mathf.MoveTowards(_position.x, _anchorPosition.x + (horizontalDistance * direction), Time.deltaTime * speedVar);
                 _difference = _anchorPosition.x - _position.x;
 
-                // Falling.
+                // Falling speed variation.
                 if (isFalling)
                 {
-                    speedVar = Mathf.MoveTowards(speedVar, speed, Time.deltaTime * speedFall * speedStartFall);
+                    speedVar = Mathf.MoveTowards(speedVar, maxSpeed, Time.deltaTime * speedFallIncrease * startFallSpeed);
                 }
-                // Straight movement
+                // Straight movement speed variation.
                 else
                 {
-                    if (Mathf.Abs(_anchorPosition.x + (maxDistance * direction) - _position.x) < minDistance)
+                    if (Mathf.Abs(_anchorPosition.x + (horizontalDistance * direction) - _position.x) < MIN_DISTANCE)
                         direction *= -1;
 
                     if (Mathf.Sign(_difference) == direction)
                     {
-                        if (Mathf.Abs(_anchorPosition.x + (maxDistance * direction) - _position.x) > minDistance)
-                            speedVar = Mathf.MoveTowards(speedVar, speed, Time.deltaTime * speedMovement);
+                        if (Mathf.Abs(_anchorPosition.x + (horizontalDistance * direction) - _position.x) > MIN_DISTANCE)
+                            speedVar = Mathf.MoveTowards(speedVar, maxSpeed, Time.deltaTime * speedIncrease);
                     }
                     else
                     {
-                        speedVar = Mathf.MoveTowards(speedVar, 0, Time.deltaTime * speedMovement * speedDecreaseCoef);
+                        speedVar = Mathf.MoveTowards(speedVar, 0, Time.deltaTime * speedIncrease * speedDecrease);
                         if (speedVar == 0)
                         {
-                            if (Mathf.Abs(_difference) > minDistance)
+                            if (Mathf.Abs(_difference) > MIN_DISTANCE)
                             {
                                 direction *= -1;
                             }
@@ -232,13 +274,15 @@ namespace GamePratic2020
                 }
 
                 // Move object.
-                float _pos = Mathf.Sqrt(Mathf.Pow(radius, 2) - Mathf.Pow(_difference, 2));
+                float _pos = Mathf.Sqrt(Mathf.Pow(distanceMagnitude, 2) - Mathf.Pow(_difference, 2));
                 _position.y = _anchorPosition.y - _pos;
 
                 transform.position = _position;
                 transform.rotation = Quaternion.LookRotation(Vector3.forward, _anchorPosition - _position);
             }
         }
+        #endregion
+
         #endregion
     }
 }

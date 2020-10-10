@@ -591,6 +591,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 201707533669175389, guid: ce87dc378d35c334d97286d2b93fc8f0,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 8.97
+      objectReference: {fileID: 0}
     - target: {fileID: 1058940913267957126, guid: ce87dc378d35c334d97286d2b93fc8f0,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -650,6 +655,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: PF_MiniGame_Crush
+      objectReference: {fileID: 0}
+    - target: {fileID: 2015373039166966775, guid: ce87dc378d35c334d97286d2b93fc8f0,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7338647277945608893, guid: ce87dc378d35c334d97286d2b93fc8f0,
         type: 3}

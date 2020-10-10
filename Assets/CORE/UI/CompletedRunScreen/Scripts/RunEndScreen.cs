@@ -7,7 +7,9 @@
 using DG.Tweening;
 using EnhancedEditor;
 using System.Collections;
+using TMPro;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace GamePratic2020 {
     public class RunEndScreen : MonoBehaviour {
@@ -25,17 +27,27 @@ namespace GamePratic2020 {
         [SerializeField] private ParticleSystem fallEffect = null;
         [SerializeField] private ParticleSystem fillEffect = null;
 
-        //[Header("Text")]
+        [Header("Text")]
+        [SerializeField] private TextMeshProUGUI totalScoreText = null;
+        [SerializeField] private TextMeshProUGUI runScoreText = null;
 
+        [Section("Callbacks")]
+        [SerializeField] private UnityEvent onFillComplete = null;
         #endregion
 
         #region Current
         [Section("Read Only")]
         [SerializeField, ReadOnly] private int currentFilledPoints = 0;
-        private bool hasBeenInitialized = false; 
+        private bool hasBeenInitialized = false;
         #endregion
 
-        #region Filling 
+        #region Filling
+        public void PlayAnimation(int runScore) {
+
+
+            //Fill(200)
+        }
+
         public void Fill(int points) {
             currentFilledPoints = points;
 

@@ -133,6 +133,21 @@ PrefabInstance:
       propertyPath: camera
       value: 
       objectReference: {fileID: 917416984}
+    - target: {fileID: 3638163069411104048, guid: 17d5f4949c3bc374c96f114bc595ebf4,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3638163069411104048, guid: 17d5f4949c3bc374c96f114bc595ebf4,
+        type: 3}
+      propertyPath: originalPosition.x
+      value: -2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3638163069411104048, guid: 17d5f4949c3bc374c96f114bc595ebf4,
+        type: 3}
+      propertyPath: originalPosition.y
+      value: 4.5
+      objectReference: {fileID: 0}
     - target: {fileID: 8413754583824129230, guid: 17d5f4949c3bc374c96f114bc595ebf4,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -506,6 +521,8 @@ MonoBehaviour:
   - {fileID: 861349015}
   - {fileID: 1311820433}
   globalScore: 0
+  maxIteration: 3
+  iteration: 0
 --- !u!4 &1614668049
 Transform:
   m_ObjectHideFlags: 0

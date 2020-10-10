@@ -75,6 +75,7 @@ namespace GamePratic2020
         [HorizontalLine(1)]
 
         [SerializeField, MinMax(1, 90)] private Vector2Int anchorRotation = new Vector2Int(10, 45);
+        [SerializeField] private Vector3 originalPosition = new Vector3();
 
         [HorizontalLine(1)]
 
@@ -109,7 +110,6 @@ namespace GamePratic2020
 
         // -----------------------
 
-        private Vector3 originalPosition = new Vector3();
         private readonly Vector3[] linePos = new Vector3[2];
         #endregion
 
@@ -164,8 +164,6 @@ namespace GamePratic2020
         {
             if (!camera)
                 camera = Camera.main;
-
-            originalPosition = anchor.position;
 
             linePos[0] = leftChain.transform.position;
             linePos[1] = leftChainLook.position;

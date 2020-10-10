@@ -11,6 +11,7 @@ namespace GamePratic2020
 { 
     public class Thermometer : MiniGame
     {
+        #region Fields and Properties
         [HorizontalLine(1, order = 0), Section("Thermometer", order = 1)]
         [SerializeField] private float initialValue = .5f;
         [SerializeField, MinMax(0.0f, 1.0f)] private Vector2 heatingLimit = new Vector2(.25f, .75f);
@@ -21,36 +22,56 @@ namespace GamePratic2020
 
         [HorizontalLine(1, order = 0), Section("Read values", order = 1)]
         [SerializeField, ReadOnly] private float currentValue;
-        [SerializeField, ReadOnly] private bool gameIsOver = false; 
+        [SerializeField, ReadOnly] private bool hasBeenInitialized = false;
+        public bool HasBeenInitialized => hasBeenInitialized;
+        #endregion
 
+        #region Methods
         public void IncreaseRatio(float _increasingValue)
         {
-            if (gameIsOver) return; 
-            currentValue = Mathf.Clamp(currentValue + _increasingValue / increasingRatio, 0, 1);
-            if(currentValue > heatingLimit.y)
-            {
-                gameIsOver = true; 
-            }
+            if (!isActivated) return;
+            currentValue += _increasingValue / increasingRatio; 
+            currentValue = Mathf.Clamp(currentValue, 0, 1);
         }
 
-        private void ResetRatio()
+        #region MiniGame
+        public override void ResetMiniGame(int _iteration)
         {
+            currentScore = initialscore; 
             currentValue = initialValue;
-            gameIsOver = false; 
+            hasBeenInitialized = false; 
         }
-    
-        private void Start() => ResetRatio();
 
-        private void Update()
+        public override void StartMiniGame()
         {
-            if (gameIsOver) return; 
-            if (currentValue < heatingLimit.x)
-            {
-                gameIsOver = true; 
-                return;
-            }
-            currentValue -= (Time.deltaTime / decreasingRatio);
-            currentValue = Mathf.Clamp(currentValue, 0, 1); 
+            base.StartMiniGame();
+            hasBeenInitialized = true; 
         }
+
+        public override void StopMiniGame()
+        {
+            base.StopMiniGame();
+        }
+        #endregion
+
+        #region Unity
+        private void Start() => ResetMiniGame(0);
+
+        protected override void Update()
+        {
+            base.Update(); 
+            if (isActivated)
+            {
+                if (currentValue < heatingLimit.x || currentValue > heatingLimit.y)
+                {
+                    // Decrease Score
+                }
+                currentValue -= (Time.deltaTime / decreasingRatio);
+                currentValue = Mathf.Clamp(currentValue, 0, 1);
+            }
+        }
+        #endregion
+
+        #endregion
     }
 }

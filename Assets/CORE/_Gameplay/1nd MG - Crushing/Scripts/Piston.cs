@@ -33,8 +33,14 @@ namespace GamePratic2020 {
         #endregion
 
         #region Callbacks
-        private void Start() {
-            MovePiston(0f);    
+        private void OnEnable() {
+            ResetPiston();
+        } 
+
+        public void ResetPiston() { 
+            currentStep = 0;
+            isMoving = false;
+            MovePiston(0f);
         }
 
         private void Update() {

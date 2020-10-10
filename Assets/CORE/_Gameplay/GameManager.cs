@@ -38,8 +38,8 @@ namespace GamePratic2020
 
                 if (iteration == maxIteration)
                 {
-                    // Do some things
-                    // C'est la fin.
+                    // Do some things.
+                    Debug.LogError("C'est la fin.");
                     return;
                 }
             }
@@ -54,6 +54,7 @@ namespace GamePratic2020
 				Instance = this;
 			else Destroy(this);
 
+            miniGames[0].ResetMiniGame(0);
             miniGames[0].StartMiniGame();
 		}
 		#endregion

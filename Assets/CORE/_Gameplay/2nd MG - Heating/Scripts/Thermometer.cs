@@ -22,7 +22,7 @@ namespace GamePratic2020
 
         [HorizontalLine(1, order = 0), Section("Points", order = 1)]
         [SerializeField, Range(1,10)] private int increasingScoreValue = 1;
-        [SerializeField, Range(.1f, 10.0f)] private float decreasingScoreTime = 1.0f;
+        [SerializeField, Range(.1f, 10.0f)] private float increasingScoreTime = 1.0f;
         private float scoreTimer = 0; 
 
         [HorizontalLine(1, order = 0), Section("Read values", order = 1)]
@@ -47,8 +47,8 @@ namespace GamePratic2020
         #region MiniGame
         public override void ResetMiniGame(int _iteration)
         {
-            timer = 10;
-            score = 0;
+            base.ResetMiniGame(_iteration);
+
             scoreTimer = 0; 
             currentValue = initialValue;
             targetValue = currentValue;
@@ -70,9 +70,6 @@ namespace GamePratic2020
         #endregion
 
         #region Unity
-        private void Start() => ResetMiniGame(0);
-
-
         protected override void Update()
         {
             base.Update(); 
@@ -89,7 +86,7 @@ namespace GamePratic2020
                 {
                     // Decrease Score
                     scoreTimer += Time.deltaTime; 
-                    if(scoreTimer > decreasingScoreTime)
+                    if(scoreTimer > increasingScoreTime)
                     {
                         score += increasingScoreValue;
                         scoreTimer = 0;

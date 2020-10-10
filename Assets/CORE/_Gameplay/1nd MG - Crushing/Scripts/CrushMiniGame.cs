@@ -26,7 +26,6 @@ namespace GamePratic2020 {
 
         public override void ResetMiniGame(int _iteration) {
             base.ResetMiniGame(_iteration);
-            score = 0;
             travelator.OnResetMinigame();
         }
         #endregion

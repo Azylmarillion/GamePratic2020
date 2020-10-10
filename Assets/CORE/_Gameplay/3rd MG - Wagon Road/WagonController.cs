@@ -174,11 +174,6 @@ namespace GamePratic2020
             rightChain.SetPositions(linePos);
         }
 
-        private void OnEnable()
-        {
-            ResetMiniGame(0);
-        }
-
         protected override void Update()
         {
             base.Update();

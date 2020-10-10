@@ -154,8 +154,8 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  globalScore: 1500
-  currentRunScore: 200
+  globalScore: 3000
+  currentRunScore: 1500
   maxIteration: 3
   iteration: 0
   soundDatabase: {fileID: 0}
@@ -449,8 +449,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1060315766}
-        m_MethodName: Fill
-        m_Mode: 3
+        m_MethodName: PlayAnimation
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine

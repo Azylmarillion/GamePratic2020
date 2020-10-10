@@ -329,9 +329,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timer: 10
-  initialscore: 100
+  score: 0
   isActivated: 0
-  currentScore: 0
   camera: {fileID: 695951335}
   anchor: {fileID: 927437342}
   controlAnchor: {fileID: 1799718184}
@@ -351,13 +350,14 @@ MonoBehaviour:
   deadZone: {x: -0.25, y: 0.25}
   dumpBounds: {x: -3.5, y: -2.5}
   bounds: {x: -2.5, y: 2.5}
-  trackOneLimit: 1
-  trackTwoLimit: -1
+  trackOneLimit: 1.25
+  trackTwoLimit: -1.25
   trackThreeLimit: 1.4
   trackTwoHeight: 3.5
   trackThreeHeight: 1.5
   distanceMagnitude: 1.25
   horizontalDistance: 1.1
+  anchorRotation: {x: 10, y: 45}
   maxSpeed: 5
   speedMovementIncrease: 0.1
   speedFallIncrease: 0.1

@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 74c89ca26f3d63f43abc9c30a13af40b, type: 3}
+  m_Name: Sound Database
+  m_EditorClassIdentifier: 
+  crushingAmbiance: {fileID: 8300000, guid: c363084552d0d8349a113bbaf63526ce, type: 3}
+  furnaceAmbiance: {fileID: 8300000, guid: 75db95bccb641b1429f05a2364e64c82, type: 3}
+  wagonAmbiance: {fileID: 8300000, guid: a48c02c68d0a29d489a06e933dcbd6e5, type: 3}
+  hammerReloading: {fileID: 8300000, guid: e7464f6602a5be1419ea9a0e147195de, type: 3}
+  hammerStomp: {fileID: 8300000, guid: 78b0ed24e835cd6419ecac648a653af5, type: 3}
+  gaugeAlarm: {fileID: 8300000, guid: fa7eabafa5ac07e48a5be0d9aee5cae3, type: 3}
+  crankLoop: {fileID: 8300000, guid: 3760eb213b1ead7499a3c91b140c7e48, type: 3}
+  endAlarm: {fileID: 8300000, guid: 0020dc1654f9363469bd1fb518627ccb, type: 3}

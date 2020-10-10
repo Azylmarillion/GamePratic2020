@@ -20,6 +20,7 @@ namespace GamePratic2020
 
         [SerializeField, Required] private new Camera camera = null;
         [SerializeField, Required] private Transform anchor = null;
+        [SerializeField, Required] private Transform wagon = null;
 
         [HorizontalLine(1)]
 
@@ -129,11 +130,13 @@ namespace GamePratic2020
 
         public override void ResetMiniGame(int _iteration)
         {
+            base.ResetMiniGame(_iteration);
+
             anchor.position = previousAnchor = originalPosition;
-            transform.position = new Vector3(originalPosition.x, originalPosition.y - distanceMagnitude, originalPosition.z);
+            wagon.position = new Vector3(originalPosition.x, originalPosition.y - distanceMagnitude, originalPosition.z);
 
             anchor.rotation = Quaternion.identity;
-            transform.rotation = Quaternion.identity;
+            wagon.rotation = Quaternion.identity;
 
             railIndex = 1;
             isTouch = isMoving = isFalling = isWaitingForDump = isOver = false;
@@ -182,8 +185,8 @@ namespace GamePratic2020
         {
             base.Update();
 
-            //if (!isActivated)
-            //    return;
+            if (!isActivated)
+                return;
 
             // Get anchor position.
             Vector3 _anchorPosition = anchor.transform.position;
@@ -323,7 +326,7 @@ namespace GamePratic2020
             Vector3 _movement = _anchorPosition - previousAnchor;
             previousAnchor = _anchorPosition;
 
-            Vector3 _position = transform.position;
+            Vector3 _position = wagon.position;
             float _difference = _anchorPosition.x - _position.x;
             if (Mathf.Abs(_difference) > horizontalDistance)
                 _difference = horizontalDistance * Mathf.Sign(_difference);
@@ -392,9 +395,9 @@ namespace GamePratic2020
                 float _pos = Mathf.Sqrt(Mathf.Pow(distanceMagnitude, 2) - Mathf.Pow(_difference, 2));
                 _position.y = _anchorPosition.y - _pos;
 
-                transform.position = _position;
+                wagon.position = _position;
                 Quaternion _rotation = Quaternion.LookRotation(Vector3.forward, _anchorPosition - _position);
-                transform.rotation = _rotation;
+                wagon.rotation = _rotation;
 
                 float _eulerAngle = _rotation.eulerAngles.z;
                 if (_eulerAngle > 180)

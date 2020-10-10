@@ -36,6 +36,14 @@ namespace GamePratic2020 {
         #endregion
 
         #region Methods
+        public void OnResetMinigame() {
+            for (int i = 0; i < crushableObjects.Count; i++) {
+                Destroy(crushableObjects[i].gameObject);
+            }
+
+            crushableObjects.Clear();
+        }
+
         private void Update() {
             MoveObjects();
 

@@ -20,7 +20,10 @@ namespace GamePratic2020
 		#endregion
 
 		#region Methods
-		public abstract void ResetMiniGame(int _iteration);
+		public virtual void ResetMiniGame(int _iteration)
+        {
+            timer = 10;
+        }
 
 		public virtual void StartMiniGame() 
 		{
@@ -42,7 +45,6 @@ namespace GamePratic2020
 				if (timer < 0)
 					StopMiniGame(); 
 			}
-
 		}
 		#endregion
 	}

@@ -47,12 +47,13 @@ namespace GamePratic2020
         #region MiniGame
         public override void ResetMiniGame(int _iteration)
         {
-            base.ResetMiniGame(_iteration);
-
+            timer = 10;
+            score = 0;
             scoreTimer = 0; 
-            score = 0; 
             currentValue = initialValue;
-            targetValue = currentValue; 
+            targetValue = currentValue;
+            filledImage.fillAmount = currentValue;
+            filledImage.color = gradientColor.Evaluate(currentValue);
             hasBeenInitialized = false; 
         }
 

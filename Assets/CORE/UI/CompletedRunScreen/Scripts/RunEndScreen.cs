@@ -7,12 +7,18 @@
 using DG.Tweening;
 using EnhancedEditor;
 using System.Collections;
+using TMPro;
 using UnityEngine;
+using UnityEngine.Events;
+using UnityEngine.UI;
 
 namespace GamePratic2020 {
     public class RunEndScreen : MonoBehaviour {
         #region Settings
         [Section("Settings")]
+        [SerializeField, Min(0f)] private float textAppearDuration = 0.8f;
+
+        [Header("Fill")]
         [SerializeField] private float pointsPerSeconds = 200;
         [SerializeField] private float fillIntensity = 2f;
         [SerializeField] private float maxFillHeight = 2;
@@ -25,19 +31,26 @@ namespace GamePratic2020 {
         [SerializeField] private ParticleSystem fallEffect = null;
         [SerializeField] private ParticleSystem fillEffect = null;
 
-        //[Header("Text")]
+        [Header("Text")]
+        [SerializeField] private CanvasGroup textCanvasGroup = null;
+        [SerializeField] private TextMeshProUGUI totalScoreText = null;
+        [SerializeField] private TextMeshProUGUI runScoreText = null;
 
+        [Section("Callbacks")]
+        [SerializeField] private UnityEvent onFillComplete = null;
         #endregion
 
         #region Current
         [Section("Read Only")]
-        [SerializeField, ReadOnly] private int currentFilledPoints = 0;
-        private bool hasBeenInitialized = false; 
+        [SerializeField, ReadOnly] private int remainingPointsToFill = 0;
+        private bool hasBeenInitialized = false;
         #endregion
 
-        #region Filling 
-        public void Fill(int points) {
-            currentFilledPoints = points;
+        #region Filling
+        public void PlayAnimation() {
+            remainingPointsToFill = GameManager.Instance.CurrentRunScore;
+            runScoreText.text = remainingPointsToFill.ToString();
+            totalScoreText.text = (GameManager.Instance.GlobalScore - remainingPointsToFill).ToString();
 
             if (!hasBeenInitialized) {
                 fillEffect.transform.position = Vector3.up * initialFillHeight;
@@ -48,23 +61,55 @@ namespace GamePratic2020 {
                 }
             }
 
-            StartCoroutine(ProcessFillCoroutine());
+            textCanvasGroup.alpha = 0f;
+
+            StartCoroutine(ProcessAnimation());
+        }
+
+        private IEnumerator ProcessAnimation() {
+            textCanvasGroup.DOFade(1f, textAppearDuration);
+
+            Vector3 totalScoreTextPos = totalScoreText.transform.position;
+            Vector3 runScoreTextPos = runScoreText.transform.position;
+
+            totalScoreText.transform.position = totalScoreTextPos + Vector3.right * 300f;
+            runScoreText.transform.position = runScoreTextPos + Vector3.right * - 300f;
+
+            totalScoreText.transform.DOMove(totalScoreTextPos, textAppearDuration, true);
+            runScoreText.transform.DOMove(runScoreTextPos, textAppearDuration, true);
+
+            yield return new WaitForSeconds(0.2f);
+
+            yield return ProcessFillCoroutine();
+
+            runScoreText.text = "0";
+            totalScoreText.text = GameManager.Instance.GlobalScore.ToString();
+            onFillComplete?.Invoke();
         }
 
         private IEnumerator ProcessFillCoroutine() {
             fallEffect.Play();
+            int globalScore = GameManager.Instance.GlobalScore;
 
             yield return new WaitForSeconds(cokeFallDuration);
 
             fillEffect.Play();
 
-            while(currentFilledPoints > 0) {
+            while(remainingPointsToFill > 0) {
                 int pointsDecrement = Mathf.RoundToInt(pointsPerSeconds * Time.deltaTime);
-                currentFilledPoints -= pointsDecrement;
+                remainingPointsToFill -= pointsDecrement;
+                if(remainingPointsToFill < 0) {
+                    remainingPointsToFill = 0;
+                }
 
                 fillEffect.transform.position += Vector3.up * fillIntensity * Time.deltaTime;
 
-                if(fillEffect.transform.position.y > maxFillHeight) {
+                //Update Text
+                runScoreText.text = remainingPointsToFill.ToString();
+                totalScoreText.text = (globalScore - remainingPointsToFill).ToString();
+
+                //Move down the stack
+                if (fillEffect.transform.position.y > maxFillHeight) {
                     stackParent.transform.position += Vector3.up * (maxFillHeight - (fillEffect.transform.position.y));
                 }
 

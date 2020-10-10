@@ -28,12 +28,11 @@ namespace GamePratic2020
         [HorizontalLine(1, order = 0), Section("Read values", order = 1)]
         [SerializeField, ReadOnly] private float currentValue;
         private float targetValue = 0; 
-        [SerializeField, ReadOnly] private bool hasBeenInitialized = false;
-        public bool HasBeenInitialized => hasBeenInitialized;
 
         [HorizontalLine(1, order = 0), Section("UI", order = 1)]
         [SerializeField] private UnityEngine.UI.Image filledImage = null;
-        [SerializeField] private Gradient gradientColor = new Gradient(); 
+        [SerializeField] private Gradient gradientColor = new Gradient();
+
         #endregion
 
         #region Methods
@@ -54,17 +53,16 @@ namespace GamePratic2020
             targetValue = currentValue;
             filledImage.fillAmount = currentValue;
             filledImage.color = gradientColor.Evaluate(currentValue);
-            hasBeenInitialized = false; 
         }
 
         public override void StartMiniGame()
         {
             base.StartMiniGame();
-            hasBeenInitialized = true; 
         }
 
         public override void StopMiniGame()
         {
+            miniGameSource.PlayOneShot(GameManager.Instance.SoundDataBase.EndAlarm);
             base.StopMiniGame();
         }
         #endregion
@@ -92,8 +90,12 @@ namespace GamePratic2020
                         scoreTimer = 0;
                     }
                 }
-                else 
+                else
+                {
                     scoreTimer = 0;
+                    if (!miniGameSource.isPlaying)
+                        miniGameSource.PlayOneShot(GameManager.Instance.SoundDataBase.GaugeAlarm, .25f); 
+                }
             }
         }
         #endregion

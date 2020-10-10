@@ -12,9 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 347558de268f29144872000ad41d3beb, type: 3}
   m_Name: CamSH_PistonCrush
   m_EditorClassIdentifier: 
-  duration: 0.6
-  strength: 0.6
-  vibrato: 15
+  duration: 0.3
+  strength: 0.4
+  vibrato: 18
   randomness: 90
   snapping: 0
   fadeOut: 1
+  priority: 1

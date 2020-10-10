@@ -18,7 +18,10 @@ namespace GamePratic2020
 
         [SerializeField, ReadOnly] protected float timerVar = 0;
         [SerializeField, ReadOnly] protected bool isActivated = false;
-		public bool IsActivated => isActivated; 
+		public bool IsActivated => isActivated;
+
+		[HorizontalLine(1, order = 0), Section("Sound", order = 1)]
+		[SerializeField, Required] protected AudioSource miniGameSource = null;
 		#endregion
 
 		#region Methods
@@ -31,7 +34,7 @@ namespace GamePratic2020
         public virtual void StartMiniGame() 
 		{
 			gameObject.SetActive(true); 
-			isActivated = true; 
+			isActivated = true;
 		}
 
 		public virtual void StopMiniGame()
@@ -44,7 +47,7 @@ namespace GamePratic2020
 
         public virtual void HideMiniGame()
         {
-            gameObject.SetActive(false);
+			gameObject.SetActive(false);
         }
 
 		protected virtual void Update()

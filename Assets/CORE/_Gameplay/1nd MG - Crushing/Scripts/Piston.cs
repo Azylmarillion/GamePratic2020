@@ -2,6 +2,7 @@
 using EnhancedEditor;
 using GamePratic2020.Tools;
 using System.Collections;
+using UnityEngine.Events;
 
 namespace GamePratic2020 {
     [SelectionBase]
@@ -25,6 +26,9 @@ namespace GamePratic2020 {
         [SerializeField] private Transform pistonHeadTransform = null;
         [SerializeField] private CameraShake stepUpCameraShake = null;
         [SerializeField] private CameraShake crushCameraShake = null;
+
+        [Section("Callbacks")]
+        [SerializeField] private UnityEvent onCrush = new UnityEvent();
         #endregion
 
         #region Currents
@@ -109,6 +113,7 @@ namespace GamePratic2020 {
                 yield return null;
             }
 
+            onCrush?.Invoke();
             crushCameraShake.Play();
             Vector3 initialPos = Vector3.up * minHeight;
 

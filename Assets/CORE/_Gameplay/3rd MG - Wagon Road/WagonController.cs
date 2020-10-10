@@ -45,6 +45,7 @@ namespace GamePratic2020
         [HorizontalLine(1)]
 
         [SerializeField] private float controlSpeed = 5;
+        [SerializeField] private float fallControlSpeed = 1;
 
         [HorizontalLine(1)]
 
@@ -69,6 +70,10 @@ namespace GamePratic2020
 
         [SerializeField] private float distanceMagnitude = 2;
         [SerializeField] private float horizontalDistance = 1.75f;
+
+        [HorizontalLine(1)]
+
+        [SerializeField, MinMax(1, 90)] private Vector2Int anchorRotation = new Vector2Int(10, 45);
 
         [HorizontalLine(1)]
 
@@ -126,6 +131,8 @@ namespace GamePratic2020
         {
             anchor.position = previousAnchor = originalPosition;
             transform.position = new Vector3(originalPosition.x, originalPosition.y - distanceMagnitude, originalPosition.z);
+
+            anchor.rotation = Quaternion.identity;
             transform.rotation = Quaternion.identity;
 
             railIndex = 1;
@@ -221,6 +228,14 @@ namespace GamePratic2020
                     }
                 }
             }
+            else if (isFalling)
+            {
+                float _fallMovement = speedVar * Time.deltaTime * fallControlSpeed;
+                if (railIndex == 3)
+                    _fallMovement *= -1;
+
+                _anchorPosition.x += _fallMovement;
+            }
             else if (!isOver)
             {
                 if (Input.GetMouseButton(0))
@@ -282,6 +297,7 @@ namespace GamePratic2020
                         controlAnchor.SetActive(false);
 
                         _anchorPosition.x = trackThreeLimit;
+                        railIndex++;
                     }
                     break;
             }
@@ -377,7 +393,14 @@ namespace GamePratic2020
                 _position.y = _anchorPosition.y - _pos;
 
                 transform.position = _position;
-                transform.rotation = Quaternion.LookRotation(Vector3.forward, _anchorPosition - _position);
+                Quaternion _rotation = Quaternion.LookRotation(Vector3.forward, _anchorPosition - _position);
+                transform.rotation = _rotation;
+
+                float _eulerAngle = _rotation.eulerAngles.z;
+                if (_eulerAngle > 180)
+                    _eulerAngle -= 360;
+
+                anchor.eulerAngles = new Vector3(0, 0, (_eulerAngle / anchorRotation.y) * anchorRotation.x);
 
                 linePos[0] = leftChain.transform.position;
                 linePos[1] = leftChainLook.position;

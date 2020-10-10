@@ -20,17 +20,38 @@ namespace GamePratic2020
 
         [SerializeField, Required] private new Camera camera = null;
         [SerializeField, Required] private Transform anchor = null;
+
+        [HorizontalLine(1)]
+
+        [SerializeField, Required] private GameObject controlAnchor = null;
         [SerializeField, Required] private Collider2D controlArea = null;
         [SerializeField, Required] private Transform controlStick = null;
 
         [HorizontalLine(1)]
 
+        [SerializeField, Required] private GameObject dumpAnchor = null;
+        [SerializeField, Required] private Collider2D dumpArea = null;
+        [SerializeField, Required] private Transform dumpControl = null;
+        [SerializeField, Required] private GameObject dumpMask = null;
+
+        [HorizontalLine(1)]
+
+        [SerializeField, Required] private LineRenderer leftChain = null;
+        [SerializeField, Required] private LineRenderer rightChain = null;
+
+        [SerializeField, Required] private Transform leftChainLook = null;
+        [SerializeField, Required] private Transform rightChainLook = null;
+
+        [HorizontalLine(1)]
+
         [SerializeField] private float controlSpeed = 5;
+        [SerializeField] private float fallControlSpeed = 1;
 
         [HorizontalLine(1)]
 
         [SerializeField, MinMax(-3, 3)] private Vector2 controlBounds = new Vector2();
         [SerializeField, MinMax(-3, 3)] private Vector2 deadZone = new Vector2();
+        [SerializeField, MinMax(-5, 0)] private Vector2 dumpBounds = new Vector2();
 
         [SerializeField, MinMax(-3, 3)] private Vector2 bounds = new Vector2();
 
@@ -52,6 +73,10 @@ namespace GamePratic2020
 
         [HorizontalLine(1)]
 
+        [SerializeField, MinMax(1, 90)] private Vector2Int anchorRotation = new Vector2Int(10, 45);
+
+        [HorizontalLine(1)]
+
         [SerializeField] private float maxSpeed = 5;
 
         [SerializeField] private float speedMovementIncrease = 1;
@@ -64,6 +89,8 @@ namespace GamePratic2020
 
         [SerializeField, ReadOnly] private bool isMoving = false;
         [SerializeField, ReadOnly] private bool isFalling = false;
+        [SerializeField, ReadOnly] private bool isWaitingForDump = false;
+        [SerializeField, ReadOnly] private bool isOver = false;
         [SerializeField, ReadOnly] private int railIndex = 1;
         [SerializeField, ReadOnly] private int direction = 0;
 
@@ -72,6 +99,7 @@ namespace GamePratic2020
         [SerializeField, ReadOnly] private float speedVar = 0;
         [SerializeField, ReadOnly] private float fallSpeedVar = 0;
         [SerializeField, ReadOnly] private float startFallSpeed = 0;
+        [SerializeField, ReadOnly] private float dumpVar = 0;
 
         [HorizontalLine(1)]
 
@@ -81,6 +109,7 @@ namespace GamePratic2020
         // -----------------------
 
         private Vector3 originalPosition = new Vector3();
+        private readonly Vector3[] linePos = new Vector3[2];
         #endregion
 
         #region Methods
@@ -102,11 +131,28 @@ namespace GamePratic2020
         {
             anchor.position = previousAnchor = originalPosition;
             transform.position = new Vector3(originalPosition.x, originalPosition.y - distanceMagnitude, originalPosition.z);
+
+            anchor.rotation = Quaternion.identity;
             transform.rotation = Quaternion.identity;
 
             railIndex = 1;
-            isTouch = isMoving = isFalling = false;
-            speedVar = fallSpeedVar = startFallSpeed;
+            isTouch = isMoving = isFalling = isWaitingForDump = isOver = false;
+            speedVar = fallSpeedVar = startFallSpeed = dumpVar = 0;
+
+            controlStick.localPosition = Vector3.zero;
+            dumpControl.localPosition = Vector3.zero;
+
+            controlAnchor.SetActive(true);
+            dumpAnchor.SetActive(false);
+            dumpMask.SetActive(false);
+
+            linePos[0] = leftChain.transform.position;
+            linePos[1] = leftChainLook.position;
+            leftChain.SetPositions(linePos);
+
+            linePos[0] = rightChain.transform.position;
+            linePos[1] = rightChainLook.position;
+            rightChain.SetPositions(linePos);
         }
         #endregion
 
@@ -117,6 +163,14 @@ namespace GamePratic2020
                 camera = Camera.main;
 
             originalPosition = anchor.position;
+
+            linePos[0] = leftChain.transform.position;
+            linePos[1] = leftChainLook.position;
+            leftChain.SetPositions(linePos);
+
+            linePos[0] = rightChain.transform.position;
+            linePos[1] = rightChainLook.position;
+            rightChain.SetPositions(linePos);
         }
 
         private void OnEnable()
@@ -124,35 +178,89 @@ namespace GamePratic2020
             ResetMiniGame(0);
         }
 
-        private void Update()
+        protected override void Update()
         {
+            base.Update();
+
+            //if (!isActivated)
+            //    return;
+
             // Get anchor position.
             Vector3 _anchorPosition = anchor.transform.position;
 
             // Move the wagon on screen touch.
 #if UNITY_EDITOR
-            if (Input.GetMouseButton(0))
+            if (isWaitingForDump)
             {
-                Vector2 _contact = camera.ScreenToWorldPoint(Input.mousePosition);
-                if (isTouch)
+                if (Input.GetMouseButton(0))
                 {
-                    Vector3 _controlPos = controlStick.position;
-                    _controlPos.x = Mathf.Clamp(_contact.x, controlBounds.x, controlBounds.y);
-                    controlStick.position = _controlPos;
+                    Vector2 _contact = camera.ScreenToWorldPoint(Input.mousePosition);
+                    if (isTouch && !isOver)
+                    {
+                        Vector3 _controlPos = dumpControl.position;
+                        _controlPos.y = Mathf.Clamp(_contact.y, dumpBounds.x, dumpBounds.y);
+                        dumpControl.position = _controlPos;
 
-                    // Move wagon anchor if touch point outside dead zone.
-                    if ((_contact.x < deadZone.x) || (_contact.x > deadZone.y))
-                        _anchorPosition.x += ((_controlPos.x - deadZone.y * Mathf.Sign(_controlPos.x)) / (controlBounds.y - deadZone.y)) * Time.deltaTime * controlSpeed;
+                        // Move wagon anchor if touch point outside dead zone.
+                        if (_controlPos.y == dumpBounds.x)
+                        {
+                            isOver = true;
+
+                            // Animation
+                            dumpMask.SetActive(true);
+                        }
+                    }
+                    else if (dumpArea.OverlapPoint(_contact))
+                    {
+                        isTouch = true;
+                    }
                 }
-                else if (controlArea.OverlapPoint(_contact))
+                else if (isTouch)
                 {
-                    isTouch = true;
+                    isTouch = false;
+                    if (isOver)
+                    {
+                        isWaitingForDump = false;
+                    }
+                    else
+                    {
+                        dumpControl.localPosition = Vector3.zero;
+                    }
                 }
             }
-            else if (isTouch)
+            else if (isFalling)
             {
-                isTouch = false;
-                controlStick.localPosition = Vector3.zero;
+                float _fallMovement = speedVar * Time.deltaTime * fallControlSpeed;
+                if (railIndex == 3)
+                    _fallMovement *= -1;
+
+                _anchorPosition.x += _fallMovement;
+            }
+            else if (!isOver)
+            {
+                if (Input.GetMouseButton(0))
+                {
+                    Vector2 _contact = camera.ScreenToWorldPoint(Input.mousePosition);
+                    if (isTouch)
+                    {
+                        Vector3 _controlPos = controlStick.position;
+                        _controlPos.x = Mathf.Clamp(_contact.x, controlBounds.x, controlBounds.y);
+                        controlStick.position = _controlPos;
+
+                        // Move wagon anchor if touch point outside dead zone.
+                        if ((_contact.x < deadZone.x) || (_contact.x > deadZone.y))
+                            _anchorPosition.x += ((_controlPos.x - deadZone.y * Mathf.Sign(_controlPos.x)) / (controlBounds.y - deadZone.y)) * Time.deltaTime * controlSpeed;
+                    }
+                    else if (controlArea.OverlapPoint(_contact))
+                    {
+                        isTouch = true;
+                    }
+                }
+                else if (isTouch)
+                {
+                    isTouch = false;
+                    controlStick.localPosition = Vector3.zero;
+                }
             }
 #endif
 
@@ -181,7 +289,16 @@ namespace GamePratic2020
                     break;
 
                 case 3:
-                    _anchorPosition.x = Mathf.Min(_anchorPosition.x, trackThreeLimit);
+                    if (_anchorPosition.x > trackThreeLimit)
+                    {
+                        isTouch = false;
+                        isWaitingForDump = true;
+                        dumpAnchor.SetActive(true);
+                        controlAnchor.SetActive(false);
+
+                        _anchorPosition.x = trackThreeLimit;
+                        railIndex++;
+                    }
                     break;
             }
 
@@ -276,7 +393,22 @@ namespace GamePratic2020
                 _position.y = _anchorPosition.y - _pos;
 
                 transform.position = _position;
-                transform.rotation = Quaternion.LookRotation(Vector3.forward, _anchorPosition - _position);
+                Quaternion _rotation = Quaternion.LookRotation(Vector3.forward, _anchorPosition - _position);
+                transform.rotation = _rotation;
+
+                float _eulerAngle = _rotation.eulerAngles.z;
+                if (_eulerAngle > 180)
+                    _eulerAngle -= 360;
+
+                anchor.eulerAngles = new Vector3(0, 0, (_eulerAngle / anchorRotation.y) * anchorRotation.x);
+
+                linePos[0] = leftChain.transform.position;
+                linePos[1] = leftChainLook.position;
+                leftChain.SetPositions(linePos);
+
+                linePos[0] = rightChain.transform.position;
+                linePos[1] = rightChainLook.position;
+                rightChain.SetPositions(linePos);
             }
         }
         #endregion

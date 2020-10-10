@@ -1,18 +1,30 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class CrushableObject : MonoBehaviour
-{
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+namespace GamePratic2020 {
+	public class CrushableObject : MonoBehaviour {
+        #region References
+        [SerializeField] private Sprite crushedSprite = null;
+        [SerializeField] private SpriteRenderer spriteRenderer = null;
+        #endregion
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+        #region Currents
+
+        public bool Crushed { get; private set; } = false;
+        #endregion
+
+        #region Behaviour
+        public void Collect() {
+            Destroy(gameObject);
+        }
+        #endregion
+
+        #region Collisions
+        public void OnTriggerEnter2D(Collider2D _collider) {
+            if (!Crushed) {
+                spriteRenderer.sprite = crushedSprite;
+                Crushed = true;
+            }
+		}
+        #endregion
+	}
 }

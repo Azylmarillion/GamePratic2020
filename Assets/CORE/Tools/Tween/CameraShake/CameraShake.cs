@@ -27,7 +27,7 @@ namespace GamePratic2020.Tools {
                 currentTween.Complete();
             }
 
-            Camera.main.transform.DOShakePosition(duration, strength, vibrato, randomness, snapping, fadeOut);
+            currentTween = Camera.main.transform.DOShakePosition(duration, strength, vibrato, randomness, snapping, fadeOut);
         }
         #endregion
     }

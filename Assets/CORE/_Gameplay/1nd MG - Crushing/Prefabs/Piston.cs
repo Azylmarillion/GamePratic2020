@@ -20,7 +20,7 @@ namespace GamePratic2020 {
         [Header("Crush")]
         [SerializeField, Min(0f)] private float crushMovementDuration = 0.2f;
         [SerializeField] private AnimationCurve crushMovementCurve = AnimationCurve.EaseInOut(0f, 0f, 1f, 1f);
-        
+
         [Header("References")]
         [SerializeField] private Transform pistonHeadTransform = null;
         [SerializeField] private CameraShake crushCameraShake = null;
@@ -28,7 +28,6 @@ namespace GamePratic2020 {
 
         #region Currents
         private int currentStep = 0;
-        private IEnumerator movementCoroutine = null;
         private bool isMoving = false;
         #endregion
 
@@ -100,6 +99,8 @@ namespace GamePratic2020 {
                 pistonHeadTransform.localPosition = Vector3.Lerp(fromPos, Vector3.zero, t);
                 yield return null;
             }
+
+
 
             crushCameraShake.Play();
             Vector3 initialPos = Vector3.up * minHeight;

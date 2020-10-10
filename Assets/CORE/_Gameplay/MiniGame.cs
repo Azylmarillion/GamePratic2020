@@ -42,7 +42,6 @@ namespace GamePratic2020
 				if (timer < 0)
 					StopMiniGame(); 
 			}
-
 		}
 		#endregion
 	}

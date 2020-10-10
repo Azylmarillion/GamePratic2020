@@ -35,7 +35,9 @@ namespace GamePratic2020
 		{
 			if (Instance == null)
 				Instance = this;
-			else Destroy(this); 
+			else Destroy(this);
+
+            miniGames[0].StartMiniGame();
 		}
 		#endregion
 	}

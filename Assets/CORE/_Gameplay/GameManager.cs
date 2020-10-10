@@ -17,7 +17,10 @@ namespace GamePratic2020
 		[HorizontalLine(1, order = 0), Section("GameManager", order = 1)]
 		[SerializeField] private MiniGame[] miniGames = new MiniGame[] { };
 		private int currentMGIndex = 0;
-		[SerializeField] private int globalScore = 0; 
+		[SerializeField] private int globalScore = 0;
+
+        [SerializeField, Min(1)] private int maxIteration = 3;
+        [SerializeField, ReadOnly] private int iteration = 0;
 		#endregion
 
 		#region Methods
@@ -27,8 +30,22 @@ namespace GamePratic2020
 			// ADD TRANSITION HERE
 			miniGames[currentMGIndex].gameObject.SetActive(false);
 			currentMGIndex++;
-			currentMGIndex = currentMGIndex >= miniGames.Length ? 0 : currentMGIndex;
-			miniGames[currentMGIndex].StartMiniGame(); 
+
+            if (currentMGIndex == miniGames.Length)
+            {
+                currentMGIndex = 0;
+                iteration++;
+
+                if (iteration == maxIteration)
+                {
+                    // Do some things
+                    // C'est la fin.
+                    return;
+                }
+            }
+
+            miniGames[currentMGIndex].ResetMiniGame(iteration);
+            miniGames[currentMGIndex].StartMiniGame(); 
 		}
 
 		private void Awake()

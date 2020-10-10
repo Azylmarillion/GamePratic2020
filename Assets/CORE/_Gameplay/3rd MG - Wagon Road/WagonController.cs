@@ -130,6 +130,8 @@ namespace GamePratic2020
 
         public override void ResetMiniGame(int _iteration)
         {
+            base.ResetMiniGame(_iteration);
+
             anchor.position = previousAnchor = originalPosition;
             wagon.position = new Vector3(originalPosition.x, originalPosition.y - distanceMagnitude, originalPosition.z);
 

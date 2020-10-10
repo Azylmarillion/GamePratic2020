@@ -8,7 +8,8 @@ namespace GamePratic2020 {
         #endregion
 
         #region Currents
-        private bool crushed = false;
+
+        public bool Crushed { get; private set; } = false;
         #endregion
 
         #region Behaviour
@@ -19,9 +20,9 @@ namespace GamePratic2020 {
 
         #region Collisions
         public void OnTriggerEnter2D(Collider2D _collider) {
-            if (!crushed) {
+            if (!Crushed) {
                 spriteRenderer.sprite = crushedSprite;
-                crushed = true;
+                Crushed = true;
             }
 		}
         #endregion

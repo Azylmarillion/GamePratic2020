@@ -18,7 +18,11 @@ namespace GamePratic2020
 
         [SerializeField, ReadOnly] protected float timerVar = 0;
         [SerializeField, ReadOnly] protected bool isActivated = false;
-		public bool IsActivated => isActivated; 
+		public bool IsActivated => isActivated;
+
+		[HorizontalLine(1, order = 0), Section("Sound", order = 1)]
+		[SerializeField, Required] protected AudioSource source = null;
+		public AudioSource Source => source; 
 		#endregion
 
 		#region Methods

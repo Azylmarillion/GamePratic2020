@@ -21,7 +21,12 @@ namespace GamePratic2020
 
         [SerializeField, Min(1)] private int maxIteration = 3;
         [SerializeField, ReadOnly] private int iteration = 0;
+
+		[HorizontalLine(1, order = 0), Section("Sounds", order = 1)]
+		[SerializeField] private SoundDatabase soundDatabase = null;
+		public SoundDatabase SoundDataBase => soundDatabase; 
 		#endregion
+
 
 		#region Methods
 		public void ProceedToNextMG(int _score)

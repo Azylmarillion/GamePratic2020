@@ -14,14 +14,21 @@ namespace GamePratic2020
         #region Fields and Properties
         [HorizontalLine(1, order = 0), Section("HeatingInputBehaviour", order = 1)]
         [SerializeField] private Camera currentCamera;
-        [SerializeField] private Thermometer thermometer; 
+        [SerializeField] private Thermometer thermometer;
+
+        [SerializeField, Required] private AudioSource crankSource = null; 
 
         private Vector2 previousPosition = Vector2.zero;
         private Vector2 currentPosition;
-        private bool isInitialized = false;
+        private bool isTurningCrank = false;
         #endregion
-    
+
         #region Methods
+        private void Start()
+        {
+            crankSource.clip = GameManager.Instance.SoundDataBase.CrankLoop; 
+        }
+
         void Update()
         {
 #if UNITY_EDITOR
@@ -30,21 +37,24 @@ namespace GamePratic2020
                 currentPosition = currentCamera.ScreenToWorldPoint(Input.mousePosition) - transform.position;
                 float _angle = (Mathf.Atan2(currentPosition.y, currentPosition.x) - Mathf.Atan2(previousPosition.y, previousPosition.x)) * Mathf.Rad2Deg;
                 previousPosition = currentPosition;
-                if (!isInitialized)
+                if (!isTurningCrank)
                 {
-                    isInitialized = true;
+                    isTurningCrank = true;
+                    crankSource.Play(); 
                     return;
                 }
                 transform.eulerAngles += new Vector3(0, 0, _angle);
-                if (!thermometer.IsActivated && !thermometer.HasBeenInitialized)
-                    thermometer.StartMiniGame();
-                else
-                    thermometer.IncreaseRatio(Mathf.Abs(_angle * Time.deltaTime));
+                thermometer.IncreaseRatio(Mathf.Abs(_angle * Time.deltaTime));
             }
             else
             {
-                previousPosition.Set(0, 0);
-                isInitialized = false;
+                if(isTurningCrank)
+                {
+                    crankSource.Stop(); 
+                    previousPosition.Set(0, 0);
+                    isTurningCrank = false;
+                }
+
             }
 #else
             if (Input.touchCount == 1)

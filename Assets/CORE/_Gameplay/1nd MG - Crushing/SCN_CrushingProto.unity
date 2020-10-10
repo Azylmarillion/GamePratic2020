@@ -139,7 +139,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &325367195
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -461,7 +461,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1543199898
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -521,6 +521,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: CompletedRunScreen
+      objectReference: {fileID: 0}
+    - target: {fileID: 6258922247205499358, guid: 1644ba6f529fe56419009fab4c9d0f0c,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6258922247205499359, guid: 1644ba6f529fe56419009fab4c9d0f0c,
         type: 3}
@@ -646,10 +651,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: PF_MiniGame_Crush
       objectReference: {fileID: 0}
-    - target: {fileID: 2015373039166966775, guid: ce87dc378d35c334d97286d2b93fc8f0,
+    - target: {fileID: 7338647277945608893, guid: ce87dc378d35c334d97286d2b93fc8f0,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ce87dc378d35c334d97286d2b93fc8f0, type: 3}

@@ -23,8 +23,8 @@ namespace GamePratic2020 {
 
         [Header("References")]
         [SerializeField] private Transform pistonHeadTransform = null;
+        [SerializeField] private CameraShake stepUpCameraShake = null;
         [SerializeField] private CameraShake crushCameraShake = null;
-        [SerializeField] private Collider2D pistonCollider = null;
         #endregion
 
         #region Currents
@@ -72,6 +72,8 @@ namespace GamePratic2020 {
 
         #region Coroutines
         private IEnumerator StepMovementCoroutine() {
+            stepUpCameraShake.Play();
+
             isMoving = true;
             float from = ((float)currentStep - 1f) / (float)steps;
             float increment = (1f / (float)steps);
@@ -95,8 +97,6 @@ namespace GamePratic2020 {
 
             Vector3 fromPos = pistonHeadTransform.localPosition;
 
-            //pistonCollider.enabled = true;
-
             for (float f = 0; f < 1f; f += Time.deltaTime / crushMovementDuration) {
                 float t = crushMovementCurve.Evaluate(f);
                 pistonHeadTransform.localPosition = Vector3.Lerp(fromPos, Vector3.zero, t);
@@ -105,7 +105,6 @@ namespace GamePratic2020 {
 
             crushCameraShake.Play();
             Vector3 initialPos = Vector3.up * minHeight;
-            //pistonCollider.enabled = false;
 
             for (float f = 0; f < 1f; f+= Time.deltaTime / stepMovementDuration) {
                 pistonHeadTransform.localPosition = Vector3.Lerp(Vector3.zero, initialPos, f);

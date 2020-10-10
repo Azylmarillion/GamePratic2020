@@ -14,9 +14,8 @@ namespace GamePratic2020
 		#region Fields / Properties
 		[HorizontalLine(1, order = 0), Section("MiniGame", order = 1)]
 		[SerializeField] protected float timer = 10.0f;
-		[SerializeField] protected int initialscore = 100;
+		[SerializeField] protected int score = 0;
 		[SerializeField, ReadOnly] protected bool isActivated = false;
-		[SerializeField, ReadOnly] protected int currentScore; 
 		public bool IsActivated => isActivated; 
 		#endregion
 

@@ -2153,8 +2153,10 @@ MonoBehaviour:
   - {fileID: 861349015}
   - {fileID: 1311820433}
   globalScore: 0
+  currentRunScore: 0
   maxIteration: 3
   iteration: 0
+  soundDatabase: {fileID: 0}
 --- !u!4 &1614668049
 Transform:
   m_ObjectHideFlags: 0

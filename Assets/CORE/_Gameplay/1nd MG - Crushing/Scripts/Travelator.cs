@@ -21,6 +21,7 @@ namespace GamePratic2020 {
         [Header("References")]
         [SerializeField] private CrushableObject crushablePrefab = null;
         [SerializeField] private CrushMiniGame ownerCrushMiniGame = null;
+        [SerializeField] private SpriteRenderer travelatorRenderer = null;
         #endregion
 
         #region Events
@@ -33,16 +34,24 @@ namespace GamePratic2020 {
         #region Currents
         private List<CrushableObject> crushableObjects = new List<CrushableObject>(10);
         private float nextElementTimer = 0f;
+
+        private static readonly int panProperty = Shader.PropertyToID("_Pan");
         #endregion
 
-        #region Methods
-        public void OnResetMinigame() {
+        #region Callbacks
+        private void OnEnable() {
+            float panSpeed = -speed / travelatorRenderer.size.x;
+            travelatorRenderer.material.SetVector(panProperty, new Vector4(panSpeed, 0f));
+        }
+
+        private void OnDisable() {
             for (int i = 0; i < crushableObjects.Count; i++) {
                 Destroy(crushableObjects[i].gameObject);
             }
 
             crushableObjects.Clear();
         }
+
 
         private void Update() {
             MoveObjects();

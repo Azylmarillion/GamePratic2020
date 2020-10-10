@@ -33,7 +33,7 @@ namespace GamePratic2020
 
         [HorizontalLine(1, order = 0), Section("UI", order = 1)]
         [SerializeField] private UnityEngine.UI.Image filledImage = null;
-        [SerializeField] private Gradient gradientColor = new Gradient(); 
+        [SerializeField] private Gradient gradientColor = new Gradient();
         #endregion
 
         #region Methods

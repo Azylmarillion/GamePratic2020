@@ -42,6 +42,11 @@ namespace GamePratic2020
 			GameManager.Instance.ProceedToNextMG(score);
 		}
 
+        public virtual void HideMiniGame()
+        {
+            gameObject.SetActive(false);
+        }
+
 		protected virtual void Update()
 		{
 			if (isActivated)

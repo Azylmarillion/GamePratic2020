@@ -28,7 +28,7 @@ namespace GamePratic2020
 		{
 			globalScore += _score;
 			// ADD TRANSITION HERE
-			miniGames[currentMGIndex].gameObject.SetActive(false);
+			miniGames[currentMGIndex].HideMiniGame();
 			currentMGIndex++;
 
             if (currentMGIndex == miniGames.Length)

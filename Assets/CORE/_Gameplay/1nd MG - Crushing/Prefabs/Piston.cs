@@ -13,10 +13,14 @@ namespace GamePratic2020 {
         [SerializeField] private int steps = 5;
         [SerializeField] private AnimationCurve heightOverSteps = AnimationCurve.Linear(0f, 0f, 1f, 1f);
 
-        [Header("Animation")]
+        [Header("Step")]
         [SerializeField, Min(0f)] private float stepMovementDuration = 0.2f;
         [SerializeField] private AnimationCurve stepMovementCurve = AnimationCurve.EaseInOut(0f, 0f, 1f, 1f);
 
+        [Header("Crush")]
+        [SerializeField, Min(0f)] private float crushMovementDuration = 0.2f;
+        [SerializeField] private AnimationCurve crushMovementCurve = AnimationCurve.EaseInOut(0f, 0f, 1f, 1f);
+        
         [Header("References")]
         [SerializeField] private Transform pistonHeadTransform = null;
         [SerializeField] private CameraShake crushCameraShake = null;
@@ -56,13 +60,12 @@ namespace GamePratic2020 {
 
         private void MovePiston(float _heightRatio) {
             float t = heightOverSteps.Evaluate(_heightRatio);
-            pistonHeadTransform.position = Vector3.Lerp(transform.position + Vector3.up * minHeight, transform.position + Vector3.up * maxHeight, t);
+            pistonHeadTransform.localPosition = Vector3.Lerp(Vector3.up * minHeight, Vector3.up * maxHeight, t);
         }
 
         private void Crush() {
-            crushCameraShake.Play();
             if (!isMoving) {
-                StartCoroutine(StepMovementCoroutine());
+                StartCoroutine(CrushMovementCoroutine());
             }
         }
         #endregion
@@ -86,6 +89,31 @@ namespace GamePratic2020 {
 
             yield return null;
         }
+
+        private IEnumerator CrushMovementCoroutine() {
+            isMoving = true;
+
+            Vector3 fromPos = pistonHeadTransform.localPosition;
+
+            for (float f = 0; f < 1f; f += Time.deltaTime / crushMovementDuration) {
+                float t = crushMovementCurve.Evaluate(f);
+                pistonHeadTransform.localPosition = Vector3.Lerp(fromPos, Vector3.zero, t);
+                yield return null;
+            }
+
+            crushCameraShake.Play();
+            Vector3 initialPos = Vector3.up * minHeight;
+
+            for (float f = 0; f < 1f; f+= Time.deltaTime / stepMovementDuration) {
+                pistonHeadTransform.localPosition = Vector3.Lerp(Vector3.zero, initialPos, f);
+                yield return null;
+            }
+
+            isMoving = false;
+
+            yield return null;
+        }
+
         #endregion
 
         #region Debug

@@ -98,7 +98,7 @@ namespace GamePratic2020
 
         // -----------------------
 
-        public void ResetMiniGame(int _iteration)
+        public override void ResetMiniGame(int _iteration)
         {
             anchor.position = previousAnchor = originalPosition;
             transform.position = new Vector3(originalPosition.x, originalPosition.y - distanceMagnitude, originalPosition.z);

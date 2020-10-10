@@ -376,11 +376,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2462fd6fe02e9c488def4d223ca3338, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  initialRatio: 0.5
+  initialValue: 0.5
   heatingLimit: {x: 0.25, y: 0.75}
-  decreasingMultiplier: 0.25
-  increasingMultiplier: 0.1
-  currentRatio: 0
+  decreasingRatio: 5
+  increasingRatio: 40
+  currentValue: 0
+  gameIsOver: 0
 --- !u!1 &1839934507
 GameObject:
   m_ObjectHideFlags: 0

@@ -24,6 +24,7 @@ namespace GamePratic2020
         #region Methods
         void Update()
         {
+#if UNITY_EDITOR
             if (Input.GetMouseButton(0))
             {
                 currentPosition = currentCamera.ScreenToWorldPoint(Input.mousePosition) - transform.position;
@@ -35,14 +36,14 @@ namespace GamePratic2020
                     return;
                 }
                 transform.eulerAngles += new Vector3(0, 0, _angle);
-                thermometer.IncreaseRatio(Mathf.Abs(_angle/360)); 
+                thermometer.IncreaseRatio(Mathf.Abs(_angle*Time.deltaTime)); 
             }
             else
             {
                 previousPosition.Set(0, 0);
                 isInitialized = false;
-            }
-    /*
+            } 
+#else
             if (Input.touchCount == 1)
             {
                 currentPosition = currentCamera.ScreenToWorldPoint(Input.GetTouch(0).position) - transform.position;
@@ -61,7 +62,7 @@ namespace GamePratic2020
                 previousPosition.Set(0, 0);
                 isInitialized = false;
             }
-    */
+#endif
         }
         #endregion
     }

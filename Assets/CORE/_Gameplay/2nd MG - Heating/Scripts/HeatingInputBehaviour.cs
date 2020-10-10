@@ -62,21 +62,24 @@ namespace GamePratic2020
                 currentPosition = currentCamera.ScreenToWorldPoint(Input.GetTouch(0).position) - transform.position;
                 float _angle = (Mathf.Atan2(currentPosition.y, currentPosition.x) - Mathf.Atan2(previousPosition.y, previousPosition.x)) * Mathf.Rad2Deg;
                 previousPosition = currentPosition;
-                if (!isInitialized)
+                if (!isTurningCrank)
                 {
-                    isInitialized = true;
+                    isTurningCrank = true;
+                    crankSource.Play(); 
                     return;
                 }
                 transform.eulerAngles += new Vector3(0, 0, _angle);
-                if (!thermometer.IsActivated && !thermometer.HasBeenInitialized)
-                    thermometer.StartMiniGame();
-                else
-                    thermometer.IncreaseRatio(Mathf.Abs(_angle * Time.deltaTime));
+                thermometer.IncreaseRatio(Mathf.Abs(_angle * Time.deltaTime));
             }
             else
             {
-                previousPosition.Set(0, 0);
-                isInitialized = false;
+                if(isTurningCrank)
+                {
+                    crankSource.Stop(); 
+                    previousPosition.Set(0, 0);
+                    isTurningCrank = false;
+                }
+
             }
 #endif
         }

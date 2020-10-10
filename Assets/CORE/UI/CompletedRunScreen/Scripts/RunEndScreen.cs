@@ -37,20 +37,18 @@ namespace GamePratic2020 {
 
         #region Current
         [Section("Read Only")]
-        [SerializeField, ReadOnly] private int currentFilledPoints = 0;
+        [SerializeField, ReadOnly] private int remainingPointsToFill = 0;
         private bool hasBeenInitialized = false;
         #endregion
 
         #region Filling
-        public void PlayAnimation(int runScore) {
-
-
-            //Fill(200)
+        public void PlayAnimation() {
+            remainingPointsToFill = GameManager.Instance.CurrentRunScore;
+            runScoreText.text = remainingPointsToFill.ToString();
+            totalScoreText.text = (GameManager.Instance.GlobalScore - remainingPointsToFill).ToString();
         }
 
-        public void Fill(int points) {
-            currentFilledPoints = points;
-
+        public void Fill() {
             if (!hasBeenInitialized) {
                 fillEffect.transform.position = Vector3.up * initialFillHeight;
                 hasBeenInitialized = true;
@@ -70,9 +68,9 @@ namespace GamePratic2020 {
 
             fillEffect.Play();
 
-            while(currentFilledPoints > 0) {
+            while(remainingPointsToFill > 0) {
                 int pointsDecrement = Mathf.RoundToInt(pointsPerSeconds * Time.deltaTime);
-                currentFilledPoints -= pointsDecrement;
+                remainingPointsToFill -= pointsDecrement;
 
                 fillEffect.transform.position += Vector3.up * fillIntensity * Time.deltaTime;
 

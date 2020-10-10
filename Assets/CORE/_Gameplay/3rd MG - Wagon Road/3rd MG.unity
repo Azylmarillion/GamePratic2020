@@ -198,35 +198,38 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a9e4aacdef67c224ea95753d4a513dbd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  initalTimer: 10
+  score: 100
   camera: {fileID: 695951335}
   anchor: {fileID: 927437342}
   controlArea: {fileID: 1889899421}
   controlStick: {fileID: 1791384865}
+  controlSpeed: 5
   controlBounds: {x: -1.5, y: 1.5}
+  deadZone: {x: -0.25, y: 0.25}
   bounds: {x: -2.5, y: 2.5}
-  fallMovement: 5
   trackOneLimit: 1
   trackTwoLimit: -1
   trackThreeLimit: 1
   trackTwoHeight: 3.5
   trackThreeHeight: 1.5
-  radius: 2
-  maxDistance: 1.75
-  speed: 5
-  speedMovement: 7
-  speedDecreaseCoef: 1.2
-  minDistance: 0.02
-  movementSensibility: 1
-  speedFall: 0.01
-  rotationSpeed: 25
-  speedVar: 0
-  previousAnchor: {x: 0, y: 0, z: 0}
+  distanceMagnitude: 1.25
+  horizontalDistance: 1.1
+  maxSpeed: 5
+  speedMovementIncrease: 0.1
+  speedFallIncrease: 0.1
+  speedIncrease: 7
+  speedDecrease: 1.35
+  fallSpeed: 5
+  isMoving: 0
   isFalling: 0
   railIndex: 1
-  fallMovementVar: 0
-  isMoving: 0
   direction: 0
-  speedStartFall: 0
+  speedVar: 0
+  fallSpeedVar: 0
+  startFallSpeed: 0
+  isTouch: 0
+  previousAnchor: {x: 0, y: 0, z: 0}
 --- !u!1 &60954898
 GameObject:
   m_ObjectHideFlags: 0

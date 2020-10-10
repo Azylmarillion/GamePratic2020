@@ -36,13 +36,16 @@ namespace GamePratic2020
                     return;
                 }
                 transform.eulerAngles += new Vector3(0, 0, _angle);
-                thermometer.IncreaseRatio(Mathf.Abs(_angle*Time.deltaTime)); 
+                if (!thermometer.IsActivated && !thermometer.HasBeenInitialized)
+                    thermometer.StartMiniGame();
+                else
+                    thermometer.IncreaseRatio(Mathf.Abs(_angle * Time.deltaTime));
             }
             else
             {
                 previousPosition.Set(0, 0);
                 isInitialized = false;
-            } 
+            }
 #else
             if (Input.touchCount == 1)
             {
@@ -55,7 +58,10 @@ namespace GamePratic2020
                     return;
                 }
                 transform.eulerAngles += new Vector3(0, 0, _angle);
-                thermometer.IncreaseRatio(Mathf.Abs(_angle));
+                if (!thermometer.IsActivated && !thermometer.HasBeenInitialized)
+                    thermometer.StartMiniGame();
+                else
+                    thermometer.IncreaseRatio(Mathf.Abs(_angle * Time.deltaTime));
             }
             else
             {

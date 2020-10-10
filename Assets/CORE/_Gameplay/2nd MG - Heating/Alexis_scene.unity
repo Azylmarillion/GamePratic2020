@@ -157,7 +157,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 9dfc825aed78fcd4ba02077103263b40, type: 2}
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -256,7 +256,6 @@ MonoBehaviour:
   m_Cameras: []
   m_RendererIndex: -1
   m_VolumeLayerMask:
-    serializedVersion: 2
     m_Bits: 1
   m_VolumeTrigger: {fileID: 0}
   m_RenderPostProcessing: 0
@@ -376,12 +375,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2462fd6fe02e9c488def4d223ca3338, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  timer: 10
+  initialscore: 100
+  isActivated: 0
+  currentScore: 0
   initialValue: 0.5
   heatingLimit: {x: 0.25, y: 0.75}
   decreasingRatio: 5
   increasingRatio: 40
   currentValue: 0
-  gameIsOver: 0
+  hasBeenInitialized: 0
 --- !u!1 &1839934507
 GameObject:
   m_ObjectHideFlags: 0

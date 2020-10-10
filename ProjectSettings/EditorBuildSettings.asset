@@ -6,6 +6,6 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/SampleScene.unity
-    guid: d1c3109bdb54ad54c8a2b2838528e640
+    path: Assets/CORE/_Gameplay/1nd MG - Crushing/SCN_CrushingProto.unity
+    guid: 4a8f3649b5ac2624b803a9c7de2895a5
   m_configObjects: {}

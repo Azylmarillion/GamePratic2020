@@ -35,7 +35,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
   m_AnchoredPosition: {x: 0, y: -528}
-  m_SizeDelta: {x: 800, y: 200}
+  m_SizeDelta: {x: 1000, y: 200}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7700911936686625199
 CanvasRenderer:
@@ -91,8 +91,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 110
-  m_fontSizeBase: 110
+  m_fontSize: 150
+  m_fontSizeBase: 150
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -144,6 +144,7 @@ GameObject:
   - component: {fileID: 3469075752257803442}
   - component: {fileID: 6900228872147369632}
   - component: {fileID: 4331720675714995444}
+  - component: {fileID: 5232589288225188466}
   m_Layer: 0
   m_Name: Canvas
   m_TagString: Untagged
@@ -215,6 +216,18 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
+--- !u!225 &5232589288225188466
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4799339747815054517}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 0
+  m_BlocksRaycasts: 0
+  m_IgnoreParentGroups: 0
 --- !u!1 &4953447260025301100
 GameObject:
   m_ObjectHideFlags: 0
@@ -250,7 +263,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
   m_AnchoredPosition: {x: 0, y: -324}
-  m_SizeDelta: {x: 800, y: 200}
+  m_SizeDelta: {x: 1000, y: 200}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4791100948326943494
 CanvasRenderer:
@@ -306,8 +319,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 140
-  m_fontSizeBase: 140
+  m_fontSize: 180
+  m_fontSizeBase: 180
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -5179,20 +5192,33 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79109707e00e3894585063fd23645436, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pointsPerSeconds: 600
-  fillIntensity: 3
+  textAppearDuration: 0.5
+  pointsPerSeconds: 700
+  fillIntensity: 6
   maxFillHeight: -1
   minimumFillHeight: -3.9
   initialFillHeight: -5.44
-  cokeFallDuration: 1.1
+  cokeFallDuration: 0.7
   stackParent: {fileID: 6258922246123571542}
   fallEffect: {fileID: 6258922247335347168}
   fillEffect: {fileID: 6258922247169187669}
+  textCanvasGroup: {fileID: 5232589288225188466}
   totalScoreText: {fileID: 9188846195964998178}
   runScoreText: {fileID: 539405951669832451}
   onFillComplete:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 11400000, guid: e83ce9e968359534aac3b5a4bf651fd9, type: 2}
+        m_MethodName: Play
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   remainingPointsToFill: 0
 --- !u!1 &6258922247335347181
 GameObject:
@@ -5309,7 +5335,7 @@ ParticleSystem:
     startLifetime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 1.15
+      scalar: 0.7
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -5800,7 +5826,7 @@ ParticleSystem:
     gravityModifier:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 2
+      scalar: 4
       minScalar: 0
       maxCurve:
         serializedVersion: 2
@@ -6059,7 +6085,7 @@ ParticleSystem:
     rateOverTime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 12
+      scalar: 22
       minScalar: 10
       maxCurve:
         serializedVersion: 2

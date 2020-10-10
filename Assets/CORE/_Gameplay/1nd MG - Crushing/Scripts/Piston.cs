@@ -113,6 +113,7 @@ namespace GamePratic2020 {
                 yield return null;
             }
 
+            onCrush?.Invoke();
             crushCameraShake.Play();
             Vector3 initialPos = Vector3.up * minHeight;
 

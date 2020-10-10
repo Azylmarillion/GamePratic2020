@@ -47,6 +47,8 @@ namespace GamePratic2020
         #region MiniGame
         public override void ResetMiniGame(int _iteration)
         {
+            base.ResetMiniGame(_iteration);
+
             scoreTimer = 0; 
             score = 0; 
             currentValue = initialValue;

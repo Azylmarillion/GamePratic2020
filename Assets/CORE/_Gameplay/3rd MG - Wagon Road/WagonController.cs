@@ -185,12 +185,23 @@ namespace GamePratic2020
             Vector3 _anchorPosition = anchor.transform.position;
 
             // Move the wagon on screen touch.
+
+            bool _isTouch;
+            Vector2 _touch = new Vector2();
 #if UNITY_EDITOR
+            _isTouch = Input.GetMouseButton(0);
+            _touch = Input.mousePosition;
+#else
+            _isTouch = Input.touchCount > 0;
+            if (_isTouch)
+                _touch = Input.GetTouch(0).position;
+#endif
+
             if (isWaitingForDump)
             {
-                if (Input.GetMouseButton(0))
+                if (_isTouch)
                 {
-                    Vector2 _contact = camera.ScreenToWorldPoint(Input.mousePosition);
+                    Vector2 _contact = camera.ScreenToWorldPoint(_touch);
                     if (isTouch && !isOver)
                     {
                         Vector3 _controlPos = dumpControl.position;
@@ -234,9 +245,9 @@ namespace GamePratic2020
             }
             else if (!isOver)
             {
-                if (Input.GetMouseButton(0))
+                if (_isTouch)
                 {
-                    Vector2 _contact = camera.ScreenToWorldPoint(Input.mousePosition);
+                    Vector2 _contact = camera.ScreenToWorldPoint(_touch);
                     if (isTouch)
                     {
                         Vector3 _controlPos = controlStick.position;
@@ -258,7 +269,6 @@ namespace GamePratic2020
                     controlStick.localPosition = Vector3.zero;
                 }
             }
-#endif
 
             // ----------
 

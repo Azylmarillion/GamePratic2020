@@ -1,0 +1,23 @@
+// ===== Game Pratic 2020 - https://github.com/Azylmarillion/GamePratic2020 ===== //
+//
+// Notes :
+//
+// ============================================================================== //
+
+using EnhancedEditor;
+using UnityEngine;
+
+namespace GamePratic2020
+{
+	public class #SCRIPTNAME# : MonoBehaviour
+    {
+        #region Fields / Properties
+		//[HorizontalLine(1, order = 0), Section("#SCRIPTNAME#", order = 1)]
+		
+        #endregion
+		
+		#region Methods
+		
+		#endregion
+    }
+}

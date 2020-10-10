@@ -9,37 +9,48 @@ using UnityEngine;
 
 namespace GamePratic2020
 { 
-    public class Thermometer : MonoBehaviour
+    public class Thermometer : MiniGame
     {
         [HorizontalLine(1, order = 0), Section("Thermometer", order = 1)]
-        [SerializeField] private float initialRatio = .5f;
+        [SerializeField] private float initialValue = .5f;
         [SerializeField, MinMax(0.0f, 1.0f)] private Vector2 heatingLimit = new Vector2(.25f, .75f);
-        [SerializeField, Range(.1f, 1.0f)] private float decreasingMultiplier = 1.0f;
-        [SerializeField, Range(.1f, 1.0f)] private float increasingMultiplier = 1.0f;
-        [SerializeField, ReadOnly] private float currentRatio;
+        [Tooltip("This value is used to slow the decrase of the value. The greater this value is, the slower the decreasing will be.")]
+        [SerializeField, Range(1.0f, 100.0f)] private float decreasingRatio = 1.0f;
+        [Tooltip("This value is used to slow the increase of the value. The greater this value is, the slower the increasing will be.")]
+        [SerializeField, Range(1.0f, 100.0f)] private float increasingRatio = 1.0f;
+
+        [HorizontalLine(1, order = 0), Section("Read values", order = 1)]
+        [SerializeField, ReadOnly] private float currentValue;
+        [SerializeField, ReadOnly] private bool gameIsOver = false; 
 
         public void IncreaseRatio(float _increasingValue)
         {
-            currentRatio = Mathf.Clamp(currentRatio + _increasingValue * increasingMultiplier, 0, 1);
-            if(currentRatio > heatingLimit.y)
+            if (gameIsOver) return; 
+            currentValue = Mathf.Clamp(currentValue + _increasingValue / increasingRatio, 0, 1);
+            if(currentValue > heatingLimit.y)
             {
-                Debug.Log("Loose"); 
+                gameIsOver = true; 
             }
         }
 
-        private void ResetRatio() => currentRatio = initialRatio;    
+        private void ResetRatio()
+        {
+            currentValue = initialValue;
+            gameIsOver = false; 
+        }
     
         private void Start() => ResetRatio();
 
         private void Update()
         {
-            if (currentRatio < heatingLimit.x)
+            if (gameIsOver) return; 
+            if (currentValue < heatingLimit.x)
             {
-                Debug.Log("Loose"); 
+                gameIsOver = true; 
                 return;
             }
-            currentRatio -= (Time.deltaTime * decreasingMultiplier);
-            currentRatio = Mathf.Clamp(currentRatio, 0, 1); 
+            currentValue -= (Time.deltaTime / decreasingRatio);
+            currentValue = Mathf.Clamp(currentValue, 0, 1); 
         }
     }
 }

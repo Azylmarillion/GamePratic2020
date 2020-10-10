@@ -29,6 +29,8 @@ namespace GamePratic2020
 		[HorizontalLine(1, order = 0), Section("Sounds", order = 1)]
 		[SerializeField] private SoundDatabase soundDatabase = null;
 		public SoundDatabase SoundDataBase => soundDatabase;
+
+		[SerializeField, Required] private AudioSource ambiantSource = null; 
 		#endregion
 
 		#region Methods
@@ -45,6 +47,8 @@ namespace GamePratic2020
             }
 
             miniGames[currentMGIndex].ResetMiniGame(iteration);
+			ambiantSource.clip = soundDatabase.AmbientClips[currentMGIndex];
+			ambiantSource.Play(); 
             miniGames[currentMGIndex].StartMiniGame(); 
 		}
 
@@ -72,7 +76,9 @@ namespace GamePratic2020
 			else Destroy(this);
 
             miniGames[0].ResetMiniGame(0);
-            miniGames[0].StartMiniGame();
+			ambiantSource.clip = soundDatabase.AmbientClips[0];
+			ambiantSource.Play();
+			miniGames[0].StartMiniGame();
 		}
 		#endregion
 	}

@@ -20,7 +20,6 @@ namespace GamePratic2020
 
         private Vector2 previousPosition = Vector2.zero;
         private Vector2 currentPosition;
-        private bool isTurningCrank = false;
         #endregion
 
         #region Methods
@@ -35,51 +34,55 @@ namespace GamePratic2020
             if (Input.GetMouseButton(0))
             {
                 currentPosition = currentCamera.ScreenToWorldPoint(Input.mousePosition) - transform.position;
+                if(previousPosition == Vector2.zero) previousPosition = currentPosition;
                 float _angle = (Mathf.Atan2(currentPosition.y, currentPosition.x) - Mathf.Atan2(previousPosition.y, previousPosition.x)) * Mathf.Rad2Deg;
                 previousPosition = currentPosition;
-                if (!isTurningCrank)
+                if(_angle == 0 && crankSource.isPlaying)
                 {
-                    isTurningCrank = true;
-                    crankSource.Play(); 
-                    return;
+                    if(crankSource.isPlaying) 
+                        crankSource.Stop();
+                    return; 
+                }
+                else if(!crankSource.isPlaying)
+                {
+                    crankSource.Play();
+
                 }
                 transform.eulerAngles += new Vector3(0, 0, _angle);
                 thermometer.IncreaseRatio(Mathf.Abs(_angle * Time.deltaTime));
             }
             else
             {
-                if(isTurningCrank)
-                {
+                if(crankSource.isPlaying)
                     crankSource.Stop(); 
-                    previousPosition.Set(0, 0);
-                    isTurningCrank = false;
-                }
-
+                previousPosition.Set(0, 0);
             }
 #else
             if (Input.touchCount == 1)
             {
                 currentPosition = currentCamera.ScreenToWorldPoint(Input.GetTouch(0).position) - transform.position;
+                if(previousPosition == Vector2.zero) previousPosition = currentPosition;
                 float _angle = (Mathf.Atan2(currentPosition.y, currentPosition.x) - Mathf.Atan2(previousPosition.y, previousPosition.x)) * Mathf.Rad2Deg;
                 previousPosition = currentPosition;
-                if (!isTurningCrank)
+                if(_angle == 0 && crankSource.isPlaying)
                 {
-                    isTurningCrank = true;
-                    crankSource.Play(); 
-                    return;
+                    if(crankSource.isPlaying) 
+                        crankSource.Stop();
+                    return; 
+                }
+                else if(!crankSource.isPlaying)
+                {
+                    crankSource.Play();
+
                 }
                 transform.eulerAngles += new Vector3(0, 0, _angle);
                 thermometer.IncreaseRatio(Mathf.Abs(_angle * Time.deltaTime));
             }
             else
             {
-                if(isTurningCrank)
-                {
+                if(crankSource.isPlaying)
                     crankSource.Stop(); 
-                    previousPosition.Set(0, 0);
-                    isTurningCrank = false;
-                }
-
+                previousPosition.Set(0, 0);
             }
 #endif
         }

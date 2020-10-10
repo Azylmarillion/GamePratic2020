@@ -24,13 +24,14 @@ namespace GamePratic2020
 
 		public virtual void StartMiniGame() 
 		{
+			gameObject.SetActive(true); 
 			isActivated = true; 
 		}
 
 		public virtual void StopMiniGame()
 		{
 			isActivated = false; 			
-			// GameManager.GoToNextMiniGame(score); 
+			GameManager.Instance.ProceedToNextMG(score); 
 		}
 
 		protected virtual void Update()

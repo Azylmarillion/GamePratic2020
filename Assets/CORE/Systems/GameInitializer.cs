@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using DG.Tweening;
 
 namespace GamePratic2020 {
 	/// <summary>
@@ -8,8 +9,8 @@ namespace GamePratic2020 {
 	public class GameInitializer {
 		[RuntimeInitializeOnLoadMethod]
 		private static void InitializeGame() {
-			Debug.Log("Initialize game");
 			Application.targetFrameRate = 60;
+			DOTween.Init(true, true, LogBehaviour.ErrorsOnly);
 		}
 	}
 }

@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<< HEAD
 guid: 4b84ab8a65efa98499adbf527ad9c6e0
+=======
+guid: 2f3331d0b88347c46a017159a8b407c8
+>>>>>>> julien_branch
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}

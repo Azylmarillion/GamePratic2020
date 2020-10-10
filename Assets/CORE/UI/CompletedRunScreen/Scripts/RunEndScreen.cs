@@ -32,7 +32,7 @@ namespace GamePratic2020 {
         #region Current
         [Section("Read Only")]
         [SerializeField, ReadOnly] private int currentFilledPoints = 0;
-        [SerializeField] private bool hasBeenInitialized = false; 
+        private bool hasBeenInitialized = false; 
         #endregion
 
         #region Filling 

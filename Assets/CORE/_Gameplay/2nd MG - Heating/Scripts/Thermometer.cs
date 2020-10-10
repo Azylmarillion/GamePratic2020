@@ -20,6 +20,11 @@ namespace GamePratic2020
         [Tooltip("This value is used to slow the increase of the value. The greater this value is, the slower the increasing will be.")]
         [SerializeField, Range(1.0f, 100.0f)] private float increasingRatio = 1.0f;
 
+        [HorizontalLine(1, order = 0), Section("Points", order = 1)]
+        [SerializeField, Range(1,10)] private int decreasingScoreValue = 1;
+        [SerializeField, Range(.1f, 10.0f)] private float decreasingScoreTime = 1.0f;
+        private float scoreTimer = 0; 
+
         [HorizontalLine(1, order = 0), Section("Read values", order = 1)]
         [SerializeField, ReadOnly] private float currentValue;
         [SerializeField, ReadOnly] private bool hasBeenInitialized = false;
@@ -37,6 +42,7 @@ namespace GamePratic2020
         #region MiniGame
         public override void ResetMiniGame(int _iteration)
         {
+            scoreTimer = 0; 
             currentScore = initialscore; 
             currentValue = initialValue;
             hasBeenInitialized = false; 
@@ -65,7 +71,15 @@ namespace GamePratic2020
                 if (currentValue < heatingLimit.x || currentValue > heatingLimit.y)
                 {
                     // Decrease Score
+                    scoreTimer += Time.deltaTime; 
+                    if(scoreTimer > decreasingScoreTime)
+                    {
+                        currentScore -= decreasingScoreValue;
+                        scoreTimer = 0;
+                    }
                 }
+                else 
+                    scoreTimer = 0;
                 currentValue -= (Time.deltaTime / decreasingRatio);
                 currentValue = Mathf.Clamp(currentValue, 0, 1);
             }

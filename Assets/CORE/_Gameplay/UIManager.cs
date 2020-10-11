@@ -105,7 +105,8 @@ namespace GamePratic2020
             twin = score.transform.DOPunchScale(new Vector3(1.1f, 1.1f, 1.1f), .5f);
             score.text = _score.ToString("### ### 000");
 
-            GameManager.Instance.AmbiantSource.PlayOneShot(GameManager.Instance.SoundDataBase.ScoreIncrement);
+            if (_score > 0)
+                GameManager.Instance.AmbiantSource.PlayOneShot(GameManager.Instance.SoundDataBase.ScoreIncrement);
         }
 
         public void DisplayPressToPlay(bool _doDisplay) => pressToPlayScreen.SetActive(_doDisplay);

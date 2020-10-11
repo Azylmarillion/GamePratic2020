@@ -33,6 +33,7 @@ namespace GamePratic2020
         [SerializeField, Min(1)] private int maxIteration = 3;
         [SerializeField, ReadOnly] private int iteration = 0;
         public int Iteration => iteration;
+        public int MaxIteriation => maxIteration;
 
 		[HorizontalLine(1, order = 0), Section("Sounds", order = 1)]
 		[SerializeField] private SoundDatabase soundDatabase = null;

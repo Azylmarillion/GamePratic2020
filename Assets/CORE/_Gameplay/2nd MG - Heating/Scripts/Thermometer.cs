@@ -27,7 +27,7 @@ namespace GamePratic2020
         [SerializeField, Range(1.0f, 100.0f)] private float increasingRatio = 1.0f;
 
         [HorizontalLine(1, order = 0), Section("Points", order = 1)]
-        [SerializeField, Range(1,10)] private int increasingScoreValue = 1;
+        [SerializeField, Range(1,10000)] private int increasingScoreValue = 1;
         [SerializeField, Range(.1f, 10.0f)] private float increasingScoreTime = 1.0f;
         private float scoreTimer = 0; 
 

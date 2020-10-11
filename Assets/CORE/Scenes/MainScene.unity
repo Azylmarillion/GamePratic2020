@@ -1217,7 +1217,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: -2410463286515227759, guid: 640cc44ad3027234aae82d608cd2868f,
+      objectReference: {fileID: 3865506561830301395, guid: 640cc44ad3027234aae82d608cd2868f,
         type: 3}
     - target: {fileID: 1121290105725909826, guid: beb95d0daea058646b7401148dd7b9f7,
         type: 3}
@@ -1323,7 +1323,7 @@ PrefabInstance:
     - target: {fileID: 1121290107568123468, guid: beb95d0daea058646b7401148dd7b9f7,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5786306318586463891, guid: beb95d0daea058646b7401148dd7b9f7,
         type: 3}
@@ -1334,7 +1334,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: -2410463286515227759, guid: 640cc44ad3027234aae82d608cd2868f,
+      objectReference: {fileID: 3865506561830301395, guid: 640cc44ad3027234aae82d608cd2868f,
         type: 3}
     - target: {fileID: 6436690560785058287, guid: beb95d0daea058646b7401148dd7b9f7,
         type: 3}

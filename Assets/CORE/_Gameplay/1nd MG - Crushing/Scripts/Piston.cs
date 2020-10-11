@@ -12,6 +12,8 @@ namespace GamePratic2020 {
     public class Piston : MonoBehaviour {
         #region Settings
         [Section("Settings")]
+        public bool enableInputs = true;
+        [Space(10f)]
         [SerializeField] private float minHeight = 2f;
         [SerializeField] private float maxHeight = 10f;
         [SerializeField] private int steps = 5;
@@ -65,7 +67,7 @@ namespace GamePratic2020 {
         }
 
         private void Update() {
-            if(Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began && !isMoving) {
+            if(enableInputs && Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began && !isMoving) {
                 UpdatePistonState();
             }
         }

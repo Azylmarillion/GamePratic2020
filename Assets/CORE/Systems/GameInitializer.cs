@@ -10,7 +10,7 @@ namespace GamePratic2020 {
 		[RuntimeInitializeOnLoadMethod]
 		private static void InitializeGame() {
 			Application.targetFrameRate = 60;
-			DOTween.Init(true, true, LogBehaviour.ErrorsOnly);
+			DOTween.Init(true, true, LogBehaviour.ErrorsOnly).SetCapacity(200, 50);
 		}
 	}
 }

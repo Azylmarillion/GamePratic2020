@@ -407,6 +407,7 @@ MonoBehaviour:
   miniGameSource: {fileID: 8139258194815788172}
   collectedCokePoints: 100
   travelator: {fileID: 7338647277387810222}
+  piston: {fileID: 5532424171832531413}
 --- !u!82 &8139258194815788172
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1060,6 +1061,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b98ddee46ba9a7c4c92fc86be9e62102, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enableInputs: 1
   minHeight: 1.5
   maxHeight: 5
   steps: 3

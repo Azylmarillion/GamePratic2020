@@ -61,18 +61,15 @@ namespace GamePratic2020
         public void StartNextMiniGame()
         {
             currentMGIndex++;
-            if (currentMGIndex >= miniGames.Length)
+            if (currentMGIndex == miniGames.Length)
             {
-                if (CompleteRun())
-                {
-                    // C'est la fin, afficher l'écran de fin.
-                }
-                else
-                {
-                    // Afficher l'écran de fin d'itération.
-                }
-
+                CompleteRun();
                 UIManager.ShowEndScreen();
+                return;
+            }
+            else if (iteration == maxIteration)
+            {
+                uiManager.ShowMainMenu(true);
                 return;
             }
 
@@ -120,7 +117,7 @@ namespace GamePratic2020
 
             if (iteration == maxIteration) {
                 // Do some things.
-                Debug.LogError("C'est la fin.");
+                Debug.Log("C'est la fin.");
                 return true;
             }
             return false;

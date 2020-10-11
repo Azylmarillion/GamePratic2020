@@ -5783,7 +5783,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   textAppearDuration: 0.5
-  pointsPerSeconds: 1000
+  pointsPerSeconds: 100000
   fillIntensity: 6
   maxFillHeight: -1
   minimumFillHeight: -3.9

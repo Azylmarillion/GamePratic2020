@@ -31,8 +31,8 @@ namespace GamePratic2020 {
 
         public override void ResetMiniGame(int _iteration) {
             base.ResetMiniGame(_iteration);
-            //float ratio = (float)_iteration / (float)GameManager.Instance.MaxIteriation;
-            //travelator.SetMovementAmount(speedScaling.Evaluate(ratio));
+            float ratio = (float)_iteration / (float)GameManager.Instance.MaxIteriation;
+            travelator.SetMovementAmount(speedScaling.Evaluate(ratio));
         }
         #endregion
 

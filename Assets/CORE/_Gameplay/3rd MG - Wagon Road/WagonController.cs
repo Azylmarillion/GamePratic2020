@@ -45,8 +45,25 @@ namespace GamePratic2020
 
         [HorizontalLine(1)]
 
+        [SerializeField, Required] private ParticleSystem leftSparks = null;
+        [SerializeField, Required] private ParticleSystem rightSparks = null;
+
+        [HorizontalLine(1)]
+
+        [SerializeField, Required] private ParticleSystem leftCoke = null;
+        [SerializeField, Required] private ParticleSystem rightCoke = null;
+        [SerializeField, Required] private ParticleSystem dropCoke = null;
+
+        [HorizontalLine(1)]
+
+        [SerializeField, Required] private ParticleSystem smokeFX = null;
+        [SerializeField, Required] private ParticleSystem lightFX = null;
+
+        [HorizontalLine(1)]
+
         [SerializeField] private float controlSpeed = 5;
         [SerializeField] private float fallControlSpeed = 1;
+        [SerializeField] private float overDelay = 2.5f;
 
         [HorizontalLine(1)]
 
@@ -102,6 +119,7 @@ namespace GamePratic2020
         [SerializeField, ReadOnly] private float fallSpeedVar = 0;
         [SerializeField, ReadOnly] private float startFallSpeed = 0;
         [SerializeField, ReadOnly] private float dumpVar = 0;
+        [SerializeField, ReadOnly] private float overVar = 0;
 
         [HorizontalLine(1)]
 
@@ -111,6 +129,7 @@ namespace GamePratic2020
         // -----------------------
 
         private readonly Vector3[] linePos = new Vector3[2];
+        private int sparkID = 0;
         #endregion
 
         #region Methods
@@ -140,7 +159,7 @@ namespace GamePratic2020
 
             railIndex = 1;
             isTouch = isMoving = isFalling = isWaitingForDump = isOver = false;
-            speedVar = fallSpeedVar = startFallSpeed = dumpVar = 0;
+            speedVar = fallSpeedVar = startFallSpeed = dumpVar = overVar = 0;
 
             controlStick.localPosition = Vector3.zero;
             dumpControl.localPosition = Vector3.zero;
@@ -156,6 +175,12 @@ namespace GamePratic2020
             linePos[0] = rightChain.transform.position;
             linePos[1] = rightChainLook.position;
             rightChain.SetPositions(linePos);
+
+            leftSparks.Stop();
+            rightSparks.Stop();
+
+            smokeFX.Play();
+            lightFX.Play();
         }
         #endregion
 
@@ -180,6 +205,15 @@ namespace GamePratic2020
 
             if (!isActivated)
                 return;
+
+            if (isOver)
+            {
+                dropCoke.transform.position = wagon.position;
+
+                overVar += Time.deltaTime;
+                if (overVar > overDelay)
+                    StopMiniGame();
+            }
 
             // Get anchor position.
             Vector3 _anchorPosition = anchor.transform.position;
@@ -212,9 +246,14 @@ namespace GamePratic2020
                         if (_controlPos.y == dumpBounds.x)
                         {
                             isOver = true;
-
-                            // Animation
                             dumpMask.SetActive(true);
+
+                            // Animations.
+                            dropCoke.transform.position = wagon.position;
+                            dropCoke.Play();
+
+                            smokeFX.Stop();
+                            lightFX.Stop();
                         }
                     }
                     else if (dumpArea.OverlapPoint(_contact))
@@ -235,14 +274,6 @@ namespace GamePratic2020
                     }
                 }
             }
-            else if (isFalling)
-            {
-                float _fallMovement = speedVar * Time.deltaTime * fallControlSpeed;
-                if (railIndex == 3)
-                    _fallMovement *= -1;
-
-                _anchorPosition.x += _fallMovement;
-            }
             else if (!isOver)
             {
                 if (_isTouch)
@@ -255,7 +286,7 @@ namespace GamePratic2020
                         controlStick.position = _controlPos;
 
                         // Move wagon anchor if touch point outside dead zone.
-                        if ((_contact.x < deadZone.x) || (_contact.x > deadZone.y))
+                        if (!isFalling && ((_contact.x < deadZone.x) || (_contact.x > deadZone.y)))
                             _anchorPosition.x += ((_controlPos.x - deadZone.y * Mathf.Sign(_controlPos.x)) / (controlBounds.y - deadZone.y)) * Time.deltaTime * controlSpeed;
                     }
                     else if (controlArea.OverlapPoint(_contact))
@@ -270,6 +301,16 @@ namespace GamePratic2020
                 }
             }
 
+            // Falling movement.
+            if (isFalling)
+            {
+                float _fallMovement = speedVar * Time.deltaTime * fallControlSpeed;
+                if (railIndex == 3)
+                    _fallMovement *= -1;
+
+                _anchorPosition.x += _fallMovement;
+            }
+
             // ----------
 
             // Falling state and horizontal position clamp.
@@ -282,6 +323,9 @@ namespace GamePratic2020
                         isFalling = true;
                         startFallSpeed = speedVar;
                         railIndex++;
+
+                        leftSparks.Stop();
+                        rightSparks.Stop();
                     }
                     break;
 
@@ -291,6 +335,9 @@ namespace GamePratic2020
                         isFalling = true;
                         startFallSpeed = speedVar;
                         railIndex++;
+
+                        leftSparks.Stop();
+                        rightSparks.Stop();
                     }
                     break;
 
@@ -352,6 +399,29 @@ namespace GamePratic2020
                 {
                     speedVar = Mathf.MoveTowards(speedVar, 0, Time.deltaTime * speedDecrease);
                 }
+
+                // Sparks trigger.
+                if (!isFalling)
+                {
+                    int _id = _movement.x < 0 ? 1 : -1;
+                    if (sparkID != _id)
+                    {
+                        ParticleSystem _current = _id > 0 ? rightSparks : leftSparks;
+                        ParticleSystem _other = _id > 0 ? leftSparks : rightSparks;
+
+                        _current.Play();
+                        _other.Stop();
+
+                        sparkID = _id;
+                    }
+                }
+            }
+            else if (!isFalling && (sparkID != 0))
+            {
+                ParticleSystem _system = sparkID > 0 ? rightSparks : leftSparks;
+                _system.Stop();
+
+                sparkID = 0;
             }
 
             // Move and rotate wagon around anchor.
@@ -370,7 +440,13 @@ namespace GamePratic2020
                 else
                 {
                     if (Mathf.Abs(_anchorPosition.x + (horizontalDistance * direction) - _position.x) < MIN_DISTANCE)
+                    {
                         direction *= -1;
+
+                        ParticleSystem _system = direction < 0 ? leftCoke : rightCoke;
+                        _system.transform.position = _position;
+                        _system.Play();
+                    }
 
                     if (Mathf.Sign(_difference) == direction)
                     {

@@ -3933,11 +3933,6 @@ PrefabInstance:
       propertyPath: onFillComplete.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
-    - target: {fileID: 6258922247205499356, guid: 1644ba6f529fe56419009fab4c9d0f0c,
-        type: 3}
-      propertyPath: pointsPerSeconds
-      value: 20000
-      objectReference: {fileID: 0}
     - target: {fileID: 6258922247205499358, guid: 1644ba6f529fe56419009fab4c9d0f0c,
         type: 3}
       propertyPath: m_Name

@@ -6,17 +6,12 @@ namespace GamePratic2020 {
         [SerializeField] private Sprite crushedSprite = null;
         [SerializeField] private SpriteRenderer spriteRenderer = null;
         [SerializeField] private ParticleSystem crushEffect = null;
+        public CrushMiniGame miniGameOwner = null;
         #endregion
 
         #region Currents
 
         public bool Crushed { get; private set; } = false;
-        #endregion
-
-        #region Behaviour
-        public void Collect() {
-            Destroy(gameObject);
-        }
         #endregion
 
         #region Collisions
@@ -25,6 +20,7 @@ namespace GamePratic2020 {
                 spriteRenderer.sprite = crushedSprite;
                 Crushed = true;
                 crushEffect.Play();
+                miniGameOwner.CollectCoke();
             }
 		}
         #endregion

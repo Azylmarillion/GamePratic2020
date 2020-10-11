@@ -475,9 +475,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timer:
-  - 10
-  - 10
-  - 10
+  - 15
+  - 15
+  - 15
   score: 0
   timerVar: 0
   isActivated: 0

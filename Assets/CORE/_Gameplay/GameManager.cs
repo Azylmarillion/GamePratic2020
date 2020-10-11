@@ -78,8 +78,6 @@ namespace GamePratic2020
             }
 
             miniGames[currentMGIndex].ResetMiniGame(iteration);
-            ambiantSource.clip = soundDatabase.AmbientClips[currentMGIndex];
-            ambiantSource.Play();
 
             if (iteration == 0)
             {

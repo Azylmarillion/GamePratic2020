@@ -128,6 +128,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 577126429, guid: beb95d0daea058646b7401148dd7b9f7, type: 3}
+      propertyPath: m_RootOrder
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 736651826, guid: beb95d0daea058646b7401148dd7b9f7, type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 838402755, guid: beb95d0daea058646b7401148dd7b9f7, type: 3}
       propertyPath: m_Camera
       value: 
@@ -1119,6 +1127,16 @@ PrefabInstance:
       propertyPath: m_RaycastTarget
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7244850073723162141, guid: 9db10bacb83188543a7e4910019ed555,
+        type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 75db95bccb641b1429f05a2364e64c82, type: 3}
+    - target: {fileID: 7244850073723162141, guid: 9db10bacb83188543a7e4910019ed555,
+        type: 3}
+      propertyPath: m_PlayOnAwake
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7244850074105707907, guid: 9db10bacb83188543a7e4910019ed555,
         type: 3}
       propertyPath: currentCamera
@@ -1263,6 +1281,21 @@ PrefabInstance:
     - target: {fileID: 3638163069411104048, guid: 17d5f4949c3bc374c96f114bc595ebf4,
         type: 3}
       propertyPath: timer.Array.data[2]
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5446881141252927737, guid: 17d5f4949c3bc374c96f114bc595ebf4,
+        type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: a48c02c68d0a29d489a06e933dcbd6e5, type: 3}
+    - target: {fileID: 5446881141252927737, guid: 17d5f4949c3bc374c96f114bc595ebf4,
+        type: 3}
+      propertyPath: Loop
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5446881141252927737, guid: 17d5f4949c3bc374c96f114bc595ebf4,
+        type: 3}
+      propertyPath: m_PlayOnAwake
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8413754583824129230, guid: 17d5f4949c3bc374c96f114bc595ebf4,

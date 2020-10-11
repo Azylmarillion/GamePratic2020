@@ -12,10 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 74c89ca26f3d63f43abc9c30a13af40b, type: 3}
   m_Name: Sound Database
   m_EditorClassIdentifier: 
-  ambientClips:
-  - {fileID: 8300000, guid: c363084552d0d8349a113bbaf63526ce, type: 3}
-  - {fileID: 8300000, guid: 75db95bccb641b1429f05a2364e64c82, type: 3}
-  - {fileID: 8300000, guid: a48c02c68d0a29d489a06e933dcbd6e5, type: 3}
   hammerReloading: {fileID: 8300000, guid: e7464f6602a5be1419ea9a0e147195de, type: 3}
   hammerStomp: {fileID: 8300000, guid: 78b0ed24e835cd6419ecac648a653af5, type: 3}
   gaugeAlarm: {fileID: 8300000, guid: fa7eabafa5ac07e48a5be0d9aee5cae3, type: 3}
@@ -26,3 +22,9 @@ MonoBehaviour:
   winJingle: {fileID: 8300000, guid: 3647a67c3323a324e8ab6b28e754949b, type: 3}
   scoreIncrement: {fileID: 8300000, guid: 53ff99b465e7c1340871e50ff8a8df7a, type: 3}
   clickClip: {fileID: 8300000, guid: a90dffb52b2658f45aa655b3c6151e41, type: 3}
+  footSteps:
+  - {fileID: 8300000, guid: 7ec82014b12139a4aaf2e5c4a408e4e5, type: 3}
+  - {fileID: 8300000, guid: e265a1fa029e85347921eeca36a19380, type: 3}
+  - {fileID: 8300000, guid: 86ab37c189c29b64181f121d41993dcc, type: 3}
+  - {fileID: 8300000, guid: ec613d6d7cf985e4c993d91b4a32364f, type: 3}
+  - {fileID: 8300000, guid: 3d00904182da9b046893311e01a55db6, type: 3}

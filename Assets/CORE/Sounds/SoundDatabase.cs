@@ -13,9 +13,6 @@ namespace GamePratic2020
     public class SoundDatabase : ScriptableObject
     {
         #region Fields / Properties
-        [HorizontalLine(1, order = 0), Section("Ambient", order = 1)]
-        [SerializeField] private AudioClip[] ambientClips = new AudioClip[] { }; 
-
         [HorizontalLine(1, order = 0), Section("First Mini Game", order = 1)]
         [SerializeField] private AudioClip hammerReloading = null;
         [SerializeField] private AudioClip hammerStomp = null;
@@ -38,8 +35,6 @@ namespace GamePratic2020
 
         [SerializeField] private AudioClip[] footSteps = new AudioClip[] { }; 
 
-
-        public AudioClip[] AmbientClips => ambientClips;
         public AudioClip HammerReloading => hammerReloading;
         public AudioClip HammerStomp => hammerStomp;
         public AudioClip GaugeAlarm => gaugeAlarm;

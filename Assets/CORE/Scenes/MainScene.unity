@@ -1325,6 +1325,36 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1392996702644720106, guid: beb95d0daea058646b7401148dd7b9f7,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1392996702644720106, guid: beb95d0daea058646b7401148dd7b9f7,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1392996702644720106, guid: beb95d0daea058646b7401148dd7b9f7,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1392996702644720106, guid: beb95d0daea058646b7401148dd7b9f7,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1614668048}
+    - target: {fileID: 1392996702644720106, guid: beb95d0daea058646b7401148dd7b9f7,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: QuitGame
+      objectReference: {fileID: 0}
+    - target: {fileID: 1392996702644720106, guid: beb95d0daea058646b7401148dd7b9f7,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 5786306318586463891, guid: beb95d0daea058646b7401148dd7b9f7,
         type: 3}
       propertyPath: m_Camera
@@ -1336,6 +1366,36 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 3865506561830301395, guid: 640cc44ad3027234aae82d608cd2868f,
         type: 3}
+    - target: {fileID: 6362921725121271055, guid: beb95d0daea058646b7401148dd7b9f7,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6362921725121271055, guid: beb95d0daea058646b7401148dd7b9f7,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6362921725121271055, guid: beb95d0daea058646b7401148dd7b9f7,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6362921725121271055, guid: beb95d0daea058646b7401148dd7b9f7,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1614668048}
+    - target: {fileID: 6362921725121271055, guid: beb95d0daea058646b7401148dd7b9f7,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: StartGame
+      objectReference: {fileID: 0}
+    - target: {fileID: 6362921725121271055, guid: beb95d0daea058646b7401148dd7b9f7,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 6436690560785058287, guid: beb95d0daea058646b7401148dd7b9f7,
         type: 3}
       propertyPath: onFillComplete.m_PersistentCalls.m_Calls.Array.data[1].m_Target
@@ -1361,6 +1421,11 @@ PrefabInstance:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 917416984}
+    - target: {fileID: 8145340378327389867, guid: beb95d0daea058646b7401148dd7b9f7,
+        type: 3}
+      propertyPath: m_SortingLayerID
+      value: 680517677
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 1121290105810298883, guid: beb95d0daea058646b7401148dd7b9f7, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: beb95d0daea058646b7401148dd7b9f7, type: 3}

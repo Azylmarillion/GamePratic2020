@@ -2420,11 +2420,6 @@ PrefabInstance:
       propertyPath: m_SortingLayer
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 8610221927568268358, guid: c0295537044f1ad4880eb2ff0264e03b,
-        type: 3}
-      propertyPath: m_SortingOrder
-      value: 1000
-      objectReference: {fileID: 0}
     - target: {fileID: 8610221927568268360, guid: c0295537044f1ad4880eb2ff0264e03b,
         type: 3}
       propertyPath: m_LocalPosition.x

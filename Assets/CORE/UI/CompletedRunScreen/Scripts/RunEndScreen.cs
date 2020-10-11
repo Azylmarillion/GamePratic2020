@@ -35,6 +35,8 @@ namespace GamePratic2020 {
         [SerializeField] private ParticleSystem fallEffect = null;
         [SerializeField] private ParticleSystem fillEffect = null;
         [SerializeField] private CameraShake fillEndCameraShake = null;
+        [SerializeField] private AudioSource cokeFallSource = null;
+        [SerializeField] private AudioSource audioSource = null;
 
         [Header("Text")]
         [SerializeField] private CanvasGroup textCanvasGroup = null;
@@ -132,6 +134,7 @@ namespace GamePratic2020 {
                 workOverText.gameObject.SetActive(true);
                 workOverText.transform.localScale = Vector3.zero;
                 workOverText.transform.DOScale(1f, 0.3f);
+                audioSource.PlayOneShot(GameManager.Instance.SoundDataBase.WinJingle);
             } else {
                 goesHarderText.gameObject.SetActive(true);
                 goesHarderText.transform.localScale = Vector3.zero;
@@ -149,6 +152,7 @@ namespace GamePratic2020 {
 
         private IEnumerator ProcessFillCoroutine() {
             fallEffect.Play();
+            cokeFallSource.Play();
             int globalScore = GameManager.Instance.GlobalScore;
 
             yield return new WaitForSeconds(cokeFallDuration);
@@ -177,6 +181,7 @@ namespace GamePratic2020 {
             }
 
             fillEndCameraShake.Play();
+            cokeFallSource.Stop();
 
             runScoreText.text = "0";
             totalScoreText.text = GameManager.Instance.GlobalScore.ToString();

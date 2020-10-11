@@ -138,6 +138,11 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 3865506561830301395, guid: 640cc44ad3027234aae82d608cd2868f,
         type: 3}
+    - target: {fileID: 456569513881240047, guid: beb95d0daea058646b7401148dd7b9f7,
+        type: 3}
+      propertyPath: Loop
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1121290105725909826, guid: beb95d0daea058646b7401148dd7b9f7,
         type: 3}
       propertyPath: m_Camera

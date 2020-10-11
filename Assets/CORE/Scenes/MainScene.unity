@@ -537,6 +537,11 @@ PrefabInstance:
       propertyPath: camera
       value: 
       objectReference: {fileID: 917416984}
+    - target: {fileID: 3638163069411104048, guid: 17d5f4949c3bc374c96f114bc595ebf4,
+        type: 3}
+      propertyPath: miniGameSource
+      value: 
+      objectReference: {fileID: 618325499}
     - target: {fileID: 8413754583824129230, guid: 17d5f4949c3bc374c96f114bc595ebf4,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -782,6 +787,12 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!82 &618325499 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 5446881141252927737, guid: 17d5f4949c3bc374c96f114bc595ebf4,
+    type: 3}
+  m_PrefabInstance: {fileID: 297616251}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &802182915
 GameObject:
   m_ObjectHideFlags: 0
@@ -1254,6 +1265,12 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 883794696}
   m_CullTransparentMesh: 0
+--- !u!82 &906088903 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 8139258194815788172, guid: ce87dc378d35c334d97286d2b93fc8f0,
+    type: 3}
+  m_PrefabInstance: {fileID: 1526386701}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &917416982
 GameObject:
   m_ObjectHideFlags: 0
@@ -1979,6 +1996,10 @@ PrefabInstance:
       propertyPath: timer.Array.data[2]
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 123761173, guid: ce87dc378d35c334d97286d2b93fc8f0, type: 3}
+      propertyPath: miniGameSource
+      value: 
+      objectReference: {fileID: 906088903}
     - target: {fileID: 1058940913267957126, guid: ce87dc378d35c334d97286d2b93fc8f0,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2140,7 +2161,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1614668048
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2161,7 +2182,7 @@ MonoBehaviour:
   currentRunScore: 0
   maxIteration: 3
   iteration: 0
-  soundDatabase: {fileID: 0}
+  soundDatabase: {fileID: 11400000, guid: 6dc6360afdffc184788b5f7c77f123fc, type: 2}
 --- !u!4 &1614668049
 Transform:
   m_ObjectHideFlags: 0

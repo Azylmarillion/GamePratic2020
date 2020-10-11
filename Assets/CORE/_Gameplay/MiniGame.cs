@@ -31,6 +31,9 @@ namespace GamePratic2020
             timerVar = timer[_iteration];
             gameObject.SetActive(true);
             score = 0;
+
+            UIManager.Instance.UpdateTimer(timerVar, 0);
+            UIManager.Instance.UpdateScore(score);
         }
 
         public virtual void StartMiniGame() 
@@ -57,8 +60,13 @@ namespace GamePratic2020
 			{
 				timerVar -= Time.deltaTime;
 				if (timerVar < 0)
-					StopMiniGame(); 
-			}
+                {
+                    timerVar = 0;
+                    StopMiniGame();
+                }
+
+                UIManager.Instance.UpdateTimer(timerVar, 1 - (timerVar / timer[GameManager.Instance.Iteration]));
+            }
 		}
 		#endregion
 	}

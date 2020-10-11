@@ -97,6 +97,12 @@ namespace GamePratic2020
 
         [HorizontalLine(1)]
 
+        [SerializeField, Min(1)] private int minScore = 1000;
+        [SerializeField, Min(1)] private int minDropScore = 1000;
+        [SerializeField, Range(1, 30)] private int looseMax = 1000;
+
+        [HorizontalLine(1)]
+
         [SerializeField, MinMax(1, 90)] private Vector2Int anchorRotation = new Vector2Int(10, 45);
         [SerializeField] private Vector3 originalPosition = new Vector3();
 
@@ -126,6 +132,7 @@ namespace GamePratic2020
         [SerializeField, ReadOnly] private float startFallSpeed = 0;
         [SerializeField, ReadOnly] private float dumpVar = 0;
         [SerializeField, ReadOnly] private float overVar = 0;
+        [SerializeField, ReadOnly] private int looseAmount = 0;
 
         [HorizontalLine(1)]
 
@@ -148,6 +155,13 @@ namespace GamePratic2020
 
         public override void StopMiniGame()
         {
+            // Give minimum score.
+            if (!isOver)
+            {
+                score = minScore;
+                UIManager.Instance.UpdateScore(score);
+            }
+
             base.StopMiniGame();
         }
 
@@ -166,6 +180,7 @@ namespace GamePratic2020
             railIndex = 1;
             isTouch = isMoving = isFalling = isWaitingForDump = isOver = false;
             speedVar = fallSpeedVar = startFallSpeed = dumpVar = overVar = 0;
+            looseAmount = 0;
 
             controlStick.localPosition = Vector3.zero;
             dumpControl.localPosition = Vector3.zero;
@@ -262,6 +277,12 @@ namespace GamePratic2020
                             lightFX.Stop();
 
                             dropShake.Play();
+
+                            // Update score.
+                            int _remain = 100000 - minDropScore;
+                            score = 100000 - (int)((_remain / (float)looseMax) * looseAmount);
+
+                            UIManager.Instance.UpdateScore(score);
                         }
                     }
                     else if (dumpArea.OverlapPoint(_contact))
@@ -451,6 +472,9 @@ namespace GamePratic2020
                     if (Mathf.Abs(_anchorPosition.x + (horizontalDistance * direction) - _position.x) < MIN_DISTANCE)
                     {
                         direction *= -1;
+
+                        // Loose points !
+                        looseAmount++;
 
                         ParticleSystem _system = direction < 0 ? leftCoke : rightCoke;
                         _system.transform.position = _position;

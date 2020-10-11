@@ -27,6 +27,7 @@ namespace GamePratic2020
 
         [HorizontalLine(1)]
 
+        [SerializeField, Required] private Image timerPanel = null;
         [SerializeField, Required] private TextMeshProUGUI timer = null;
         [SerializeField, Required] private TextMeshProUGUI score = null;
 
@@ -84,7 +85,13 @@ namespace GamePratic2020
         #region In Game UI
         public void DisplayGameScore(bool _doDisplay) => score.gameObject.SetActive(_doDisplay);
 
-        public void UpdateTimer(float _timer) => timer.text = _timer.ToString("00.00");
+        public void UpdateTimer(float _timer, float _percent)
+        {
+            timer.text = _timer.ToString("00");
+            timerPanel.fillAmount = _percent;
+        }
+
+        public void UpdateScore(int _score) => score.text = _score.ToString("### ### 000");
 
         public void DisplayPressToPlay(bool _doDisplay) => pressToPlayScreen.SetActive(_doDisplay);
 
@@ -147,6 +154,7 @@ namespace GamePratic2020
                     if (!isTransitOut)
                     {
                         isTransitOut = true;
+
                         GameManager.Instance.StartNextMiniGame();
                     }
 

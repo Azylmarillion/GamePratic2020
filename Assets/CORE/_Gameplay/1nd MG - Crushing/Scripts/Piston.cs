@@ -3,6 +3,9 @@ using EnhancedEditor;
 using GamePratic2020.Tools;
 using System.Collections;
 using UnityEngine.Events;
+using TMPro;
+using DG.Tweening;
+using UnityEngine.UI;
 
 namespace GamePratic2020 {
     [SelectionBase]
@@ -29,6 +32,9 @@ namespace GamePratic2020 {
         [SerializeField] private CameraShake stepUpCameraShake = null;
         [SerializeField] private CameraShake crushCameraShake = null;
         [SerializeField] private Animator pistonAnimator = null;
+        [SerializeField] private RectTransform buttonRectTransform = null;
+        [SerializeField] private TextMeshProUGUI counterText = null;
+        [SerializeField] private JitterMovement textJitterMovement = null;
 
         [Section("Callbacks")]
         [SerializeField] private UnityEvent onCrushBegins = new UnityEvent();
@@ -38,6 +44,8 @@ namespace GamePratic2020 {
         #region Currents
         private int currentStep = 0;
         private bool isMoving = false;
+
+        private Tween buttonTween = null;
 
         private static readonly int stepUpAnim = Animator.StringToHash("StepUp");
         private static readonly int fallAnim = Animator.StringToHash("Fall");
@@ -53,10 +61,11 @@ namespace GamePratic2020 {
             currentStep = 0;
             isMoving = false;
             MovePiston(0f);
+            counterText.text = (steps - currentStep).ToString();
         }
 
         private void Update() {
-            if(Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began) {
+            if(Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began && !isMoving) {
                 UpdatePistonState();
             }
         }
@@ -66,13 +75,24 @@ namespace GamePratic2020 {
         private void UpdatePistonState() {
             currentStep++;
 
+            if (buttonTween != null && buttonTween.IsPlaying()) {
+                buttonTween.Complete();
+            }
+
+            buttonTween = buttonRectTransform.transform.DOPunchScale(Vector3.one * 0.3f, 0.3f, 20);
+
             if(currentStep > steps) {
-                currentStep = 0;
                 Crush();
+                textJitterMovement.SetActiveJitter(false);
             } else {
-                if (!isMoving) {
-                    StartCoroutine(StepMovementCoroutine());
+                if(currentStep >= steps) {
+                    counterText.text = "GO";
+                    textJitterMovement.SetActiveJitter(true);
+                } else {
+                    counterText.text = (steps - currentStep).ToString();
                 }
+
+                StartCoroutine(StepMovementCoroutine());
             }
         }
 
@@ -82,9 +102,9 @@ namespace GamePratic2020 {
         }
 
         private void Crush() {
-            if (!isMoving) {
-                StartCoroutine(CrushMovementCoroutine());
-            }
+            counterText.text = steps.ToString();
+            currentStep = 0;
+            StartCoroutine(CrushMovementCoroutine());
         }
         #endregion
 

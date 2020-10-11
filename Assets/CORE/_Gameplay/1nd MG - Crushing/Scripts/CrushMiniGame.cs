@@ -11,17 +11,22 @@ namespace GamePratic2020 {
 
         #region References
         [SerializeField] private Travelator travelator = null;
+        [SerializeField] private Piston piston = null;
         #endregion
 
         #region Minigame Callbacks
         public override void StartMiniGame() {
             base.StartMiniGame();
             travelator.spawn = true;
+            piston.enableInputs = true;
+            travelator.SetMovementAmount(1f);
         }
 
         public override void StopMiniGame() {
             base.StopMiniGame();
             travelator.spawn = false;
+            travelator.SetMovementAmount(0f);
+            piston.enableInputs = false;
         }
 
         public override void ResetMiniGame(int _iteration) {

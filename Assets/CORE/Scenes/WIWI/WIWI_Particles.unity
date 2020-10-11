@@ -508,7 +508,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1904265413
 Transform:
   m_ObjectHideFlags: 0
@@ -717,20 +717,25 @@ PrefabInstance:
       propertyPath: m_Name
       value: CrankTrail
       objectReference: {fileID: 0}
+    - target: {fileID: 6095877503998150744, guid: e089a1b52580e5f4aa531d13f164c88c,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6095877503998150749, guid: e089a1b52580e5f4aa531d13f164c88c,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.7811216
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6095877503998150749, guid: e089a1b52580e5f4aa531d13f164c88c,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.424757
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6095877503998150749, guid: e089a1b52580e5f4aa531d13f164c88c,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -4.1853123
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6095877503998150749, guid: e089a1b52580e5f4aa531d13f164c88c,
         type: 3}
@@ -810,6 +815,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: SmokeFurnace
+      objectReference: {fileID: 0}
+    - target: {fileID: 2623650063012113660, guid: 6d1c80058852862498cecb988341cdf4,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2623650063012113663, guid: 6d1c80058852862498cecb988341cdf4,
         type: 3}
@@ -1180,6 +1190,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: FurnaceSparksThin
       objectReference: {fileID: 0}
+    - target: {fileID: 4147907861611283099, guid: 2a52de4334dbd5b4a8dd22ceb407e681,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5499185354853743148, guid: 2a52de4334dbd5b4a8dd22ceb407e681,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1416,6 +1431,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: FurnaceSparksWide
+      objectReference: {fileID: 0}
+    - target: {fileID: 442165476051545163, guid: 6b13fbfb067bd424b9ff80a35fb5012c,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 442165476051545174, guid: 6b13fbfb067bd424b9ff80a35fb5012c,
         type: 3}
@@ -1840,6 +1860,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Glowing particles
+      objectReference: {fileID: 0}
+    - target: {fileID: 8560759251011122332, guid: 48b87f981c36b0a4180d598895f785d8,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 48b87f981c36b0a4180d598895f785d8, type: 3}

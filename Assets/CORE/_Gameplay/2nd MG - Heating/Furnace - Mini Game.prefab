@@ -427,8 +427,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   timer:
   - 10
-  - 10
-  - 10
+  - 15
+  - 20
   score: 0
   timerVar: 0
   isActivated: 0
@@ -526,8 +526,8 @@ MonoBehaviour:
   smokeSystem: {fileID: 4675848110422603130}
   decreasingRatio: 10
   increasingRatio: 55
-  increasingScoreValue: 1000
-  increasingScoreTime: 2
+  increasingScoreValue: 2500
+  increasingScoreTime: 1
   currentValue: 0
   heatingLimit: {x: 0.4, y: 0.6}
   currentGradientColor:

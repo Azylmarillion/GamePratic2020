@@ -1017,12 +1017,12 @@ PrefabInstance:
     - target: {fileID: 7244850072422164200, guid: 9db10bacb83188543a7e4910019ed555,
         type: 3}
       propertyPath: timer.Array.data[1]
-      value: 10
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 7244850072422164200, guid: 9db10bacb83188543a7e4910019ed555,
         type: 3}
       propertyPath: timer.Array.data[2]
-      value: 10
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 7244850072422164201, guid: 9db10bacb83188543a7e4910019ed555,
         type: 3}
@@ -1233,7 +1233,7 @@ PrefabInstance:
     - target: {fileID: 3638163069411104048, guid: 17d5f4949c3bc374c96f114bc595ebf4,
         type: 3}
       propertyPath: timer.Array.data[0]
-      value: 10
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3638163069411104048, guid: 17d5f4949c3bc374c96f114bc595ebf4,
         type: 3}
@@ -1253,12 +1253,12 @@ PrefabInstance:
     - target: {fileID: 3638163069411104048, guid: 17d5f4949c3bc374c96f114bc595ebf4,
         type: 3}
       propertyPath: timer.Array.data[1]
-      value: 10
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3638163069411104048, guid: 17d5f4949c3bc374c96f114bc595ebf4,
         type: 3}
       propertyPath: timer.Array.data[2]
-      value: 10
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8413754583824129230, guid: 17d5f4949c3bc374c96f114bc595ebf4,
         type: 3}
@@ -1352,15 +1352,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 123761173, guid: ce87dc378d35c334d97286d2b93fc8f0, type: 3}
       propertyPath: timer.Array.data[0]
-      value: 10
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 123761173, guid: ce87dc378d35c334d97286d2b93fc8f0, type: 3}
       propertyPath: timer.Array.data[1]
-      value: 10
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 123761173, guid: ce87dc378d35c334d97286d2b93fc8f0, type: 3}
       propertyPath: timer.Array.data[2]
-      value: 10
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1058940913267957126, guid: ce87dc378d35c334d97286d2b93fc8f0,
         type: 3}

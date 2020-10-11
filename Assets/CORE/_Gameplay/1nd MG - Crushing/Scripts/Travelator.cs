@@ -89,6 +89,7 @@ namespace GamePratic2020 {
         private void Spawn() {
             Vector3 spawnPos = transform.position + Vector3.right * range.x;
             CrushableObject instance = Instantiate(crushablePrefab, spawnPos, Quaternion.identity);
+            instance.miniGameOwner = ownerCrushMiniGame;
             crushableObjects.Add(instance);
             onSpawnElement?.Invoke();
         }
@@ -98,20 +99,9 @@ namespace GamePratic2020 {
                 CrushableObject obj = crushableObjects[i];
                 if (obj.transform.position.x > range.y) {
                     crushableObjects.RemoveAt(i);
-                    CollectElement(obj);
+                    Destroy(obj.gameObject);
                 }
             }
-        }
-
-        private void CollectElement(CrushableObject obj) {
-            if (obj.Crushed) {
-                ownerCrushMiniGame.CollectCoke();
-                onCollectValidElement?.Invoke();
-            } else {
-                onCollectFailedElement?.Invoke();
-            }
-
-            obj.Collect();
         }
         #endregion
 

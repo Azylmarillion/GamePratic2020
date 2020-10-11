@@ -25,6 +25,9 @@ namespace GamePratic2020
         [SerializeField, Required] private GameObject pressToPlayScreen = null;
 
         [SerializeField, Required] private RunEndScreen finalScreen = null;
+        [SerializeField, Required] private FunFactDatabase database = null;
+
+        [SerializeField, Required] private TextMeshProUGUI funfactText = null;
 
         [HorizontalLine(1)]
 
@@ -122,6 +125,7 @@ namespace GamePratic2020
             isTransitOut = false;
             transitionVar = 0;
             endMiniGame.SetActive(true);
+            funfactText.text = database.GetRandomFact();
         }
 
         public void UpdateProgressBar(int _amount) => progressAnimator.SetInteger(progress_Hash, _amount);

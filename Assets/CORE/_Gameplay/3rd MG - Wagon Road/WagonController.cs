@@ -5,6 +5,7 @@
 // ============================================================================== //
 
 using EnhancedEditor;
+using GamePratic2020.Tools;
 using UnityEngine;
 
 namespace GamePratic2020
@@ -58,6 +59,11 @@ namespace GamePratic2020
 
         [SerializeField, Required] private ParticleSystem smokeFX = null;
         [SerializeField, Required] private ParticleSystem lightFX = null;
+
+        [HorizontalLine(1)]
+
+        [SerializeField, Required] private CameraShake fallShake = null;
+        [SerializeField, Required] private CameraShake dropShake = null;
 
         [HorizontalLine(1)]
 
@@ -254,6 +260,8 @@ namespace GamePratic2020
 
                             smokeFX.Stop();
                             lightFX.Stop();
+
+                            dropShake.Play();
                         }
                     }
                     else if (dumpArea.OverlapPoint(_contact))
@@ -368,6 +376,7 @@ namespace GamePratic2020
                     fallSpeedVar = 0;
 
                     _anchorPosition.y = _height;
+                    fallShake.Play();
                 }
             }
 

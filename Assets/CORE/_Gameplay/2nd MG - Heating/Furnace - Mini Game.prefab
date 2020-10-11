@@ -429,6 +429,7 @@ MonoBehaviour:
     m_Mode: 1
     m_NumColorKeys: 4
     m_NumAlphaKeys: 2
+  smokeSystem: {fileID: 4675848110422603130}
   decreasingRatio: 10
   increasingRatio: 70
   increasingScoreValue: 1
@@ -1481,12 +1482,17 @@ PrefabInstance:
     - target: {fileID: 2623650063012113662, guid: 6d1c80058852862498cecb988341cdf4,
         type: 3}
       propertyPath: EmissionModule.rateOverTime.scalar
-      value: 35
+      value: 40
       objectReference: {fileID: 0}
     - target: {fileID: 2623650063012113662, guid: 6d1c80058852862498cecb988341cdf4,
         type: 3}
       propertyPath: InitialModule.startLifetime.scalar
       value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2623650063012113662, guid: 6d1c80058852862498cecb988341cdf4,
+        type: 3}
+      propertyPath: InitialModule.startSpeed.minScalar
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2623650063012113663, guid: 6d1c80058852862498cecb988341cdf4,
         type: 3}
@@ -1555,6 +1561,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6d1c80058852862498cecb988341cdf4, type: 3}
+--- !u!198 &4675848110422603130 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 2623650063012113662, guid: 6d1c80058852862498cecb988341cdf4,
+    type: 3}
+  m_PrefabInstance: {fileID: 7244850073495869828}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &4675848110422603131 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2623650063012113663, guid: 6d1c80058852862498cecb988341cdf4,

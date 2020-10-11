@@ -151,6 +151,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad7263152f657a54ebde86cfb29c751b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  uiManager: {fileID: 0}
   miniGames:
   - {fileID: 7244850073723162142}
   globalScore: 0
@@ -159,6 +160,7 @@ MonoBehaviour:
   iteration: 0
   soundDatabase: {fileID: 11400000, guid: 6dc6360afdffc184788b5f7c77f123fc, type: 2}
   ambiantSource: {fileID: 784660167}
+  isWaitingToStart: 0
 --- !u!4 &784660166
 Transform:
   m_ObjectHideFlags: 0
@@ -451,6 +453,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4675848110422603130, guid: 9db10bacb83188543a7e4910019ed555,
+        type: 3}
+      propertyPath: InitialModule.startLifetime.scalar
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4675848110422603130, guid: 9db10bacb83188543a7e4910019ed555,
+        type: 3}
+      propertyPath: EmissionModule.rateOverTime.scalar
+      value: 40
+      objectReference: {fileID: 0}
     - target: {fileID: 7244850072422164201, guid: 9db10bacb83188543a7e4910019ed555,
         type: 3}
       propertyPath: m_LocalPosition.x

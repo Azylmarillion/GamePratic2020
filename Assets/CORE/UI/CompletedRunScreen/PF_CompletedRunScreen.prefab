@@ -5780,6 +5780,7 @@ MonoBehaviour:
   stackParent: {fileID: 6258922246123571542}
   fallEffect: {fileID: 6258922247335347168}
   fillEffect: {fileID: 6258922247169187669}
+  fillEndCameraShake: {fileID: 11400000, guid: f2c61e279cdb01a45afd207916d62f88, type: 2}
   textCanvasGroup: {fileID: 3203216127460810231}
   totalScoreText: {fileID: 9188846195964998178}
   runScoreText: {fileID: 539405951669832451}

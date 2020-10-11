@@ -6,6 +6,7 @@
 
 using DG.Tweening;
 using EnhancedEditor;
+using GamePratic2020.Tools;
 using System.Collections;
 using TMPro;
 using UnityEngine;
@@ -33,6 +34,7 @@ namespace GamePratic2020 {
         [SerializeField] private Transform stackParent = null;
         [SerializeField] private ParticleSystem fallEffect = null;
         [SerializeField] private ParticleSystem fillEffect = null;
+        [SerializeField] private CameraShake fillEndCameraShake = null;
 
         [Header("Text")]
         [SerializeField] private CanvasGroup textCanvasGroup = null;
@@ -121,8 +123,17 @@ namespace GamePratic2020 {
             yield return ProcessFillCoroutine();
             yield return DaysFillCoroutine();
 
-            //Detect current run here
-            //if(GameManager.Instance.)
+            yield return new WaitForSeconds(0.4f);
+
+            if (GameManager.Instance.Iteration >= GameManager.Instance.MaxIteriation - 1) {
+                workOverText.gameObject.SetActive(true);
+                workOverText.transform.localScale = Vector3.zero;
+                workOverText.transform.DOScale(1f, 0.3f);
+            } else {
+                goesHarderText.gameObject.SetActive(true);
+                goesHarderText.transform.localScale = Vector3.zero;
+                goesHarderText.transform.DOScale(1f, 0.3f);
+            }
 
             yield return new WaitForSeconds(endWaitDuration);
 
@@ -155,9 +166,11 @@ namespace GamePratic2020 {
                     stackParent.transform.position += Vector3.up * (maxFillHeight - (fillEffect.transform.position.y));
                 }
 
-
                 yield return null;
             }
+
+            fillEndCameraShake.Play();
+
             runScoreText.text = "0";
             totalScoreText.text = GameManager.Instance.GlobalScore.ToString();
 
@@ -174,7 +187,23 @@ namespace GamePratic2020 {
             daysPanelGroup.transform.localScale = Vector3.zero;
             daysPanelGroup.transform.DOScale(1f, 0.4f);
 
-            yield return new WaitForSeconds(0.5f);
+            GameManager gm = GameManager.Instance;
+
+            daysCounterText.text = $"Jour {gm.Iteration + 1}/{gm.MaxIteriation}";
+
+            float fromFillVal = ((float)gm.Iteration)/ (float)gm.MaxIteriation;
+            float toFillVal = ((float)gm.Iteration + 1) / (float)gm.MaxIteriation;
+            fillBar.fillAmount = fromFillVal;
+
+            yield return new WaitForSeconds(0.4f);
+
+            for (float f = 0; f < 1f; f += Time.deltaTime / 0.6f) {
+                float fill = Mathf.SmoothStep(fromFillVal, toFillVal, f);
+                fillBar.fillAmount = fill;
+                yield return null;
+            }
+
+            fillBar.fillAmount = toFillVal;
 
             yield return null;
         }

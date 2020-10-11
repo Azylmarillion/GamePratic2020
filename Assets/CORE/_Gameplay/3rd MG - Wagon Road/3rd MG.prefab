@@ -1381,6 +1381,8 @@ MonoBehaviour:
   dropCoke: {fileID: 2272334923024547928}
   smokeFX: {fileID: 707052616469836771}
   lightFX: {fileID: 3385934020075656526}
+  fallShake: {fileID: 11400000, guid: 58cc6cd795b0ddd499272aad8ce51618, type: 2}
+  dropShake: {fileID: 11400000, guid: ab88cbbcb5bf54541ae6f7bb73d601ca, type: 2}
   controlSpeed: 5
   fallControlSpeed: 0.75
   overDelay: 2.5

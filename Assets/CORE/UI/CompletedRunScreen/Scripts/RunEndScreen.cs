@@ -25,6 +25,9 @@ namespace GamePratic2020 {
         [SerializeField] private float initialFillHeight = 0;
         [SerializeField] private float cokeFallDuration = 0.5f;
 
+        [Header("Screen")]
+        [SerializeField] private float endWaitDuration = 0.6f;
+
         [Header("References")]
         [SerializeField] private Transform stackParent = null;
         [SerializeField] private ParticleSystem fallEffect = null;
@@ -94,7 +97,7 @@ namespace GamePratic2020 {
 
             yield return new WaitForSeconds(0.85f);
             textCanvasGroup.DOFade(0f, 0.4f);
-            yield return new WaitForSeconds(0.5f);
+            yield return new WaitForSeconds(endWaitDuration);
 
             onFillComplete?.Invoke();
         }

@@ -34,7 +34,10 @@ namespace GamePratic2020
         [SerializeField] private AudioClip scoreIncrement = null;
 
         [HorizontalLine(1, order = 0), Section("Menu", order = 1)]
-        [SerializeField] private AudioClip clickClip = null; 
+        [SerializeField] private AudioClip clickClip = null;
+
+        [SerializeField] private AudioClip[] footSteps = new AudioClip[] { }; 
+
 
         public AudioClip[] AmbientClips => ambientClips;
         public AudioClip HammerReloading => hammerReloading;
@@ -46,7 +49,9 @@ namespace GamePratic2020
         public AudioClip CharcoalWaterfall => charcoalWaterfall;
         public AudioClip WinJingle => winJingle;
         public AudioClip ScoreIncrement => scoreIncrement;
-        public AudioClip ClickClip => clickClip; 
+        public AudioClip ClickClip => clickClip;
+
+        public AudioClip GetRandomFootStep() => footSteps[Random.Range(0, footSteps.Length)]; 
         #endregion
     }
 }

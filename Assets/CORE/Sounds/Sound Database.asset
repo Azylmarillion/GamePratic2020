@@ -21,3 +21,8 @@ MonoBehaviour:
   gaugeAlarm: {fileID: 8300000, guid: fa7eabafa5ac07e48a5be0d9aee5cae3, type: 3}
   crankLoop: {fileID: 8300000, guid: 3760eb213b1ead7499a3c91b140c7e48, type: 3}
   endAlarm: {fileID: 8300000, guid: 0020dc1654f9363469bd1fb518627ccb, type: 3}
+  railLoop: {fileID: 8300000, guid: ca0caea461ef96e4dae42d5f63880179, type: 3}
+  charcoalWaterfall: {fileID: 0}
+  winJingle: {fileID: 8300000, guid: 3647a67c3323a324e8ab6b28e754949b, type: 3}
+  scoreIncrement: {fileID: 8300000, guid: 53ff99b465e7c1340871e50ff8a8df7a, type: 3}
+  clickClip: {fileID: 8300000, guid: a90dffb52b2658f45aa655b3c6151e41, type: 3}

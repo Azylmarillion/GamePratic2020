@@ -16,6 +16,10 @@ namespace GamePratic2020
         [SerializeField] private float initialValue = .5f;
         [SerializeField, MinMax(0.0f, 1.0f)] private Vector2[] heatingLimits = new Vector2[3];
         [SerializeField] private Gradient[] gradientColors = new Gradient[3];
+        [SerializeField] private ParticleSystem smokeSystem = null;
+        private ParticleSystem.EmissionModule emission;
+        private ParticleSystem.MainModule main;
+
 
         [Tooltip("This value is used to slow the decrase of the value. The greater this value is, the slower the decreasing will be.")]
         [SerializeField, Range(1.0f, 100.0f)] private float decreasingRatio = 1.0f;
@@ -61,6 +65,12 @@ namespace GamePratic2020
             filledImage.fillAmount = currentValue;
             currentGradientColor = gradientColors[_iteration]; 
             filledImage.color = currentGradientColor.Evaluate(currentValue);
+
+            emission = smokeSystem.emission;
+            emission.rateOverTime = 40 * currentValue;
+
+            main = smokeSystem.main;
+            main.startLifetime = 1.5f * currentValue; 
         }
 
         public override void StartMiniGame()
@@ -87,6 +97,8 @@ namespace GamePratic2020
                 currentValue = Mathf.MoveTowards(currentValue, targetValue, Time.deltaTime); 
                 filledImage.fillAmount = currentValue;
                 filledImage.color = currentGradientColor.Evaluate(currentValue);
+                emission.rateOverTime = 40 * Mathf.Clamp(currentValue, .1f, 1.0f);
+                main.startLifetime = 1.5f * Mathf.Clamp(currentValue, .25f, 1.0f);
 
                 if (currentValue >= heatingLimit.x && currentValue <= heatingLimit.y)
                 {

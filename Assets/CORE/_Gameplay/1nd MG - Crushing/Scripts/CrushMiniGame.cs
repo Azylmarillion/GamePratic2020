@@ -7,6 +7,7 @@ namespace GamePratic2020 {
         #region Settings
         [Section("Mini Game Settings")]
         [SerializeField] private int collectedCokePoints = 100;
+        [SerializeField] private AnimationCurve speedScaling = AnimationCurve.Linear(0f, 1f, 1f, 1f);
         #endregion
 
         #region References
@@ -19,7 +20,6 @@ namespace GamePratic2020 {
             base.StartMiniGame();
             travelator.spawn = true;
             piston.enableInputs = true;
-            travelator.SetMovementAmount(1f);
         }
 
         public override void StopMiniGame() {
@@ -31,12 +31,15 @@ namespace GamePratic2020 {
 
         public override void ResetMiniGame(int _iteration) {
             base.ResetMiniGame(_iteration);
+            //float ratio = (float)_iteration / (float)GameManager.Instance.MaxIteriation;
+            //travelator.SetMovementAmount(speedScaling.Evaluate(ratio));
         }
         #endregion
 
         #region Score
         public void CollectCoke() {
             score += collectedCokePoints;
+            UIManager.Instance.UpdateScore(score);
         }
         #endregion
     }

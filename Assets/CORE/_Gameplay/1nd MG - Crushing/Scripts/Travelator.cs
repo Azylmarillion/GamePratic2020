@@ -34,14 +34,14 @@ namespace GamePratic2020 {
         #region Currents
         private List<CrushableObject> crushableObjects = new List<CrushableObject>(10);
         private float nextElementTimer = 0f;
+        private float currentMovementRatio = 1f;
 
         private static readonly int panProperty = Shader.PropertyToID("_Pan");
         #endregion
 
         #region Callbacks
         private void OnEnable() {
-            float panSpeed = -speed / travelatorRenderer.size.x;
-            travelatorRenderer.material.SetVector(panProperty, new Vector4(panSpeed, 0f));
+            SetTravelatorMaterialSpeed();
         }
 
         private void OnDisable() {
@@ -70,9 +70,19 @@ namespace GamePratic2020 {
         #endregion
 
         #region Manage Objects
+        public void SetMovementAmount(float ratio) {
+            currentMovementRatio = ratio;
+            SetTravelatorMaterialSpeed();
+        }
+
+        private void SetTravelatorMaterialSpeed() {
+            float panSpeed = -(speed * currentMovementRatio) / travelatorRenderer.size.x;
+            travelatorRenderer.material.SetVector(panProperty, new Vector4(panSpeed, 0f));
+        }
+
         private void MoveObjects() {
             for (int i = 0; i < crushableObjects.Count; i++) {
-                crushableObjects[i].transform.position += Vector3.right * Time.deltaTime * speed;
+                crushableObjects[i].transform.position += Vector3.right * Time.deltaTime * speed * currentMovementRatio;
             }
         }
 

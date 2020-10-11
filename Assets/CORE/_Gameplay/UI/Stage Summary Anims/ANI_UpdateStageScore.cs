@@ -61,6 +61,8 @@ namespace GamePratic2020
             isIncreasingScore = true;
             timerVar = 0;
             text.text = "+ 000";
+
+            score = GameManager.Instance.GetMiniGameScore();
         }
 
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state

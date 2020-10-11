@@ -10,7 +10,6 @@ using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.UI;
 
 namespace GamePratic2020 {
     public class RunEndScreen : MonoBehaviour {
@@ -25,6 +24,9 @@ namespace GamePratic2020 {
         [SerializeField] private float minimumFillHeight = 0;
         [SerializeField] private float initialFillHeight = 0;
         [SerializeField] private float cokeFallDuration = 0.5f;
+
+        [Header("Screen")]
+        [SerializeField] private float endWaitDuration = 0.6f;
 
         [Header("References")]
         [SerializeField] private Transform stackParent = null;
@@ -44,6 +46,14 @@ namespace GamePratic2020 {
         [Section("Read Only")]
         [SerializeField, ReadOnly] private int remainingPointsToFill = 0;
         private bool hasBeenInitialized = false;
+        #endregion
+
+        #region Reset
+        [ContextMenu("Reset All")]
+        public void ResetAll() {
+            hasBeenInitialized = false;
+            fillEffect.Clear();
+        }
         #endregion
 
         #region Filling
@@ -66,6 +76,11 @@ namespace GamePratic2020 {
             StartCoroutine(ProcessAnimation());
         }
 
+        public void CleanDisplay()
+        {
+            textCanvasGroup.alpha = 0;
+        }
+
         private IEnumerator ProcessAnimation() {
             textCanvasGroup.DOFade(1f, textAppearDuration);
 
@@ -84,6 +99,11 @@ namespace GamePratic2020 {
 
             runScoreText.text = "0";
             totalScoreText.text = GameManager.Instance.GlobalScore.ToString();
+
+            yield return new WaitForSeconds(0.85f);
+            textCanvasGroup.DOFade(0f, 0.4f);
+            yield return new WaitForSeconds(endWaitDuration);
+
             onFillComplete?.Invoke();
         }
 

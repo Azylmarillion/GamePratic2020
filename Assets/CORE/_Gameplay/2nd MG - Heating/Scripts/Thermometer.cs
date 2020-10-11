@@ -109,6 +109,8 @@ namespace GamePratic2020
                     {
                         score += increasingScoreValue;
                         scoreTimer = 0;
+
+                        UIManager.Instance.UpdateScore(score);
                     }
                 }
                 else

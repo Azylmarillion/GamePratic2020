@@ -93,8 +93,9 @@ namespace GamePratic2020
 
         public void HideMiniGame() => miniGames[currentMGIndex].HideMiniGame();
 
-        private void StartGame()
+        public void StartGame()
         {
+            UIManager.Instance.ShowMainMenu(false);
             currentMGIndex = -1;
             globalScore = currentRunScore = iteration = 0;
             StartNextMiniGame();
@@ -118,13 +119,13 @@ namespace GamePratic2020
             return false;
         }
 
+        public void QuitGame() => Application.Quit();
+
 		private void Awake()
 		{
 			if (Instance == null)
 				Instance = this;
 			else Destroy(this);
-
-            StartGame();
         }
 
         private void Update()

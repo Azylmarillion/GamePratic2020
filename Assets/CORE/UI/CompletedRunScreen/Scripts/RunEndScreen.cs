@@ -10,7 +10,6 @@ using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.UI;
 
 namespace GamePratic2020 {
     public class RunEndScreen : MonoBehaviour {
@@ -44,6 +43,14 @@ namespace GamePratic2020 {
         [Section("Read Only")]
         [SerializeField, ReadOnly] private int remainingPointsToFill = 0;
         private bool hasBeenInitialized = false;
+        #endregion
+
+        #region Reset
+        [ContextMenu("Reset All")]
+        public void ResetAll() {
+            hasBeenInitialized = false;
+            fillEffect.Clear();
+        }
         #endregion
 
         #region Filling
@@ -84,6 +91,11 @@ namespace GamePratic2020 {
 
             runScoreText.text = "0";
             totalScoreText.text = GameManager.Instance.GlobalScore.ToString();
+
+            yield return new WaitForSeconds(0.85f);
+            textCanvasGroup.DOFade(0f, 0.4f);
+            yield return new WaitForSeconds(0.5f);
+
             onFillComplete?.Invoke();
         }
 

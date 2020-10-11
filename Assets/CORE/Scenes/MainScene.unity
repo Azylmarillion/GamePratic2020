@@ -157,6 +157,21 @@ PrefabInstance:
       propertyPath: camera
       value: 
       objectReference: {fileID: 917416984}
+    - target: {fileID: 3638163069411104048, guid: 17d5f4949c3bc374c96f114bc595ebf4,
+        type: 3}
+      propertyPath: timer.Array.data[0]
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 3638163069411104048, guid: 17d5f4949c3bc374c96f114bc595ebf4,
+        type: 3}
+      propertyPath: timer.Array.data[1]
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 3638163069411104048, guid: 17d5f4949c3bc374c96f114bc595ebf4,
+        type: 3}
+      propertyPath: timer.Array.data[2]
+      value: 12
+      objectReference: {fileID: 0}
     - target: {fileID: 8413754583824129230, guid: 17d5f4949c3bc374c96f114bc595ebf4,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -278,12 +293,17 @@ PrefabInstance:
     - target: {fileID: 7244850072422164200, guid: 9db10bacb83188543a7e4910019ed555,
         type: 3}
       propertyPath: timer.Array.data[1]
-      value: 10
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 7244850072422164200, guid: 9db10bacb83188543a7e4910019ed555,
         type: 3}
       propertyPath: timer.Array.data[2]
-      value: 10
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 7244850072422164200, guid: 9db10bacb83188543a7e4910019ed555,
+        type: 3}
+      propertyPath: increasingScoreValue
+      value: 5000
       objectReference: {fileID: 0}
     - target: {fileID: 7244850072422164201, guid: 9db10bacb83188543a7e4910019ed555,
         type: 3}
@@ -518,22 +538,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 123761173, guid: ce87dc378d35c334d97286d2b93fc8f0, type: 3}
-      propertyPath: timer.Array.size
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 123761173, guid: ce87dc378d35c334d97286d2b93fc8f0, type: 3}
-      propertyPath: timer.Array.data[0]
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 123761173, guid: ce87dc378d35c334d97286d2b93fc8f0, type: 3}
-      propertyPath: timer.Array.data[1]
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 123761173, guid: ce87dc378d35c334d97286d2b93fc8f0, type: 3}
-      propertyPath: timer.Array.data[2]
-      value: 10
-      objectReference: {fileID: 0}
     - target: {fileID: 1058940913267957126, guid: ce87dc378d35c334d97286d2b93fc8f0,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -593,11 +597,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: PF_MiniGame_Crush
-      objectReference: {fileID: 0}
-    - target: {fileID: 2015373039166966775, guid: ce87dc378d35c334d97286d2b93fc8f0,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ce87dc378d35c334d97286d2b93fc8f0, type: 3}

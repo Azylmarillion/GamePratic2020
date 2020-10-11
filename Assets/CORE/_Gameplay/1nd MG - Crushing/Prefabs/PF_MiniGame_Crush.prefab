@@ -445,7 +445,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1058940913267957126
 Transform:
   m_ObjectHideFlags: 0
@@ -475,14 +475,47 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timer:
-  - 15
-  - 15
-  - 15
+  - 12
+  - 12
+  - 12
   score: 0
   timerVar: 0
   isActivated: 0
   miniGameSource: {fileID: 8139258194815788172}
-  collectedCokePoints: 100
+  collectedCokePoints: 10000
+  speedScaling:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.30303976
+      value: 1.5011965
+      inSlope: 1.4869274
+      outSlope: 1.4869274
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.6
+      value: 2
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
   travelator: {fileID: 7338647277387810222}
   piston: {fileID: 5532424171832531413}
 --- !u!82 &8139258194815788172
@@ -822,7 +855,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 3
   range: {x: -4.5, y: 4.5}
-  randomRate: {x: 0.5, y: 2}
+  randomRate: {x: 0.4, y: 1.2}
   spawn: 1
   crushablePrefab: {fileID: -1697317807082079854, guid: c8d192e5d937f8f4f9ef40dc3e1bfe73,
     type: 3}

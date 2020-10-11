@@ -28,6 +28,7 @@ namespace GamePratic2020 {
         [Header("Crush")]
         [SerializeField, Min(0f)] private float crushMovementDuration = 0.2f;
         [SerializeField] private AnimationCurve crushMovementCurve = AnimationCurve.EaseInOut(0f, 0f, 1f, 1f);
+        [SerializeField] private Color readyToCrushButtonColor = Color.white;
 
         [Header("References")]
         [SerializeField] private Transform pistonHeadTransform = null;
@@ -36,6 +37,7 @@ namespace GamePratic2020 {
         [SerializeField] private Animator pistonAnimator = null;
         [SerializeField] private RectTransform buttonRectTransform = null;
         [SerializeField] private TextMeshProUGUI counterText = null;
+        [SerializeField] private Image buttonImage = null;
         [SerializeField] private JitterMovement textJitterMovement = null;
 
         [Section("Callbacks")]

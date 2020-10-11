@@ -1227,12 +1227,14 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  readyToCrushButtonColor: {r: 1, g: 1, b: 1, a: 1}
   pistonHeadTransform: {fileID: 7338647278897814571}
   stepUpCameraShake: {fileID: 11400000, guid: a177a43f135b4f44b89610dfd911a85f, type: 2}
   crushCameraShake: {fileID: 11400000, guid: e83ce9e968359534aac3b5a4bf651fd9, type: 2}
   pistonAnimator: {fileID: 8690636259121129574}
   buttonRectTransform: {fileID: 4309761052676243626}
   counterText: {fileID: 5242388558476279917}
+  buttonImage: {fileID: 0}
   textJitterMovement: {fileID: 1344085677}
   onCrushBegins:
     m_PersistentCalls:
@@ -1584,15 +1586,16 @@ MonoBehaviour:
       m_Calls: []
   m_text: XX
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 7d096e34f4ede2a4a845d92538831c82, type: 2}
+  m_sharedMaterial: {fileID: 5306472374151940004, guid: 7d096e34f4ede2a4a845d92538831c82,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4278190080
-  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
+    rgba: 4294967295
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:

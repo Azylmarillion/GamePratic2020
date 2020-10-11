@@ -41,6 +41,7 @@ namespace GamePratic2020
         [SerializeField] private UnityEngine.UI.Image filledImage = null;
         [SerializeField] private RectTransform topCursorTransform;
         [SerializeField] private RectTransform botCursorTransform;
+        [SerializeField] private GameObject warningIcon; 
         #endregion
 
         #region Methods
@@ -102,7 +103,7 @@ namespace GamePratic2020
 
                 if (currentValue >= heatingLimit.x && currentValue <= heatingLimit.y)
                 {
-
+                    warningIcon.SetActive(false);
                     // Decrease Score
                     scoreTimer += Time.deltaTime; 
                     if(scoreTimer > increasingScoreTime)
@@ -116,6 +117,8 @@ namespace GamePratic2020
                 else
                 {
                     scoreTimer = 0;
+                    warningIcon.SetActive(true); 
+
                     if (!miniGameSource.isPlaying)
                         miniGameSource.PlayOneShot(GameManager.Instance.SoundDataBase.GaugeAlarm, .25f); 
                 }

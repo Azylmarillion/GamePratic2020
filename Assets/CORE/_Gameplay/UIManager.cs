@@ -46,6 +46,10 @@ namespace GamePratic2020
         [SerializeField] private float finalTransitionInDuration = .5f;
         [SerializeField] private float finalTransitionOutDuration = .75f;
 
+        [HorizontalLine(1)]
+        [SerializeField] private TMPro.TextMeshProUGUI funFactText = null;
+        [SerializeField] private FunFactDatabase funFactDatabase = null; 
+
         private readonly int progress_Hash = Animator.StringToHash("State");
         #endregion
 
@@ -112,6 +116,7 @@ namespace GamePratic2020
             isTransitOut = false;
             transitionVar = 0;
             endMiniGame.SetActive(true);
+            funFactText.text = funFactDatabase.GetRandomFact(); 
         }
 
         public void UpdateProgressBar(int _amount) => progressAnimator.SetInteger(progress_Hash, _amount);

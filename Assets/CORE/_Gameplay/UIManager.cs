@@ -24,7 +24,6 @@ namespace GamePratic2020
         [SerializeField, Required] private GameObject pressToPlayScreen = null;
 
         [SerializeField, Required] private RunEndScreen finalScreen = null;
-        [SerializeField, Required] private GameObject finalScreenBackground = null;
 
         [HorizontalLine(1)]
 
@@ -68,6 +67,7 @@ namespace GamePratic2020
             endScreenVar = 0;
 
             finalScreen.gameObject.SetActive(true);
+            finalScreen.CleanDisplay();
         }
 
         public void HideEndScreen()
@@ -175,7 +175,7 @@ namespace GamePratic2020
                     finalScreen.PlayAnimation();
                 }
 
-                finalScreenBackground.transform.position = Vector3.Lerp(finalScreenPos, Vector3.zero, _lerp);
+                finalScreen.transform.position = Vector3.Lerp(finalScreenPos, Vector3.zero, _lerp);
             }
             else if (isHidingEndScreen)
             {
@@ -189,7 +189,7 @@ namespace GamePratic2020
                     finalScreen.gameObject.SetActive(false);
                 }
 
-                finalScreenBackground.transform.position = Vector3.Lerp(Vector3.zero, -finalScreenPos, _lerp);
+                finalScreen.transform.position = Vector3.Lerp(Vector3.zero, -finalScreenPos, _lerp);
             }
         }
 

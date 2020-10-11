@@ -131,6 +131,8 @@ namespace GamePratic2020
 			if (Instance == null)
 				Instance = this;
 			else Destroy(this);
+
+            uiManager.ShowMainMenu(true);
         }
 
         private void Update()

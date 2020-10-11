@@ -76,6 +76,11 @@ namespace GamePratic2020 {
             StartCoroutine(ProcessAnimation());
         }
 
+        public void CleanDisplay()
+        {
+            textCanvasGroup.alpha = 0;
+        }
+
         private IEnumerator ProcessAnimation() {
             textCanvasGroup.DOFade(1f, textAppearDuration);
 

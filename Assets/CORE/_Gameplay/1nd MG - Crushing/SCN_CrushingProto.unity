@@ -704,10 +704,5 @@ PrefabInstance:
       propertyPath: m_Name
       value: PF_MiniGame_Crush
       objectReference: {fileID: 0}
-    - target: {fileID: 2015373039166966775, guid: ce87dc378d35c334d97286d2b93fc8f0,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ce87dc378d35c334d97286d2b93fc8f0, type: 3}

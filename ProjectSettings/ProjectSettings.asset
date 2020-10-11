@@ -677,6 +677,7 @@ PlayerSettings:
     7: AMPLIFY_SHADER_EDITOR
   platformArchitecture: {}
   scriptingBackend:
+    Android: 1
     Standalone: 1
   il2cppCompilerConfiguration: {}
   managedStrippingLevel: {}

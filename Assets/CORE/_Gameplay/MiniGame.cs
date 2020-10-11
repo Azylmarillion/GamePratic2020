@@ -15,6 +15,7 @@ namespace GamePratic2020
         [HorizontalLine(1, order = 0), Section("MiniGame", order = 1)]
         [SerializeField] protected float[] timer = new float[] { 10f, 10f, 10f };
 		[SerializeField] protected int score = 0;
+        public int Score => score;
 
         [SerializeField, ReadOnly] protected float timerVar = 0;
         [SerializeField, ReadOnly] protected bool isActivated = false;
@@ -28,12 +29,12 @@ namespace GamePratic2020
 		public virtual void ResetMiniGame(int _iteration)
         {
             timerVar = timer[_iteration];
+            gameObject.SetActive(true);
             score = 0;
         }
 
         public virtual void StartMiniGame() 
 		{
-			gameObject.SetActive(true); 
 			isActivated = true;
 		}
 

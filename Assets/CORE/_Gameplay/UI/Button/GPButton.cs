@@ -22,12 +22,6 @@ namespace GamePratic2020
 			base.OnPointerClick(eventData);
 			GameManager.Instance.PlayClickSound(); 
 		}
-
-		protected override void Start()
-		{
-			base.Start();
-			source = GetComponent<AudioSource>(); 
-		}
 		#endregion
 	}
 }

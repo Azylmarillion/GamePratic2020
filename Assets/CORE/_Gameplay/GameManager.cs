@@ -125,7 +125,13 @@ namespace GamePratic2020
 
         public void QuitGame() => Application.Quit();
 
-		private void Awake()
+        public void PlayClickSound()
+        {
+            ambiantSource.PlayOneShot(soundDatabase.ClickClip); 
+        }
+
+
+        private void Awake()
 		{
 			if (Instance == null)
 				Instance = this;

@@ -431,9 +431,9 @@ MonoBehaviour:
     m_NumAlphaKeys: 2
   smokeSystem: {fileID: 4675848110422603130}
   decreasingRatio: 10
-  increasingRatio: 70
-  increasingScoreValue: 1
-  increasingScoreTime: 1
+  increasingRatio: 55
+  increasingScoreValue: 1000
+  increasingScoreTime: 2
   currentValue: 0
   heatingLimit: {x: 0.4, y: 0.6}
   currentGradientColor:

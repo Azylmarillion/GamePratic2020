@@ -5,6 +5,7 @@ namespace GamePratic2020 {
         #region References
         [SerializeField] private Sprite crushedSprite = null;
         [SerializeField] private SpriteRenderer spriteRenderer = null;
+        [SerializeField] private ParticleSystem crushEffect = null;
         #endregion
 
         #region Currents
@@ -23,6 +24,7 @@ namespace GamePratic2020 {
             if (!Crushed) {
                 spriteRenderer.sprite = crushedSprite;
                 Crushed = true;
+                crushEffect.Play();
             }
 		}
         #endregion

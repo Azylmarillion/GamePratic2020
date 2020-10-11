@@ -17,6 +17,8 @@ namespace GamePratic2020 {
         [Header("Step")]
         [SerializeField, Min(0f)] private float stepMovementDuration = 0.2f;
         [SerializeField] private AnimationCurve stepMovementCurve = AnimationCurve.EaseInOut(0f, 0f, 1f, 1f);
+        [SerializeField] private float stepUpSFXMaxPitch = 0.5f;
+        [SerializeField] private AudioSource stepUpSFXSource = null;
 
         [Header("Crush")]
         [SerializeField, Min(0f)] private float crushMovementDuration = 0.2f;
@@ -26,14 +28,20 @@ namespace GamePratic2020 {
         [SerializeField] private Transform pistonHeadTransform = null;
         [SerializeField] private CameraShake stepUpCameraShake = null;
         [SerializeField] private CameraShake crushCameraShake = null;
+        [SerializeField] private Animator pistonAnimator = null;
 
         [Section("Callbacks")]
-        [SerializeField] private UnityEvent onCrush = new UnityEvent();
+        [SerializeField] private UnityEvent onCrushBegins = new UnityEvent();
+        [SerializeField] private UnityEvent onCrushImpact = new UnityEvent();
         #endregion
 
         #region Currents
         private int currentStep = 0;
         private bool isMoving = false;
+
+        private static readonly int stepUpAnim = Animator.StringToHash("StepUp");
+        private static readonly int fallAnim = Animator.StringToHash("Fall");
+        private static readonly int crushAnim = Animator.StringToHash("Crush");
         #endregion
 
         #region Callbacks
@@ -84,6 +92,12 @@ namespace GamePratic2020 {
         private IEnumerator StepMovementCoroutine() {
             stepUpCameraShake.Play();
 
+            stepUpSFXSource.Stop();
+            stepUpSFXSource.pitch = 1f + ((float)(currentStep - 1) / ((float)steps - 1));
+            stepUpSFXSource.Play();
+
+            pistonAnimator.SetTrigger(stepUpAnim);
+
             isMoving = true;
             float from = ((float)currentStep - 1f) / (float)steps;
             float increment = (1f / (float)steps);
@@ -104,8 +118,10 @@ namespace GamePratic2020 {
 
         private IEnumerator CrushMovementCoroutine() {
             isMoving = true;
-
+            onCrushBegins?.Invoke();
             Vector3 fromPos = pistonHeadTransform.localPosition;
+            pistonAnimator.SetTrigger(fallAnim);
+
 
             for (float f = 0; f < 1f; f += Time.deltaTime / crushMovementDuration) {
                 float t = crushMovementCurve.Evaluate(f);
@@ -113,7 +129,9 @@ namespace GamePratic2020 {
                 yield return null;
             }
 
-            onCrush?.Invoke();
+            pistonAnimator.SetTrigger(crushAnim);
+
+            onCrushImpact?.Invoke();
             crushCameraShake.Play();
             Vector3 initialPos = Vector3.up * minHeight;
 

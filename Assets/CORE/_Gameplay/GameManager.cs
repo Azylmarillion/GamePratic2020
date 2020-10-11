@@ -40,6 +40,7 @@ namespace GamePratic2020
 		public SoundDatabase SoundDataBase => soundDatabase;
 
 		[SerializeField, Required] private AudioSource ambiantSource = null;
+        public AudioSource AmbiantSource => ambiantSource;
 
         [HorizontalLine(1)]
 

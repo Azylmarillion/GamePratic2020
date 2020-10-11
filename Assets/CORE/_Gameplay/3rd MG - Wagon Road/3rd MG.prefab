@@ -6116,9 +6116,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timer:
-  - 20
-  - 20
-  - 20
+  - 10
+  - 10
+  - 10
   score: 0
   timerVar: 0
   isActivated: 0
@@ -6146,6 +6146,7 @@ MonoBehaviour:
   lightFX: {fileID: 3717441826878934030}
   fallShake: {fileID: 11400000, guid: 58cc6cd795b0ddd499272aad8ce51618, type: 2}
   dropShake: {fileID: 11400000, guid: ab88cbbcb5bf54541ae6f7bb73d601ca, type: 2}
+  wagonSource: {fileID: 124137923}
   controlSpeed: 5
   fallControlSpeed: 0.75
   overDelay: 2.5
@@ -6160,6 +6161,9 @@ MonoBehaviour:
   trackThreeHeight: 0.5
   distanceMagnitude: 1.25
   horizontalDistance: 1.1
+  minScore: 10000
+  minDropScore: 25000
+  looseMax: 15
   anchorRotation: {x: 10, y: 45}
   originalPosition: {x: -2, y: 4.5, z: 0}
   maxSpeed: 5
@@ -6179,8 +6183,10 @@ MonoBehaviour:
   startFallSpeed: 0
   dumpVar: 0
   overVar: 0
+  looseAmount: 0
   isTouch: 0
   previousAnchor: {x: 0, y: 0, z: 0}
+  isAnchorMoving: 0
 --- !u!82 &5446881141252927737
 AudioSource:
   m_ObjectHideFlags: 0
@@ -7030,6 +7036,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8413754584623944856}
+  - component: {fileID: 124137923}
   m_Layer: 0
   m_Name: Wagon
   m_TagString: Untagged
@@ -7055,6 +7062,102 @@ Transform:
   m_Father: {fileID: 8413754583573964975}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!82 &124137923
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8413754584623944857}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: ca0caea461ef96e4dae42d5f63880179, type: 3}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 1
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &8413754584637849446
 GameObject:
   m_ObjectHideFlags: 0
@@ -7375,15 +7478,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9520cc5383c69f041b9d31dce2703c1f, type: 3}
---- !u!4 &707052616469836770 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 9010679951484287856, guid: 9520cc5383c69f041b9d31dce2703c1f,
-    type: 3}
-  m_PrefabInstance: {fileID: 8413754582928558226}
-  m_PrefabAsset: {fileID: 0}
 --- !u!198 &707052616469836771 stripped
 ParticleSystem:
   m_CorrespondingSourceObject: {fileID: 9010679951484287857, guid: 9520cc5383c69f041b9d31dce2703c1f,
+    type: 3}
+  m_PrefabInstance: {fileID: 8413754582928558226}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &707052616469836770 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 9010679951484287856, guid: 9520cc5383c69f041b9d31dce2703c1f,
     type: 3}
   m_PrefabInstance: {fileID: 8413754582928558226}
   m_PrefabAsset: {fileID: 0}

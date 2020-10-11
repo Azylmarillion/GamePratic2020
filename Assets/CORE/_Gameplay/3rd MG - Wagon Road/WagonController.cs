@@ -64,6 +64,7 @@ namespace GamePratic2020
 
         [SerializeField, Required] private CameraShake fallShake = null;
         [SerializeField, Required] private CameraShake dropShake = null;
+        [SerializeField, Required] private AudioSource wagonSource = null;
 
         [HorizontalLine(1)]
 
@@ -138,6 +139,7 @@ namespace GamePratic2020
 
         [SerializeField, ReadOnly] private bool isTouch = false;
         [SerializeField, ReadOnly] private Vector3 previousAnchor = new Vector3();
+        [SerializeField, ReadOnly] private bool isAnchorMoving = false;
 
         // -----------------------
 
@@ -162,6 +164,7 @@ namespace GamePratic2020
                 UIManager.Instance.UpdateScore(score);
             }
 
+            wagonSource.Stop();
             base.StopMiniGame();
         }
 
@@ -283,6 +286,7 @@ namespace GamePratic2020
                             score = 100000 - (int)((_remain / (float)looseMax) * looseAmount);
 
                             UIManager.Instance.UpdateScore(score);
+                            miniGameSource.PlayOneShot(GameManager.Instance.SoundDataBase.CharcoalWaterfall);
                         }
                     }
                     else if (dumpArea.OverlapPoint(_contact))
@@ -411,12 +415,23 @@ namespace GamePratic2020
             if (Mathf.Abs(_difference) > horizontalDistance)
                 _difference = horizontalDistance * Mathf.Sign(_difference);
 
+            bool _isAnchorMoving = _movement.x != 0;
+            if (_isAnchorMoving != isAnchorMoving)
+            {
+                isAnchorMoving = _isAnchorMoving;
+                if (_isAnchorMoving)
+                    wagonSource.Play();
+                else
+                    wagonSource.Stop();
+            }
+
             // Get movement inertia.
             if (_movement.x != 0)
             {
                 if (!isMoving)
                 {
                     isMoving = true;
+
                     direction = _movement.x > 0 ? -1 : 1;
 
                     speedVar = Mathf.MoveTowards(speedVar, maxSpeed, Time.deltaTime * speedIncrease * speedMovementIncrease);

@@ -5563,6 +5563,7 @@ MonoBehaviour:
   minimumFillHeight: -3.9
   initialFillHeight: -5.8
   cokeFallDuration: 0.7
+  endWaitDuration: 0.8
   stackParent: {fileID: 6258922246123571542}
   fallEffect: {fileID: 6258922247335347168}
   fillEffect: {fileID: 6258922247169187669}

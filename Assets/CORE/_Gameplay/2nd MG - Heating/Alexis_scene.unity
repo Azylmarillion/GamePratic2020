@@ -138,7 +138,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &784660165
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -516,16 +516,6 @@ PrefabInstance:
       propertyPath: currentCamera
       value: 
       objectReference: {fileID: 1015762714}
-    - target: {fileID: 7353485571457164082, guid: 9db10bacb83188543a7e4910019ed555,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -0.00197
-      objectReference: {fileID: 0}
-    - target: {fileID: 8562572321749911361, guid: 9db10bacb83188543a7e4910019ed555,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -0.0126
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9db10bacb83188543a7e4910019ed555, type: 3}
 --- !u!114 &7244850073723162142 stripped

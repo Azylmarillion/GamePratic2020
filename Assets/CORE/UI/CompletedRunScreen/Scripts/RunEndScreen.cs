@@ -46,6 +46,7 @@ namespace GamePratic2020 {
         [SerializeField] private TextMeshProUGUI workOverText = null;
         [SerializeField] private Image fillBar = null;
         [SerializeField] private RectTransform daysPanelGroup = null;
+        [SerializeField] private CanvasGroup uiGroup = null;
 
         [Section("Callbacks")]
         [SerializeField] private UnityEvent onFillComplete = null;
@@ -101,6 +102,8 @@ namespace GamePratic2020 {
 
         private IEnumerator ProcessAnimation() {
 
+            uiGroup.alpha = 1f;
+
             dayOverText.gameObject.SetActive(true);
             dayOverText.transform.localScale = Vector3.zero;
             dayOverText.transform.DOScale(1f, 0.4f);
@@ -125,7 +128,7 @@ namespace GamePratic2020 {
 
             yield return new WaitForSeconds(0.4f);
 
-            if (GameManager.Instance.Iteration >= GameManager.Instance.MaxIteriation - 1) {
+            if (GameManager.Instance.Iteration >= GameManager.Instance.MaxIteriation) {
                 workOverText.gameObject.SetActive(true);
                 workOverText.transform.localScale = Vector3.zero;
                 workOverText.transform.DOScale(1f, 0.3f);
@@ -136,6 +139,10 @@ namespace GamePratic2020 {
             }
 
             yield return new WaitForSeconds(endWaitDuration);
+
+            uiGroup.DOFade(0f, 0.3f);
+            yield return new WaitForSeconds(0.3f);
+
 
             onFillComplete?.Invoke();
         }
@@ -189,10 +196,10 @@ namespace GamePratic2020 {
 
             GameManager gm = GameManager.Instance;
 
-            daysCounterText.text = $"Jour {gm.Iteration + 1}/{gm.MaxIteriation}";
+            daysCounterText.text = $"Jour {gm.Iteration}/{gm.MaxIteriation}";
 
-            float fromFillVal = ((float)gm.Iteration)/ (float)gm.MaxIteriation;
-            float toFillVal = ((float)gm.Iteration + 1) / (float)gm.MaxIteriation;
+            float fromFillVal = ((float)gm.Iteration - 1)/ (float)gm.MaxIteriation;
+            float toFillVal = ((float)gm.Iteration) / (float)gm.MaxIteriation;
             fillBar.fillAmount = fromFillVal;
 
             yield return new WaitForSeconds(0.4f);

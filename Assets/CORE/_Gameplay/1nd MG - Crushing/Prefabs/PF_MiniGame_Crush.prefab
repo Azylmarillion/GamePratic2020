@@ -497,7 +497,7 @@ MonoBehaviour:
       outWeight: 0
     - serializedVersion: 3
       time: 0.30303976
-      value: 1.5011965
+      value: 1.6148019
       inSlope: 1.4869274
       outSlope: 1.4869274
       tangentMode: 0
@@ -506,7 +506,7 @@ MonoBehaviour:
       outWeight: 0.33333334
     - serializedVersion: 3
       time: 0.6
-      value: 2
+      value: 2.141775
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -855,7 +855,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 3
   range: {x: -4.5, y: 4.5}
-  randomRate: {x: 0.4, y: 1.2}
+  randomRate: {x: 0.6, y: 1.2}
   spawn: 1
   crushablePrefab: {fileID: -1697317807082079854, guid: c8d192e5d937f8f4f9ef40dc3e1bfe73,
     type: 3}

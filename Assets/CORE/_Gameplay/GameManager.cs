@@ -58,6 +58,9 @@ namespace GamePratic2020
 
         public int GetMiniGameScore() => miniGames[currentMGIndex].Score;
 
+        private bool isWaiting = false;
+        private float waitingVar = 0;
+
         public void StartNextMiniGame()
         {
             currentMGIndex++;
@@ -89,7 +92,8 @@ namespace GamePratic2020
             }
             else
             {
-                miniGames[currentMGIndex].StartMiniGame();
+                isWaiting = true;
+                waitingVar = .5f;
             }
         }
 
@@ -98,6 +102,7 @@ namespace GamePratic2020
         public void StartGame()
         {
             UIManager.Instance.ShowMainMenu(false);
+            isWaiting = false;
             currentMGIndex = -1;
             globalScore = currentRunScore = iteration = 0;
             StartNextMiniGame();
@@ -162,6 +167,17 @@ namespace GamePratic2020
                 }
                 else
                     waitingInputAmount = _touchCount;
+            }
+
+            // Start mini game delay.
+            if (isWaiting)
+            {
+                waitingVar -= Time.deltaTime;
+                if (waitingVar < 0)
+                {
+                    isWaiting = false;
+                    miniGames[currentMGIndex].StartMiniGame();
+                }
             }
         }
         #endregion

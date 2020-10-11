@@ -25,7 +25,16 @@ namespace GamePratic2020
         [SerializeField] private AudioClip crankLoop = null;
         [SerializeField] private AudioClip endAlarm = null;
 
-        //[HorizontalLine(1, order = 0), Section("Third Mini Game", order = 1)]
+        [HorizontalLine(1, order = 0), Section("Third Mini Game", order = 1)]
+        [SerializeField] private AudioClip railLoop = null;
+        [SerializeField] private AudioClip charcoalWaterfall = null;
+
+        [HorizontalLine(1, order = 0), Section("Feedbacks", order = 1)]
+        [SerializeField] private AudioClip winJingle = null;
+        [SerializeField] private AudioClip scoreIncrement = null;
+
+        //[HorizontalLine(1, order = 0), Section("Menu", order = 1)]
+        //[SerializeField] private AudioClip 
 
         public AudioClip[] AmbientClips => ambientClips;
         public AudioClip HammerReloading => hammerReloading;

@@ -70,8 +70,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: -50
-  m_Sprite: {fileID: 21300000, guid: 9b879158c382dd4439b83c6e026a4ee0, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.2784314}
+  m_Sprite: {fileID: 21300000, guid: 6a6d6adcac8195d4cba91b46048ea3eb, type: 3}
+  m_Color: {r: 0.70199996, g: 0.70199996, b: 0.70199996, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -326,7 +326,7 @@ MonoBehaviour:
   score: 0
   timerVar: 0
   isActivated: 0
-  source: {fileID: 8139258194815788172}
+  miniGameSource: {fileID: 0}
   collectedCokePoints: 100
   travelator: {fileID: 7338647277387810222}
 --- !u!82 &8139258194815788172
@@ -956,6 +956,9 @@ MonoBehaviour:
   pistonHeadTransform: {fileID: 7338647278897814571}
   stepUpCameraShake: {fileID: 11400000, guid: a177a43f135b4f44b89610dfd911a85f, type: 2}
   crushCameraShake: {fileID: 11400000, guid: e83ce9e968359534aac3b5a4bf651fd9, type: 2}
+  onCrush:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &7338647278882199828
 GameObject:
   m_ObjectHideFlags: 0

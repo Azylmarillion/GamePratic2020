@@ -10,6 +10,7 @@ using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.UI;
 
 namespace GamePratic2020 {
     public class RunEndScreen : MonoBehaviour {
@@ -37,6 +38,12 @@ namespace GamePratic2020 {
         [SerializeField] private CanvasGroup textCanvasGroup = null;
         [SerializeField] private TextMeshProUGUI totalScoreText = null;
         [SerializeField] private TextMeshProUGUI runScoreText = null;
+        [SerializeField] private TextMeshProUGUI goesHarderText = null;
+        [SerializeField] private TextMeshProUGUI dayOverText = null;
+        [SerializeField] private TextMeshProUGUI daysCounterText = null;
+        [SerializeField] private TextMeshProUGUI workOverText = null;
+        [SerializeField] private Image fillBar = null;
+        [SerializeField] private RectTransform daysPanelGroup = null;
 
         [Section("Callbacks")]
         [SerializeField] private UnityEvent onFillComplete = null;
@@ -56,6 +63,12 @@ namespace GamePratic2020 {
         }
         #endregion
 
+        #region Callbacks
+        private void Awake() {
+            CleanDisplay();
+        }
+        #endregion
+
         #region Filling
         public void PlayAnimation() {
             remainingPointsToFill = GameManager.Instance.CurrentRunScore;
@@ -66,7 +79,7 @@ namespace GamePratic2020 {
                 fillEffect.transform.position = Vector3.up * initialFillHeight;
                 hasBeenInitialized = true;
             } else {
-                if(fillEffect.transform.position.y > minimumFillHeight) {
+                if (fillEffect.transform.position.y > minimumFillHeight) {
                     stackParent.transform.position += Vector3.up * (minimumFillHeight - (fillEffect.transform.position.y));
                 }
             }
@@ -76,19 +89,29 @@ namespace GamePratic2020 {
             StartCoroutine(ProcessAnimation());
         }
 
-        public void CleanDisplay()
-        {
+        public void CleanDisplay() {
             textCanvasGroup.alpha = 0;
+            goesHarderText.gameObject.SetActive(false);
+            dayOverText.gameObject.SetActive(false);
+            workOverText.gameObject.SetActive(false);
+            daysPanelGroup.gameObject.SetActive(false);
         }
 
         private IEnumerator ProcessAnimation() {
+
+            dayOverText.gameObject.SetActive(true);
+            dayOverText.transform.localScale = Vector3.zero;
+            dayOverText.transform.DOScale(1f, 0.4f);
+
+            yield return new WaitForSeconds(0.7f);
+
             textCanvasGroup.DOFade(1f, textAppearDuration);
 
             Vector3 totalScoreTextPos = totalScoreText.transform.position;
             Vector3 runScoreTextPos = runScoreText.transform.position;
 
             totalScoreText.transform.position = totalScoreTextPos + Vector3.right * 300f;
-            runScoreText.transform.position = runScoreTextPos + Vector3.right * - 300f;
+            runScoreText.transform.position = runScoreTextPos + Vector3.right * -300f;
 
             totalScoreText.transform.DOMove(totalScoreTextPos, textAppearDuration, true);
             runScoreText.transform.DOMove(runScoreTextPos, textAppearDuration, true);
@@ -96,12 +119,11 @@ namespace GamePratic2020 {
             yield return new WaitForSeconds(0.2f);
 
             yield return ProcessFillCoroutine();
+            yield return DaysFillCoroutine();
 
-            runScoreText.text = "0";
-            totalScoreText.text = GameManager.Instance.GlobalScore.ToString();
+            //Detect current run here
+            //if(GameManager.Instance.)
 
-            yield return new WaitForSeconds(0.85f);
-            textCanvasGroup.DOFade(0f, 0.4f);
             yield return new WaitForSeconds(endWaitDuration);
 
             onFillComplete?.Invoke();
@@ -115,10 +137,10 @@ namespace GamePratic2020 {
 
             fillEffect.Play();
 
-            while(remainingPointsToFill > 0) {
+            while (remainingPointsToFill > 0) {
                 int pointsDecrement = Mathf.RoundToInt(pointsPerSeconds * Time.deltaTime);
                 remainingPointsToFill -= pointsDecrement;
-                if(remainingPointsToFill < 0) {
+                if (remainingPointsToFill < 0) {
                     remainingPointsToFill = 0;
                 }
 
@@ -133,11 +155,26 @@ namespace GamePratic2020 {
                     stackParent.transform.position += Vector3.up * (maxFillHeight - (fillEffect.transform.position.y));
                 }
 
+
                 yield return null;
             }
+            runScoreText.text = "0";
+            totalScoreText.text = GameManager.Instance.GlobalScore.ToString();
 
             fallEffect.Stop();
             fillEffect.Stop();
+
+            yield return null;
+        }
+
+        private IEnumerator DaysFillCoroutine() {
+            yield return new WaitForSeconds(0.5f);
+
+            daysPanelGroup.gameObject.SetActive(true);
+            daysPanelGroup.transform.localScale = Vector3.zero;
+            daysPanelGroup.transform.DOScale(1f, 0.4f);
+
+            yield return new WaitForSeconds(0.5f);
 
             yield return null;
         }

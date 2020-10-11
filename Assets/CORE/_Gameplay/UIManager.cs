@@ -21,8 +21,10 @@ namespace GamePratic2020
         [SerializeField, Required] private GameObject mainMenu = null;
         [SerializeField, Required] private GameObject endMiniGame = null;
         [SerializeField, Required] private RectTransform transitionScreen = null;
-        [SerializeField, Required] private GameObject finalScreen = null;
         [SerializeField, Required] private GameObject pressToPlayScreen = null;
+
+        [SerializeField, Required] private RunEndScreen finalScreen = null;
+        [SerializeField, Required] private GameObject finalScreenBackground = null;
 
         [HorizontalLine(1)]
 
@@ -35,16 +37,48 @@ namespace GamePratic2020
 
         [HorizontalLine(1)]
 
-        [SerializeField] private float transitionInDuration = .75f;
+        [SerializeField] private float transitionInDuration = .5f;
         [SerializeField] private float transitionOutDuration = .5f;
+
+        [HorizontalLine(1)]
+
+        [SerializeField] private Vector3 finalScreenPos = new Vector3();
+        [SerializeField] private float finalTransitionInDuration = .5f;
+        [SerializeField] private float finalTransitionOutDuration = .75f;
 
         private readonly int progress_Hash = Animator.StringToHash("State");
         #endregion
 
         #region Methods
 
-        #region Main Menu
+        #region Menus
         public void ShowMainMenu(bool _isActive) => mainMenu.SetActive(_isActive);
+
+        // ---------
+
+        private bool isShowingEndScreen = false;
+        private bool isHidingEndScreen = false;
+
+        private float endScreenVar = 0;
+
+        public void ShowEndScreen()
+        {
+            isShowingEndScreen = true;
+            isHidingEndScreen = false;
+            endScreenVar = 0;
+
+            finalScreen.gameObject.SetActive(true);
+        }
+
+        public void HideEndScreen()
+        {
+            isShowingEndScreen = false;
+            isHidingEndScreen = true;
+            endScreenVar = 0;
+
+            GameManager.Instance.ResetScore();
+            GameManager.Instance.StartNextMiniGame();
+        }
         #endregion
 
         #region In Game UI
@@ -126,6 +160,36 @@ namespace GamePratic2020
                     }
                     transitionScreen.anchoredPosition = Vector2.Lerp(Vector2.zero, new Vector2(-1250, 0), _lerp);
                 }
+            }
+
+            // Final screen transitions.
+            if (isShowingEndScreen)
+            {
+                endScreenVar += Time.deltaTime;
+                float _lerp = endScreenVar / finalTransitionInDuration;
+                if (_lerp > 1)
+                {
+                    _lerp = 1;
+                    isShowingEndScreen = false;
+
+                    finalScreen.PlayAnimation();
+                }
+
+                finalScreenBackground.transform.position = Vector3.Lerp(finalScreenPos, Vector3.zero, _lerp);
+            }
+            else if (isHidingEndScreen)
+            {
+                endScreenVar += Time.deltaTime;
+                float _lerp = endScreenVar / finalTransitionOutDuration;
+                if (_lerp > 1)
+                {
+                    _lerp = 1;
+                    isHidingEndScreen = false;
+
+                    finalScreen.gameObject.SetActive(false);
+                }
+
+                finalScreenBackground.transform.position = Vector3.Lerp(Vector3.zero, -finalScreenPos, _lerp);
             }
         }
 

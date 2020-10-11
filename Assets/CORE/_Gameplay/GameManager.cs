@@ -1,6 +1,7 @@
 // ===== Game Pratic 2020 - https://github.com/Azylmarillion/GamePratic2020 ===== //
 //
 // Notes :
+//      • Reset Score --> Reset EndGame
 //
 // ============================================================================== //
 
@@ -63,12 +64,14 @@ namespace GamePratic2020
                 if (CompleteRun())
                 {
                     // C'est la fin, afficher l'écran de fin.
-                    return;
                 }
                 else
                 {
                     // Afficher l'écran de fin d'itération.
                 }
+
+                UIManager.ShowEndScreen();
+                return;
             }
 
             miniGames[currentMGIndex].ResetMiniGame(iteration);
@@ -105,8 +108,10 @@ namespace GamePratic2020
             currentRunScore = 0;
 		}
 
-		private bool CompleteRun() {
-            currentMGIndex = 0;
+        public void ResetScore() => currentRunScore = 0;
+
+        private bool CompleteRun() {
+            currentMGIndex = -1;
             iteration++;
 
             globalScore += currentRunScore;

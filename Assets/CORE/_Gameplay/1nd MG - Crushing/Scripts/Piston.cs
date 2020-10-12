@@ -66,6 +66,7 @@ namespace GamePratic2020 {
             isMoving = false;
             MovePiston(0f);
             counterText.text = (steps - currentStep).ToString();
+            textJitterMovement.SetActiveJitter(false);
         }
 
         private void Update() {
@@ -92,6 +93,7 @@ namespace GamePratic2020 {
                 if(currentStep >= steps) {
                     counterText.text = "GO";
                     textJitterMovement.SetActiveJitter(true);
+                    buttonImage.color = readyToCrushButtonColor;
                 } else {
                     counterText.text = (steps - currentStep).ToString();
                 }
@@ -108,6 +110,7 @@ namespace GamePratic2020 {
         private void Crush() {
             counterText.text = steps.ToString();
             currentStep = 0;
+            buttonImage.color = Color.white;
             StartCoroutine(CrushMovementCoroutine());
         }
         #endregion

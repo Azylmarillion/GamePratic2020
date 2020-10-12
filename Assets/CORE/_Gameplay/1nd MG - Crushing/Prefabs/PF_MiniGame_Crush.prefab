@@ -445,7 +445,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1058940913267957126
 Transform:
   m_ObjectHideFlags: 0
@@ -506,7 +506,7 @@ MonoBehaviour:
       outWeight: 0.33333334
     - serializedVersion: 3
       time: 0.6
-      value: 2.141775
+      value: 2.122934
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -861,15 +861,6 @@ MonoBehaviour:
     type: 3}
   ownerCrushMiniGame: {fileID: 123761173}
   travelatorRenderer: {fileID: 915565632}
-  onSpawnElement:
-    m_PersistentCalls:
-      m_Calls: []
-  onCollectFailedElement:
-    m_PersistentCalls:
-      m_Calls: []
-  onCollectValidElement:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!1 &7338647277945608893
 GameObject:
   m_ObjectHideFlags: 0
@@ -1260,14 +1251,14 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  readyToCrushButtonColor: {r: 1, g: 1, b: 1, a: 1}
+  readyToCrushButtonColor: {r: 0.514151, g: 1, b: 0.55295235, a: 1}
   pistonHeadTransform: {fileID: 7338647278897814571}
   stepUpCameraShake: {fileID: 11400000, guid: a177a43f135b4f44b89610dfd911a85f, type: 2}
   crushCameraShake: {fileID: 11400000, guid: e83ce9e968359534aac3b5a4bf651fd9, type: 2}
   pistonAnimator: {fileID: 8690636259121129574}
   buttonRectTransform: {fileID: 4309761052676243626}
   counterText: {fileID: 5242388558476279917}
-  buttonImage: {fileID: 0}
+  buttonImage: {fileID: 8897874291343986996}
   textJitterMovement: {fileID: 1344085677}
   onCrushBegins:
     m_PersistentCalls:

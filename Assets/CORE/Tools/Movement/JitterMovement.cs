@@ -29,7 +29,9 @@ namespace GamePratic2020 {
             if (active) {
                 basePosition = transform.position;
             } else {
-                transform.position = basePosition;
+                if (playing) {
+                    transform.position = basePosition;
+                }
             }
 
             playing = active;

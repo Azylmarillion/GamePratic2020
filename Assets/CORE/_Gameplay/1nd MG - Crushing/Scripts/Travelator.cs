@@ -24,13 +24,6 @@ namespace GamePratic2020 {
         [SerializeField] private SpriteRenderer travelatorRenderer = null;
         #endregion
 
-        #region Events
-        [Section("Events")]
-        [SerializeField] UnityEvent onSpawnElement = new UnityEvent();
-        [SerializeField] UnityEvent onCollectFailedElement = new UnityEvent();
-        [SerializeField] UnityEvent onCollectValidElement = new UnityEvent();
-        #endregion
-
         #region Currents
         private List<CrushableObject> crushableObjects = new List<CrushableObject>(10);
         private float nextElementTimer = 0f;
@@ -91,7 +84,6 @@ namespace GamePratic2020 {
             CrushableObject instance = Instantiate(crushablePrefab, spawnPos, Quaternion.identity);
             instance.miniGameOwner = ownerCrushMiniGame;
             crushableObjects.Add(instance);
-            onSpawnElement?.Invoke();
         }
 
         private void CheckObjects() {

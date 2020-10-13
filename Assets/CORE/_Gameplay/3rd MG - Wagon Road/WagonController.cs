@@ -146,7 +146,7 @@ namespace GamePratic2020
                                                             new float[4] { -.7f, -1.7f, 1.55f, 1.5f }};
 
         private float[][] tracksHeight = new float[3][]{    new float[2] { 2.5f, 0.5f },
-                                                            new float[3] { 3f, 1.25f, .25f },
+                                                            new float[3] { 3f, 1.6f, .25f },
                                                             new float[3] { 3f, 1.25f, .25f }};
 
         private bool[][] tracksGoRight = new bool[3][]{     new bool[3] { true, false, true },

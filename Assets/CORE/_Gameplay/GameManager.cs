@@ -103,7 +103,7 @@ namespace GamePratic2020
             UIManager.Instance.ShowMainMenu(false);
             isWaiting = false;
             currentMGIndex = -1;
-            globalScore = currentRunScore = iteration = 2;
+            globalScore = currentRunScore = iteration = 0;
             StartNextMiniGame();
         }
 

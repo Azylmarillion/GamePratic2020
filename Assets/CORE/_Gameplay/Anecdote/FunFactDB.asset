@@ -13,16 +13,16 @@ MonoBehaviour:
   m_Name: FunFactDB
   m_EditorClassIdentifier: 
   funFacts:
-  - "Le coke est un combustible issu de la pyrolyse de la houille dans d'\xE9normes
-    fours qui sont organis\xE9s en batteries dans une cokerie.\r"
-  - "La cuisson du coke est une \xE9tape qui peut durer entre 16 et 40h selon la
-    qualit\xE9 recherch\xE9e."
-  - "Les fours \xE0 coke, des fours \xE0 chambre verticales, peuvent atteindre des
-    temp\xE9ratures avoisinant 1400\xB0C !"
-  - "La cr\xE9ation du coke date du XVII\xE8me si\xE8cle suite \xE0 un risque de
-    p\xE9nurie de charbon de bois."
-  - "Les ouvriers cokier broient quotidiennement du noir, puisqu'en effet, il faut
-    broyer de la houille, une pierre noire, pour cr\xE9er la p\xE2te \xE0 coke."
+  - Le coke est un combustible issu de la pyrolyse de la houille dans d'enormes fours
+    qui sont organises en batteries dans une cokerie.
+  - La cuisson du coke est une etape qui peut durer entre 16 et 40h selon la qualite
+    recherchee.
+  - "Les fours a coke, des fours a chambre verticales, peuvent atteindre des temperatures
+    avoisinant 1400\xB0C !"
+  - La creation du coke date du XVIIeme siecle suite a un risque de penurie de charbon
+    de bois.
+  - Les ouvriers cokier broient quotidiennement du noir, puisqu'en effet, il faut
+    broyer de la houille, une pierre noire, pour creer la pate a coke.
   - 'Le nom  du coke fut longtemps variable: coacks, coacs, coadks, coak, coaks,
     cock, cocke, coghes, cook, coque, coucke, couke, cowkes, koacks, koak, kock,
     koeks.'

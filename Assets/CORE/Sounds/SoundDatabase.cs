@@ -19,16 +19,15 @@ namespace GamePratic2020
 
         [HorizontalLine(1, order = 0), Section("Second Mini Game", order = 1)]
         [SerializeField] private AudioClip gaugeAlarm = null;
-        [SerializeField] private AudioClip crankLoop = null;
         [SerializeField] private AudioClip endAlarm = null;
 
         [HorizontalLine(1, order = 0), Section("Third Mini Game", order = 1)]
-        [SerializeField] private AudioClip railLoop = null;
+        [SerializeField] private AudioClip wagonLaunch = null;
+        [SerializeField] private AudioClip wagonLand = null; 
         [SerializeField] private AudioClip charcoalWaterfall = null;
 
         [HorizontalLine(1, order = 0), Section("Feedbacks", order = 1)]
         [SerializeField] private AudioClip winJingle = null;
-        [SerializeField] private AudioClip scoreIncrement = null;
 
         [HorizontalLine(1, order = 0), Section("Menu", order = 1)]
         [SerializeField] private AudioClip clickClip = null;
@@ -38,12 +37,11 @@ namespace GamePratic2020
         public AudioClip HammerReloading => hammerReloading;
         public AudioClip HammerStomp => hammerStomp;
         public AudioClip GaugeAlarm => gaugeAlarm;
-        public AudioClip CrankLoop => crankLoop;
         public AudioClip EndAlarm => endAlarm;
-        public AudioClip RailLoop => railLoop;
+        public AudioClip WagonLaunch => wagonLaunch;
+        public AudioClip WagonLand => wagonLand;
         public AudioClip CharcoalWaterfall => charcoalWaterfall;
         public AudioClip WinJingle => winJingle;
-        public AudioClip ScoreIncrement => scoreIncrement;
         public AudioClip ClickClip => clickClip;
 
         public AudioClip GetRandomFootStep() => footSteps[Random.Range(0, footSteps.Length)]; 

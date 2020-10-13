@@ -23,9 +23,9 @@ namespace GamePratic2020
         #endregion
 
         #region Methods
-        private void Start()
+        private void Awake()
         {
-            crankSource.clip = GameManager.Instance.SoundDataBase.CrankLoop; 
+            crankSource.Pause(); 
         }
 
         void Update()
@@ -40,21 +40,22 @@ namespace GamePratic2020
                 if(_angle == 0 && crankSource.isPlaying)
                 {
                     if(crankSource.isPlaying) 
-                        crankSource.Stop();
+                        crankSource.Pause();
                     return; 
                 }
                 else if(!crankSource.isPlaying)
                 {
-                    crankSource.Play();
+                    crankSource.UnPause();
 
                 }
                 transform.eulerAngles += new Vector3(0, 0, _angle);
+                _angle = Mathf.Clamp(_angle, -1, 1);
                 thermometer.IncreaseRatio(Mathf.Abs(_angle * Time.deltaTime));
             }
             else
             {
                 if(crankSource.isPlaying)
-                    crankSource.Stop(); 
+                    crankSource.Pause(); 
                 previousPosition.Set(0, 0);
             }
 #else
@@ -67,21 +68,22 @@ namespace GamePratic2020
                 if(_angle == 0 && crankSource.isPlaying)
                 {
                     if(crankSource.isPlaying) 
-                        crankSource.Stop();
+                        crankSource.Pause();
                     return; 
                 }
                 else if(!crankSource.isPlaying)
                 {
-                    crankSource.Play();
+                    crankSource.UnPause();
 
                 }
                 transform.eulerAngles += new Vector3(0, 0, _angle);
+                _angle = Mathf.Clamp(_angle, -1, 1);
                 thermometer.IncreaseRatio(Mathf.Abs(_angle * Time.deltaTime));
             }
             else
             {
                 if(crankSource.isPlaying)
-                    crankSource.Stop(); 
+                    crankSource.Pause(); 
                 previousPosition.Set(0, 0);
             }
 #endif

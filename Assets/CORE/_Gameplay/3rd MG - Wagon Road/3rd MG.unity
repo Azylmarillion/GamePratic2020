@@ -140,10 +140,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 124137923, guid: 17d5f4949c3bc374c96f114bc595ebf4, type: 3}
-      propertyPath: OutputAudioMixerGroup
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 3638163069411104048, guid: 17d5f4949c3bc374c96f114bc595ebf4,
         type: 3}
       propertyPath: camera
@@ -208,11 +204,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: 3rd MG
-      objectReference: {fileID: 0}
-    - target: {fileID: 8413754583824129231, guid: 17d5f4949c3bc374c96f114bc595ebf4,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 17d5f4949c3bc374c96f114bc595ebf4, type: 3}
@@ -624,7 +615,7 @@ MonoBehaviour:
   globalScore: 0
   currentRunScore: 0
   maxIteration: 3
-  iteration: 0
+  iteration: 1
   soundDatabase: {fileID: 11400000, guid: 6dc6360afdffc184788b5f7c77f123fc, type: 2}
   ambiantSource: {fileID: 1614668051}
   isWaitingToStart: 0

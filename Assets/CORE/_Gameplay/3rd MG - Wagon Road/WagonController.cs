@@ -25,6 +25,11 @@ namespace GamePratic2020
 
         [HorizontalLine(1)]
 
+        [SerializeField] private GameObject[] levels = new GameObject[] { };
+        [SerializeField] private Vector3[] startPosition = new Vector3[] { };
+
+        [HorizontalLine(1)]
+
         [SerializeField, Required] private GameObject controlAnchor = null;
         [SerializeField, Required] private Collider2D controlArea = null;
         [SerializeField, Required] private Transform controlStick = null;
@@ -80,16 +85,6 @@ namespace GamePratic2020
 
         [SerializeField, MinMax(-3, 3)] private Vector2 bounds = new Vector2();
 
-        [HorizontalLine(1)]
-
-        [SerializeField] private float[][] tracksLimit = new float[3][] {   new float[3] { 1.25f, -1.25f, 1.4f },
-                                                                            new float[3] { 1.25f, -1.25f, 1.4f },
-                                                                            new float[3] { 1.25f, -1.25f, 1.4f }};
-
-        [SerializeField] private float[][] tracksHeight = new float[3][]{   new float[2] { 2.5f, 0.5f },
-                                                                            new float[2] { 2.5f, 0.5f },
-                                                                            new float[2] { 2.5f, 0.5f }};
-
         [HorizontalLine(2, SuperColor.Crimson)]
 
         [SerializeField] private float distanceMagnitude = 2;
@@ -104,7 +99,6 @@ namespace GamePratic2020
         [HorizontalLine(1)]
 
         [SerializeField, MinMax(1, 90)] private Vector2Int anchorRotation = new Vector2Int(10, 45);
-        [SerializeField] private Vector3 originalPosition = new Vector3();
 
         [HorizontalLine(1)]
 
@@ -146,6 +140,18 @@ namespace GamePratic2020
 
         private readonly Vector3[] linePos = new Vector3[2];
         private int sparkID = 0;
+
+        private float[][] tracksLimit = new float[3][] {    new float[3] { 1.25f, -1.25f, 1.4f },
+                                                            new float[4] { -1.55f, -.4f, 1.4f, -.7f },
+                                                            new float[4] { -.7f, -1.7f, 1.55f, 1.5f }};
+
+        private float[][] tracksHeight = new float[3][]{    new float[2] { 2.5f, 0.5f },
+                                                            new float[3] { 3f, 1.6f, .25f },
+                                                            new float[3] { 3f, 1.25f, .25f }};
+
+        private bool[][] tracksGoRight = new bool[3][]{     new bool[3] { true, false, true },
+                                                            new bool[4] { false, true, true, false },
+                                                            new bool[4] { true, false, true, false }};
         #endregion
 
         #region Methods
@@ -175,8 +181,8 @@ namespace GamePratic2020
         {
             base.ResetMiniGame(_iteration);
 
-            anchor.position = previousAnchor = originalPosition;
-            wagon.position = new Vector3(originalPosition.x, originalPosition.y - distanceMagnitude, originalPosition.z);
+            anchor.position = previousAnchor = startPosition[GameManager.Instance.Iteration];
+            wagon.position = new Vector3(previousAnchor.x, previousAnchor.y - distanceMagnitude, previousAnchor.z);
 
             anchor.rotation = Quaternion.identity;
             wagon.rotation = Quaternion.identity;
@@ -204,8 +210,19 @@ namespace GamePratic2020
             leftSparks.Stop();
             rightSparks.Stop();
 
+            smokeFX.transform.position = wagon.position + new Vector3(0, .12f, 0);
+            lightFX.transform.position = wagon.position;
+
             smokeFX.Play();
             lightFX.Play();
+
+            // Activate level.
+            for (int _i = 0; _i < GameManager.Instance.Iteration; _i++)
+                levels[_i].SetActive(false);
+            for(int _i = GameManager.Instance.Iteration; _i < GameManager.Instance.MaxIteriation; _i++)
+                levels[_i].SetActive(false);
+
+            levels[GameManager.Instance.Iteration].SetActive(true);
         }
         #endregion
 
@@ -339,7 +356,7 @@ namespace GamePratic2020
             if (isFalling)
             {
                 float _fallMovement = speedVar * Time.deltaTime * fallControlSpeed;
-                if ((railIndex % 2) == 0)
+                if (!tracksGoRight[GameManager.Instance.Iteration][railIndex - 1])
                     _fallMovement *= -1;
 
                 _anchorPosition.x += _fallMovement;
@@ -350,7 +367,7 @@ namespace GamePratic2020
             // Falling state and horizontal position clamp.
             _anchorPosition.x = Mathf.Clamp(_anchorPosition.x, bounds.x, bounds.y);
             if ((railIndex < tracksLimit[GameManager.Instance.Iteration].Length) &&
-                ((railIndex % 2 == 0) ?
+                (tracksGoRight[GameManager.Instance.Iteration][railIndex] ?
                 (_anchorPosition.x > tracksLimit[GameManager.Instance.Iteration][railIndex]) :
                 (_anchorPosition.x < tracksLimit[GameManager.Instance.Iteration][railIndex])))
             {

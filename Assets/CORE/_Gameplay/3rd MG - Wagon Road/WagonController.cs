@@ -426,23 +426,19 @@ namespace GamePratic2020
                 _difference = horizontalDistance * Mathf.Sign(_difference);
 
             bool _isAnchorMoving = _movement.x != 0;
-            if (_isAnchorMoving != isAnchorMoving)
+            if (!isFalling && (_isAnchorMoving != isAnchorMoving))
             {
                 isAnchorMoving = _isAnchorMoving;
-
-                if (!isFalling)
+                if (_isAnchorMoving)
                 {
-                    if (_isAnchorMoving)
-                    {
-                        isFadingAudio = false;
-                        wagonSource.volume = 1;
-                        wagonSource.Play();
-                    }
-                    else
-                    {
-                        isFadingAudio = true;
-                        fadingAudioVar = .5f;
-                    }
+                    isFadingAudio = false;
+                    wagonSource.volume = 1;
+                    wagonSource.Play();
+                }
+                else
+                {
+                    isFadingAudio = true;
+                    fadingAudioVar = .5f;
                 }
             }
 

@@ -24,10 +24,14 @@ namespace GamePratic2020
         [SerializeField, Required] private RectTransform transitionScreen = null;
         [SerializeField, Required] private GameObject pressToPlayScreen = null;
 
+        [HorizontalLine(1)]
+
         [SerializeField, Required] private RunEndScreen finalScreen = null;
+        [SerializeField, Required] private RectTransform endGameScreen = null;
         [SerializeField, Required] private FunFactDatabase database = null;
 
         [SerializeField, Required] private TextMeshProUGUI funfactText = null;
+        [SerializeField, Required] private TextMeshProUGUI endGameText = null;
 
         [HorizontalLine(1)]
 
@@ -82,7 +86,22 @@ namespace GamePratic2020
             endScreenVar = 0;
 
             GameManager.Instance.ResetScore();
-            GameManager.Instance.StartNextMiniGame();
+            if (GameManager.Instance.Iteration == GameManager.Instance.MaxIteriation)
+            {
+                isEndTransition = true;
+                endTransitionVar = 0;
+                endTransitionState = 0;
+
+                endGameScreen.gameObject.SetActive(true);
+                endGameScreen.anchoredPosition = Vector3.zero;
+
+                endGameText.text =  "Félicitations !\n\n" +
+                                    "Vous avez produit " +
+                                    (GameManager.Instance.GlobalScore / 100).ToString() +
+                                    "kg de coke pour alimenter une usine sidérurgique locale !";
+            }
+            else
+                GameManager.Instance.StartNextMiniGame();
         }
         #endregion
 
@@ -119,6 +138,10 @@ namespace GamePratic2020
         private bool isTransitOut = false;
         private float transitionVar = 0;
 
+        private bool isEndTransition = false;
+        private int endTransitionState = 0;
+        private float endTransitionVar = 0;
+
         public void DoMiniGameTransition()
         {
             // Call hide mini game after animation.
@@ -131,6 +154,7 @@ namespace GamePratic2020
             GameManager.Instance.AmbiantSource.PlayOneShot(GameManager.Instance.SoundDataBase.WinJingle);
 
             funfactText.text = database.GetRandomFact();
+            transitionScreen.anchoredPosition = new Vector2(1250, 0);
         }
 
         public void UpdateProgressBar(int _amount) => progressAnimator.SetInteger(progress_Hash, _amount);
@@ -213,10 +237,41 @@ namespace GamePratic2020
                     _lerp = 1;
                     isHidingEndScreen = false;
 
-                    finalScreen.gameObject.SetActive(false);
+                    if (GameManager.Instance.Iteration < GameManager.Instance.MaxIteriation)
+                        finalScreen.gameObject.SetActive(false);
                 }
 
                 finalScreen.transform.position = Vector3.Lerp(Vector3.zero, -finalScreenPos, _lerp);
+            }
+
+            // End game transition.
+            if (isEndTransition)
+            {
+                endTransitionVar += Time.deltaTime;
+                switch (endTransitionState)
+                {
+                    case 0:
+                        if (endTransitionVar > 5)
+                        {
+                            endTransitionState++;
+
+                            finalScreen.gameObject.SetActive(false);
+                            GameManager.Instance.StartNextMiniGame();
+                        }
+                        break;
+
+                    case 1:
+                        if (endTransitionVar < 6)
+                        {
+                            endGameScreen.anchoredPosition = Vector3.Lerp(Vector3.zero, new Vector3(0, -2000, 0), endTransitionVar - 5);
+                        }
+                        else
+                        {
+                            isEndTransition = false;
+                            endGameScreen.gameObject.SetActive(false);
+                        }
+                        break;
+                }
             }
         }
 

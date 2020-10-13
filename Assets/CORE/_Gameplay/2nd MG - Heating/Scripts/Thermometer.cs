@@ -13,7 +13,6 @@ namespace GamePratic2020
     {
         #region Fields and Properties
         [HorizontalLine(1, order = 0), Section("Thermometer", order = 1)]
-        [SerializeField] private float initialValue = .5f;
         [SerializeField, MinMax(0.0f, 1.0f)] private Vector2[] heatingLimits = new Vector2[3];
         [SerializeField] private Gradient[] gradientColors = new Gradient[3];
         [SerializeField] private ParticleSystem smokeSystem = null;
@@ -21,10 +20,10 @@ namespace GamePratic2020
         private ParticleSystem.MainModule main;
 
 
-        [Tooltip("This value is used to slow the decrase of the value. The greater this value is, the slower the decreasing will be.")]
-        [SerializeField, Range(1.0f, 100.0f)] private float decreasingRatio = 1.0f;
-        [Tooltip("This value is used to slow the increase of the value. The greater this value is, the slower the increasing will be.")]
-        [SerializeField, Range(1.0f, 100.0f)] private float increasingRatio = 1.0f;
+        [Tooltip("This value is used to fasten the decrease of the value.")]
+        [SerializeField, Range(.1f, 10.0f)] private float decreasingMultiplier = 1.0f;
+        [Tooltip("This value is used to fasten the increase of the value.")]
+        [SerializeField, Range(.1f, 10.0f)] private float increasingMultiplier = 1.0f;
 
         [HorizontalLine(1, order = 0), Section("Points", order = 1)]
         [SerializeField, Range(1,10000)] private int increasingScoreValue = 1;
@@ -41,14 +40,16 @@ namespace GamePratic2020
         [SerializeField] private UnityEngine.UI.Image filledImage = null;
         [SerializeField] private RectTransform topCursorTransform;
         [SerializeField] private RectTransform botCursorTransform;
-        [SerializeField] private GameObject warningIcon; 
+        [SerializeField] private GameObject warningIcon;
+
+        private bool isOutOfLimits = false; 
         #endregion
 
         #region Methods
         public void IncreaseRatio(float _increasingValue)
         {
             if (!isActivated) return;
-            targetValue += _increasingValue / increasingRatio;
+            targetValue += _increasingValue * increasingMultiplier;
             targetValue = Mathf.Clamp(targetValue, 0, 1);
         }
 
@@ -61,7 +62,7 @@ namespace GamePratic2020
             botCursorTransform.anchoredPosition = new Vector3(botCursorTransform.anchoredPosition.x, filledImage.rectTransform.rect.height * heatingLimit.x);
 
             scoreTimer = 0; 
-            currentValue = initialValue;
+            currentValue = .5f;
             targetValue = currentValue;
             filledImage.fillAmount = currentValue;
             currentGradientColor = gradientColors[_iteration]; 
@@ -92,7 +93,7 @@ namespace GamePratic2020
             base.Update(); 
             if (isActivated)
             {
-                targetValue -= (Time.deltaTime / decreasingRatio);
+                targetValue -= (Time.deltaTime * decreasingMultiplier);
                 targetValue = Mathf.Clamp(targetValue, 0, 1);
 
                 currentValue = Mathf.MoveTowards(currentValue, targetValue, Time.deltaTime); 
@@ -103,7 +104,11 @@ namespace GamePratic2020
 
                 if (currentValue >= heatingLimit.x && currentValue <= heatingLimit.y)
                 {
-                    warningIcon.SetActive(false);
+                    if (isOutOfLimits)
+                    {
+                        isOutOfLimits = false;
+                        warningIcon.SetActive(false);
+                    }
                     // Decrease Score
                     scoreTimer += Time.deltaTime; 
                     if(scoreTimer > increasingScoreTime)
@@ -116,11 +121,15 @@ namespace GamePratic2020
                 }
                 else
                 {
-                    scoreTimer = 0;
-                    warningIcon.SetActive(true); 
+                    if(!isOutOfLimits)
+                    {
+                        isOutOfLimits = true;
+                        scoreTimer = 0;
+                        warningIcon.SetActive(true);
 
-                    if (!miniGameSource.isPlaying)
-                        miniGameSource.PlayOneShot(GameManager.Instance.SoundDataBase.GaugeAlarm, .25f); 
+                        miniGameSource.PlayOneShot(GameManager.Instance.SoundDataBase.GaugeAlarm, .5f);
+                    }
+
                 }
             }
         }

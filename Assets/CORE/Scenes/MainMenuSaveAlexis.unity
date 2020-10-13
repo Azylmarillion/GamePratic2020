@@ -1008,35 +1008,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1706191464, guid: 9db10bacb83188543a7e4910019ed555, type: 3}
-      propertyPath: m_RaycastTarget
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7244850072422164200, guid: 9db10bacb83188543a7e4910019ed555,
-        type: 3}
-      propertyPath: timer.Array.size
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 7244850072422164200, guid: 9db10bacb83188543a7e4910019ed555,
-        type: 3}
-      propertyPath: score
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7244850072422164200, guid: 9db10bacb83188543a7e4910019ed555,
-        type: 3}
-      propertyPath: timer.Array.data[0]
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 7244850072422164200, guid: 9db10bacb83188543a7e4910019ed555,
-        type: 3}
-      propertyPath: timer.Array.data[1]
-      value: 15
-      objectReference: {fileID: 0}
-    - target: {fileID: 7244850072422164200, guid: 9db10bacb83188543a7e4910019ed555,
-        type: 3}
-      propertyPath: timer.Array.data[2]
-      value: 20
-      objectReference: {fileID: 0}
     - target: {fileID: 7244850072422164201, guid: 9db10bacb83188543a7e4910019ed555,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1102,56 +1073,11 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7244850072605124365, guid: 9db10bacb83188543a7e4910019ed555,
-        type: 3}
-      propertyPath: m_RaycastTarget
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7244850072884110952, guid: 9db10bacb83188543a7e4910019ed555,
-        type: 3}
-      propertyPath: m_SortingOrder
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 7244850072884110959, guid: 9db10bacb83188543a7e4910019ed555,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7244850072938332422, guid: 9db10bacb83188543a7e4910019ed555,
-        type: 3}
-      propertyPath: m_RaycastTarget
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7244850073059133683, guid: 9db10bacb83188543a7e4910019ed555,
-        type: 3}
-      propertyPath: m_RaycastTarget
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7244850073723162141, guid: 9db10bacb83188543a7e4910019ed555,
-        type: 3}
-      propertyPath: m_audioClip
-      value: 
-      objectReference: {fileID: 8300000, guid: 75db95bccb641b1429f05a2364e64c82, type: 3}
-    - target: {fileID: 7244850073723162141, guid: 9db10bacb83188543a7e4910019ed555,
-        type: 3}
-      propertyPath: m_PlayOnAwake
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 7244850074105707907, guid: 9db10bacb83188543a7e4910019ed555,
         type: 3}
       propertyPath: currentCamera
       value: 
       objectReference: {fileID: 795468387}
-    - target: {fileID: 7244850074105707907, guid: 9db10bacb83188543a7e4910019ed555,
-        type: 3}
-      propertyPath: thermometer
-      value: 
-      objectReference: {fileID: 1144122849}
-    - target: {fileID: 8308086499012195095, guid: 9db10bacb83188543a7e4910019ed555,
-        type: 3}
-      propertyPath: m_RaycastTarget
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9db10bacb83188543a7e4910019ed555, type: 3}
 --- !u!114 &1144122849 stripped

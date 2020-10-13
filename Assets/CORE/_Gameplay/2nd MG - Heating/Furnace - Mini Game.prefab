@@ -175,7 +175,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1731932529503578651
 RectTransform:
   m_ObjectHideFlags: 0
@@ -433,7 +433,6 @@ MonoBehaviour:
   timerVar: 0
   isActivated: 0
   miniGameSource: {fileID: 7244850073723162141}
-  initialValue: 0.5
   heatingLimits:
   - {x: 0.15, y: 0.85}
   - {x: 0.25, y: 0.75}
@@ -524,8 +523,8 @@ MonoBehaviour:
     m_NumColorKeys: 4
     m_NumAlphaKeys: 2
   smokeSystem: {fileID: 4675848110422603130}
-  decreasingRatio: 10
-  increasingRatio: 55
+  decreasingMultiplier: 0.25
+  increasingMultiplier: 0.35
   increasingScoreValue: 2500
   increasingScoreTime: 1
   currentValue: 0
@@ -574,8 +573,8 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 75db95bccb641b1429f05a2364e64c82, type: 3}
-  m_PlayOnAwake: 0
-  m_Volume: 0.5
+  m_PlayOnAwake: 1
+  m_Volume: 1
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -1247,9 +1246,9 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 3760eb213b1ead7499a3c91b140c7e48, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.25
+  m_Volume: 0.5
   m_Pitch: 1
   Loop: 1
   Mute: 0

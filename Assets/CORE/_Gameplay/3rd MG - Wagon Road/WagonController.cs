@@ -359,6 +359,7 @@ namespace GamePratic2020
 
                         leftSparks.Stop();
                         rightSparks.Stop();
+                        wagonSource.PlayOneShot(GameManager.Instance.SoundDataBase.WagonLaunch);
                     }
                     break;
 
@@ -371,6 +372,7 @@ namespace GamePratic2020
 
                         leftSparks.Stop();
                         rightSparks.Stop();
+                        wagonSource.PlayOneShot(GameManager.Instance.SoundDataBase.WagonLaunch);
                     }
                     break;
 
@@ -401,6 +403,7 @@ namespace GamePratic2020
                     fallSpeedVar = 0;
 
                     _anchorPosition.y = _height;
+                    wagonSource.PlayOneShot(GameManager.Instance.SoundDataBase.WagonLand);
                     fallShake.Play();
                 }
             }

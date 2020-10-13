@@ -15,9 +15,9 @@ MonoBehaviour:
   hammerReloading: {fileID: 8300000, guid: e7464f6602a5be1419ea9a0e147195de, type: 3}
   hammerStomp: {fileID: 8300000, guid: 78b0ed24e835cd6419ecac648a653af5, type: 3}
   gaugeAlarm: {fileID: 8300000, guid: fa7eabafa5ac07e48a5be0d9aee5cae3, type: 3}
-  crankLoop: {fileID: 8300000, guid: 3760eb213b1ead7499a3c91b140c7e48, type: 3}
   endAlarm: {fileID: 8300000, guid: 0020dc1654f9363469bd1fb518627ccb, type: 3}
-  railLoop: {fileID: 8300000, guid: ca0caea461ef96e4dae42d5f63880179, type: 3}
+  wagonLaunch: {fileID: 8300000, guid: 80d19affcdfbeff458adcfe033964cb9, type: 3}
+  wagonLand: {fileID: 8300000, guid: 04e2bd3e711a11b4fb8c4a2820d77fd0, type: 3}
   charcoalWaterfall: {fileID: 8300000, guid: f1ce09db3d8c04b4582664a7f9df62f5, type: 3}
   winJingle: {fileID: 8300000, guid: 3647a67c3323a324e8ab6b28e754949b, type: 3}
   scoreIncrement: {fileID: 8300000, guid: 53ff99b465e7c1340871e50ff8a8df7a, type: 3}

@@ -16,6 +16,7 @@ namespace GamePratic2020
 
         private bool isInitialized = false;
         private TextMeshProUGUI text = null;
+        private AudioSource source = null; 
 
         private float score = 1000000f;
 
@@ -33,6 +34,7 @@ namespace GamePratic2020
                 {
                     isWaitingDelay = false;
                     timerVar -= delay;
+                    source.Play(); 
                 }
             }
             else if (isIncreasingScore)
@@ -42,6 +44,7 @@ namespace GamePratic2020
                 {
                     timerVar = duration;
                     isIncreasingScore = false;
+                    source.Stop(); 
                 }
 
                 text.text = "+ " + ((score / duration) * timerVar).ToString("### ### 000");
@@ -55,8 +58,10 @@ namespace GamePratic2020
             {
                 isInitialized = true;
                 text = animator.transform.GetChild(0).GetComponent<TextMeshProUGUI>();
+                source = animator.GetComponent<AudioSource>();
             }
 
+            
             isWaitingDelay = true;
             isIncreasingScore = true;
             timerVar = 0;
@@ -65,22 +70,22 @@ namespace GamePratic2020
             score = GameManager.Instance.GetMiniGameScore();
         }
 
-    // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
-    //override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    //{
-    //    
-    //}
+        // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
+        //override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+        //{
+        //    
+        //}
 
-    // OnStateMove is called right after Animator.OnAnimatorMove()
-    //override public void OnStateMove(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    //{
-    //    // Implement code that processes and affects root motion
-    //}
+        // OnStateMove is called right after Animator.OnAnimatorMove()
+        //override public void OnStateMove(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+        //{
+        //    // Implement code that processes and affects root motion
+        //}
 
-    // OnStateIK is called right after Animator.OnAnimatorIK()
-    //override public void OnStateIK(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    //{
-    //    // Implement code that sets up animation IK (inverse kinematics)
-    //}
-}
+        // OnStateIK is called right after Animator.OnAnimatorIK()
+        //override public void OnStateIK(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+        //{
+        //    // Implement code that sets up animation IK (inverse kinematics)
+        //}
+    }
 }

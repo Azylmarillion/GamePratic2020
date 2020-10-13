@@ -136,7 +136,7 @@ namespace GamePratic2020
 
         public void PlayFootStepSound()
         {
-            ambiantSource.PlayOneShot(soundDatabase.GetRandomFootStep()); 
+            ambiantSource.PlayOneShot(soundDatabase.GetRandomFootStep(), .25f); 
         }
 
         private void Awake()

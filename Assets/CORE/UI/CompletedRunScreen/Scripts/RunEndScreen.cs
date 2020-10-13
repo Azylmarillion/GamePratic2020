@@ -169,8 +169,8 @@ namespace GamePratic2020 {
                 fillEffect.transform.position += Vector3.up * fillIntensity * Time.deltaTime;
 
                 //Update Text
-                runScoreText.text = remainingPointsToFill.ToString();
-                totalScoreText.text = (globalScore - remainingPointsToFill).ToString();
+                runScoreText.text = remainingPointsToFill.ToString("### ###");
+                totalScoreText.text = (globalScore - remainingPointsToFill).ToString("### ###");
 
                 //Move down the stack
                 if (fillEffect.transform.position.y > maxFillHeight) {
@@ -184,7 +184,7 @@ namespace GamePratic2020 {
             cokeFallSource.Stop();
 
             runScoreText.text = "0";
-            totalScoreText.text = GameManager.Instance.GlobalScore.ToString();
+            totalScoreText.text = GameManager.Instance.GlobalScore.ToString("### ###");
 
             fallEffect.Stop();
             fillEffect.Stop();

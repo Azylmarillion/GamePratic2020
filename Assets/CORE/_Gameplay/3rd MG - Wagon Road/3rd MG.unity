@@ -650,8 +650,10 @@ MonoBehaviour:
   transitionScreen: {fileID: 1794072496}
   pressToPlayScreen: {fileID: 350046878}
   finalScreen: {fileID: 1021544914}
+  endGameScreen: {fileID: 0}
   database: {fileID: 11400000, guid: 2e42db66099f2764ab1885f034cc58b5, type: 2}
   funfactText: {fileID: 151075532}
+  endGameText: {fileID: 0}
   timerPanel: {fileID: 1121290106048524772}
   timer: {fileID: 1775221694}
   score: {fileID: 480300700}
@@ -887,6 +889,11 @@ PrefabInstance:
       propertyPath: onFillComplete.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
       objectReference: {fileID: 1614668050}
+    - target: {fileID: 6931401265502496301, guid: beb95d0daea058646b7401148dd7b9f7,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7498333636095248511, guid: beb95d0daea058646b7401148dd7b9f7,
         type: 3}
       propertyPath: m_IsActive

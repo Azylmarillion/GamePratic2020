@@ -82,14 +82,13 @@ namespace GamePratic2020
 
         [HorizontalLine(1)]
 
-        [SerializeField] private float trackOneLimit = 5;
-        [SerializeField] private float trackTwoLimit = 5;
-        [SerializeField] private float trackThreeLimit = 5;
+        [SerializeField] private float[][] tracksLimit = new float[3][] {   new float[3] { 1.25f, -1.25f, 1.4f },
+                                                                            new float[3] { 1.25f, -1.25f, 1.4f },
+                                                                            new float[3] { 1.25f, -1.25f, 1.4f }};
 
-        [HorizontalLine(1)]
-
-        [SerializeField] private float trackTwoHeight = 5;
-        [SerializeField] private float trackThreeHeight = 5;
+        [SerializeField] private float[][] tracksHeight = new float[3][]{   new float[2] { 2.5f, 0.5f },
+                                                                            new float[2] { 2.5f, 0.5f },
+                                                                            new float[2] { 2.5f, 0.5f }};
 
         [HorizontalLine(2, SuperColor.Crimson)]
 
@@ -123,7 +122,7 @@ namespace GamePratic2020
         [SerializeField, ReadOnly] private bool isFalling = false;
         [SerializeField, ReadOnly] private bool isWaitingForDump = false;
         [SerializeField, ReadOnly] private bool isOver = false;
-        [SerializeField, ReadOnly] private int railIndex = 1;
+        [SerializeField, ReadOnly] private int railIndex = 0;
         [SerializeField, ReadOnly] private int direction = 0;
 
         [HorizontalLine(1)]
@@ -180,7 +179,7 @@ namespace GamePratic2020
             anchor.rotation = Quaternion.identity;
             wagon.rotation = Quaternion.identity;
 
-            railIndex = 1;
+            railIndex = 0;
             isTouch = isMoving = isFalling = isWaitingForDump = isOver = false;
             speedVar = fallSpeedVar = startFallSpeed = dumpVar = overVar = 0;
             looseAmount = 0;
@@ -338,7 +337,7 @@ namespace GamePratic2020
             if (isFalling)
             {
                 float _fallMovement = speedVar * Time.deltaTime * fallControlSpeed;
-                if (railIndex == 3)
+                if ((railIndex % 2) == 0)
                     _fallMovement *= -1;
 
                 _anchorPosition.x += _fallMovement;
@@ -348,50 +347,36 @@ namespace GamePratic2020
 
             // Falling state and horizontal position clamp.
             _anchorPosition.x = Mathf.Clamp(_anchorPosition.x, bounds.x, bounds.y);
-            switch (railIndex)
+            if ((railIndex < tracksLimit[GameManager.Instance.Iteration].Length) &&
+                ((railIndex % 2 == 0) ?
+                (_anchorPosition.x > tracksLimit[GameManager.Instance.Iteration][railIndex]) :
+                (_anchorPosition.x < tracksLimit[GameManager.Instance.Iteration][railIndex])))
             {
-                case 1:
-                    if (_anchorPosition.x > trackOneLimit)
-                    {
-                        isFalling = true;
-                        startFallSpeed = speedVar;
-                        railIndex++;
+                if (railIndex == tracksLimit[GameManager.Instance.Iteration].Length - 1)
+                {
+                    isTouch = false;
+                    isWaitingForDump = true;
+                    dumpAnchor.SetActive(true);
+                    controlAnchor.SetActive(false);
 
-                        leftSparks.Stop();
-                        rightSparks.Stop();
-                    }
-                    break;
+                    _anchorPosition.x = tracksLimit[GameManager.Instance.Iteration][railIndex];
+                    railIndex++;
+                }
+                else
+                {
+                    isFalling = true;
+                    startFallSpeed = speedVar;
+                    railIndex++;
 
-                case 2:
-                    if (_anchorPosition.x < trackTwoLimit)
-                    {
-                        isFalling = true;
-                        startFallSpeed = speedVar;
-                        railIndex++;
-
-                        leftSparks.Stop();
-                        rightSparks.Stop();
-                    }
-                    break;
-
-                case 3:
-                    if (_anchorPosition.x > trackThreeLimit)
-                    {
-                        isTouch = false;
-                        isWaitingForDump = true;
-                        dumpAnchor.SetActive(true);
-                        controlAnchor.SetActive(false);
-
-                        _anchorPosition.x = trackThreeLimit;
-                        railIndex++;
-                    }
-                    break;
+                    leftSparks.Stop();
+                    rightSparks.Stop();
+                }
             }
 
             // Falling height update.
             if (isFalling)
             {
-                float _height = railIndex == 2 ? trackTwoHeight : trackThreeHeight;
+                float _height = tracksHeight[GameManager.Instance.Iteration][railIndex - 1];
                 fallSpeedVar += Time.deltaTime * fallSpeed;
 
                 _anchorPosition.y -= fallSpeedVar * Time.deltaTime;

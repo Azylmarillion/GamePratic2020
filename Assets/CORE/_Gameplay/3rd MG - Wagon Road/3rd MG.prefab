@@ -6082,7 +6082,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &8413754583824129230
 Transform:
   m_ObjectHideFlags: 0
@@ -6116,9 +6116,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timer:
-  - 10
-  - 10
-  - 10
+  - 20
+  - 15
+  - 12
   score: 0
   timerVar: 0
   isActivated: 0
@@ -6154,11 +6154,6 @@ MonoBehaviour:
   deadZone: {x: -0.25, y: 0.25}
   dumpBounds: {x: -4.5, y: -3.5}
   bounds: {x: -2.5, y: 2.5}
-  trackOneLimit: 1.25
-  trackTwoLimit: -1.25
-  trackThreeLimit: 1.4
-  trackTwoHeight: 2.5
-  trackThreeHeight: 0.5
   distanceMagnitude: 1.25
   horizontalDistance: 1.1
   minScore: 10000
@@ -6197,11 +6192,11 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: a48c02c68d0a29d489a06e933dcbd6e5, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0

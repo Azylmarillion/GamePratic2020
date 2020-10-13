@@ -120,6 +120,7 @@ namespace GamePratic2020
 
         [SerializeField, ReadOnly] private bool isMoving = false;
         [SerializeField, ReadOnly] private bool isFalling = false;
+        [SerializeField, ReadOnly] private bool isFadingAudio = false;
         [SerializeField, ReadOnly] private bool isWaitingForDump = false;
         [SerializeField, ReadOnly] private bool isOver = false;
         [SerializeField, ReadOnly] private int railIndex = 0;
@@ -132,6 +133,7 @@ namespace GamePratic2020
         [SerializeField, ReadOnly] private float startFallSpeed = 0;
         [SerializeField, ReadOnly] private float dumpVar = 0;
         [SerializeField, ReadOnly] private float overVar = 0;
+        [SerializeField, ReadOnly] private float fadingAudioVar = 0;
         [SerializeField, ReadOnly] private int looseAmount = 0;
 
         [HorizontalLine(1)]
@@ -360,6 +362,7 @@ namespace GamePratic2020
                     controlAnchor.SetActive(false);
 
                     _anchorPosition.x = tracksLimit[GameManager.Instance.Iteration][railIndex];
+                    miniGameSource.PlayOneShot(GameManager.Instance.SoundDataBase.WagonLand);
                     railIndex++;
                 }
                 else
@@ -371,7 +374,8 @@ namespace GamePratic2020
                     leftSparks.Stop();
                     rightSparks.Stop();
 
-                    wagonSource.PlayOneShot(GameManager.Instance.SoundDataBase.WagonLaunch);
+                    wagonSource.Stop();
+                    miniGameSource.PlayOneShot(GameManager.Instance.SoundDataBase.WagonLaunch);
                 }
             }
 
@@ -390,7 +394,7 @@ namespace GamePratic2020
                     _anchorPosition.y = _height;
                     fallShake.Play();
 
-                    wagonSource.PlayOneShot(GameManager.Instance.SoundDataBase.WagonLand);
+                    miniGameSource.PlayOneShot(GameManager.Instance.SoundDataBase.WagonLand);
                 }
             }
 
@@ -408,10 +412,34 @@ namespace GamePratic2020
             if (_isAnchorMoving != isAnchorMoving)
             {
                 isAnchorMoving = _isAnchorMoving;
-                if (_isAnchorMoving)
-                    wagonSource.Play();
-                else
+
+                if (!isFalling)
+                {
+                    if (_isAnchorMoving)
+                    {
+                        isFadingAudio = false;
+                        wagonSource.volume = 1;
+                        wagonSource.Play();
+                    }
+                    else
+                    {
+                        isFadingAudio = true;
+                        fadingAudioVar = .5f;
+                    }
+                }
+            }
+
+            if (isFadingAudio)
+            {
+                fadingAudioVar -= Time.deltaTime;
+                if (fadingAudioVar < 0)
+                {
+                    fadingAudioVar = 0;
+                    isFadingAudio = false;
                     wagonSource.Stop();
+                }
+
+                wagonSource.volume = fadingAudioVar * 2;
             }
 
             // Get movement inertia.

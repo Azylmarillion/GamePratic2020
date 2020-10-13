@@ -97,8 +97,8 @@ namespace GamePratic2020
 
                 endGameText.text =  "Félicitations !\n\n" +
                                     "Vous avez produit " +
-                                    (GameManager.Instance.GlobalScore / 100).ToString() +
-                                    "kg de coke pour alimenter une usine sidérurgique locale !";
+                                    (GameManager.Instance.GlobalScore / 1000).ToString() +
+                                    " tonnes de coke pour alimenter une usine sidérurgique locale !";
             }
             else
                 GameManager.Instance.StartNextMiniGame();

@@ -622,6 +622,33 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79109707e00e3894585063fd23645436, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1078789948 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8705965616835530252, guid: beb95d0daea058646b7401148dd7b9f7,
+    type: 3}
+  m_PrefabInstance: {fileID: 1121290106048524771}
+  m_PrefabAsset: {fileID: 0}
+--- !u!223 &1078789952
+Canvas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1078789948}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_RenderMode: 2
+  m_Camera: {fileID: 0}
+  m_PlaneDistance: 100
+  m_PixelPerfect: 0
+  m_ReceivesEvents: 1
+  m_OverrideSorting: 1
+  m_OverridePixelPerfect: 0
+  m_SortingBucketNormalizedSize: 0
+  m_AdditionalShaderChannelsFlag: 0
+  m_SortingLayerID: 680517677
+  m_SortingOrder: 3
+  m_TargetDisplay: 0
 --- !u!114 &1311820433 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3638163069411104048, guid: 17d5f4949c3bc374c96f114bc595ebf4,
@@ -949,16 +976,31 @@ PrefabInstance:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 917416984}
+    - target: {fileID: 1121290105987846286, guid: beb95d0daea058646b7401148dd7b9f7,
+        type: 3}
+      propertyPath: m_fontColor32.rgba
+      value: 4290837856
+      objectReference: {fileID: 0}
     - target: {fileID: 1121290106327206495, guid: beb95d0daea058646b7401148dd7b9f7,
         type: 3}
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 917416984}
+    - target: {fileID: 1121290106344308225, guid: beb95d0daea058646b7401148dd7b9f7,
+        type: 3}
+      propertyPath: m_fontColor32.rgba
+      value: 4290837856
+      objectReference: {fileID: 0}
     - target: {fileID: 1121290106623774852, guid: beb95d0daea058646b7401148dd7b9f7,
         type: 3}
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 917416984}
+    - target: {fileID: 1121290106856200958, guid: beb95d0daea058646b7401148dd7b9f7,
+        type: 3}
+      propertyPath: m_fontColor32.rgba
+      value: 4290837856
+      objectReference: {fileID: 0}
     - target: {fileID: 1121290107067840658, guid: beb95d0daea058646b7401148dd7b9f7,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1019,11 +1061,26 @@ PrefabInstance:
       propertyPath: m_Name
       value: UI
       objectReference: {fileID: 0}
+    - target: {fileID: 1121290107568123468, guid: beb95d0daea058646b7401148dd7b9f7,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1392996702644720106, guid: beb95d0daea058646b7401148dd7b9f7,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1614668048}
+    - target: {fileID: 2173342137017699006, guid: beb95d0daea058646b7401148dd7b9f7,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4520876178183703155, guid: beb95d0daea058646b7401148dd7b9f7,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 508
+      objectReference: {fileID: 0}
     - target: {fileID: 4692531246084454961, guid: beb95d0daea058646b7401148dd7b9f7,
         type: 3}
       propertyPath: m_Camera
@@ -1039,6 +1096,31 @@ PrefabInstance:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 917416984}
+    - target: {fileID: 5897731150072354601, guid: beb95d0daea058646b7401148dd7b9f7,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6099593503387554581, guid: beb95d0daea058646b7401148dd7b9f7,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 6099593503387554587, guid: beb95d0daea058646b7401148dd7b9f7,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -23.178982
+      objectReference: {fileID: 0}
+    - target: {fileID: 6219411585110578712, guid: beb95d0daea058646b7401148dd7b9f7,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 6219411585110578714, guid: beb95d0daea058646b7401148dd7b9f7,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -23
+      objectReference: {fileID: 0}
     - target: {fileID: 6362921725121271055, guid: beb95d0daea058646b7401148dd7b9f7,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -1079,6 +1161,41 @@ PrefabInstance:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 917416984}
+    - target: {fileID: 8705965616188381929, guid: beb95d0daea058646b7401148dd7b9f7,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -332
+      objectReference: {fileID: 0}
+    - target: {fileID: 8705965616188381929, guid: beb95d0daea058646b7401148dd7b9f7,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 486
+      objectReference: {fileID: 0}
+    - target: {fileID: 8705965616430838592, guid: beb95d0daea058646b7401148dd7b9f7,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 8705965616430838593, guid: beb95d0daea058646b7401148dd7b9f7,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -23.105984
+      objectReference: {fileID: 0}
+    - target: {fileID: 8705965616835530242, guid: beb95d0daea058646b7401148dd7b9f7,
+        type: 3}
+      propertyPath: m_RaycastTarget
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8705965617927472403, guid: beb95d0daea058646b7401148dd7b9f7,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8705965617927472412, guid: beb95d0daea058646b7401148dd7b9f7,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 3.6800232
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: beb95d0daea058646b7401148dd7b9f7, type: 3}
 --- !u!114 &1121290106048524772 stripped
